@@ -2,3 +2,5 @@ A career exploration app where different career roles are mapped out with colleg
 and different clubs that the user can explore to gain insights on which classes are the best
 to take and which clubs will best help you reach your goal. It provides AI-driven
 recommendations, college-specific next steps, and clear explanations of career roles and required skills.
+
+I used the python environment because I like it better than setting up the conda one.
