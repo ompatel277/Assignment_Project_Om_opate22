@@ -5,5 +5,4 @@ recommendations, college-specific next steps, and clear explanations of career r
 
 I used the python environment because I like it better than setting up the conda one.
 
-I chose pathfinder which is subjected to change. I got the name from Chatgpt but
-I am going to change the name is currently temporary
+I chose Traject because while you are using this app it is going to map out the trajectory of different career roles
