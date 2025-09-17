@@ -1,3 +1,9 @@
-from django.db import models
+from django import models
 
-# Create your models here.
+class Career(models.Model):
+    position = models.CharField(max_length=100)
+    skill_sets = ....
+    title = models.CharField(max_length=100)
+    industries = models.CharField(max_length=100)
+    description = models.TextField()
+    company = models.CharField(max_length=100)

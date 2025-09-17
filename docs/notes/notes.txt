@@ -2,3 +2,21 @@ A career exploration app where different career roles are mapped out with colleg
 and different clubs that the user can explore to gain insights on which classes are the best
 to take and which clubs will best help you reach your goal. It provides AI-driven
 recommendations, college-specific next steps, and clear explanations of career roles and required skills.
+
+Define models with fields, PKs, FKs (+ on_delete choices).
+
+Add at least one UniqueConstraint and Meta.ordering.
+
+makemigrations → migrate.
+
+Register models in admin.py; createsuperuser.
+
+Add test data via Admin / shell.
+
+Verify FK behavior (try deleting a parent to see PROTECT/CASCADE).
+
+Commit + push after each milestone (models, migrations, admin, data).
+
+Update README + docs/notes/notes.txt.
+
+Upload db.sqlite3 on Canvas.
