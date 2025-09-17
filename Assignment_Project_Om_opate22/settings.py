@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Traject.apps.PathfinderConfig',
+    'accounts',
+    'careers',
+    'catalog',
+    'colleges',
+    'recommender'
 ]
 
 MIDDLEWARE = [
