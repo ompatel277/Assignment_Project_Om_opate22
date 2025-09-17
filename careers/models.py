@@ -1,4 +1,4 @@
-from django import models
+from django.db import models
 
 class Career(models.Model):
     position = models.CharField(max_length=100)
