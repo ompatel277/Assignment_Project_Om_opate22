@@ -16,6 +16,7 @@ class Major(models.Model):
     name = models.CharField(max_length=120)
     code = models.CharField(max_length=20, blank=True)  # optional, e.g., "CS"
 
+# from chatGPT will change once I get more information about this
     class Meta:
         unique_together = ("college", "name")
         ordering = ["college__abbreviation", "name"]

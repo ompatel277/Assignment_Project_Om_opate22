@@ -6,3 +6,16 @@ recommendations, college-specific next steps, and clear explanations of career r
 I used the python environment because I like it better than setting up the conda one.
 
 I chose Traject because while you are using this app it is going to map out the trajectory of different career roles
+
+
+Why these models/fields?
+I chose these models because I can get an idea of what the app would look like when the user first sign-up and logs in. I think it will help me add or eliminate possible features.
+
+Your relationship choices (ForeignKey, on_delete rationale),
+ForeignKey, unique, and primary key. I am still playing around with these optoins not set and stone yet but will figure out more as I continue the project
+
+Any constraints (unique, ordering),
+I did make a unique and ordering but I got that from chatGPT and I do not know what it does fully. I was just experimenting on how things would look. But once again I will figure it out with trial and error throughout the project
+
+How you seeded test data.
+I manually added the data from the admin dashboard. I do want to try to do the dummydata once I have everything connected.
