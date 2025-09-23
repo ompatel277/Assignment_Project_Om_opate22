@@ -1,14 +1,17 @@
 from django.db import models
+from django.db.models import AutoField
+
 from colleges.models import College, Major
 
 # main login/ sign up page
 class User(models.Model):
+    user_id = AutoField(primary_key=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=25)
     phone_number = models.CharField(max_length=25, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100, unique=True, primary_key=True)
+    username = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return f"{self.username}"

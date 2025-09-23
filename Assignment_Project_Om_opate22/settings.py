@@ -59,7 +59,7 @@ ROOT_URLCONF = 'Assignment_Project_Om_opate22.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'template']
         ,
         'APP_DIRS': True,
         'OPTIONS': {

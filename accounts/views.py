@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+from accounts.models import User
 
-# Create your views here.
+#Https
+def user_list(request):
+    user = User.objects.all()
+    template = loader.get_template('accounts/user_list.html')
+    context = {"user": user}
+    output = template.render(context, request)
+    return HttpResponse(output)
+
+
+
