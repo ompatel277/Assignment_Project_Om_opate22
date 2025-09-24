@@ -19,3 +19,13 @@ I did make a unique and ordering but I got that from chatGPT and I do not know w
 
 How you seeded test data.
 I manually added the data from the admin dashboard. I do want to try to do the dummydata once I have everything connected.
+
+
+why you wrote two views,
+to practice what I learned in class
+
+what’s different between HttpResponse and render,
+The difference is that http requires you to load and render a template, unlike rendor which combines all the steps into one funtion
+
+any URL/template decisions you made.
+No I used the one we saw in class for now
