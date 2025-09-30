@@ -1,0 +1,24 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}
+    User List
+{% endblock %}
+
+{% block user_content %}
+    <h2>User List</h2>
+    <ul>
+
+
+        {% for user_for_loop in user %}
+
+            <li>
+                <a href=""> {{ user_for_loop }}</a>
+            </li>
+
+        {% empty %}
+
+            <li>No Users yet!</li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}
