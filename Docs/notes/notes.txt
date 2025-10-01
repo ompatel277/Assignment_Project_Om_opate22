@@ -29,3 +29,8 @@ The difference is that http requires you to load and render a template, unlike r
 
 any URL/template decisions you made.
 No I used the one we saw in class for now
+
+Wireframes for Traject:
+I am still figuring out the wireframe situation as I continue to develop the project. But for the bacis of the project I do wnt a clean and simple login/sign-up page, a page where the user can customize it to thier personal needs and experinces.
+Have an explore page where the user can explore certain pathways, careers, or get a mixure of both and map out a outline of was courses and clubs to join to get the fullest exposure.
+I also want a page of a map where the users can compare and contrats or mix certiain classes and clubs and customize it to their liking.
