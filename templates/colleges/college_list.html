@@ -1,0 +1,24 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Colleges{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">Colleges</h2>
+  {% if colleges %}
+    <ul class="list-group">
+      {% for college in colleges %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ college.abbreviation }}</strong> - {{ college.college_name }}
+            <br><small>{{ college.city }}, {{ college.state }}</small>
+          </div>
+          <a href="{% url 'college_detail' college.pk %}" class="btn btn-sm btn-outline-primary">
+            View
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No colleges available yet.</p>
+  {% endif %}
+{% endblock %}

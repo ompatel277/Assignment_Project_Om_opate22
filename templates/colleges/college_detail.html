@@ -1,0 +1,23 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}{{ college.college_name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ college.college_name }} ({{ college.abbreviation }})</h2>
+  <p><strong>Location:</strong> {{ college.city }}, {{ college.state }}</p>
+
+  {% if college.logo_url %}
+    <img src="{{ college.logo_url }}" alt="{{ college.college_name }} Logo" class="img-fluid mb-3" style="max-height: 100px;">
+  {% endif %}
+
+  <h4>Majors Offered</h4>
+  {% if majors %}
+    <ul class="list-group">
+      {% for major in majors %}
+        <li class="list-group-item">{{ major.name }} {% if major.code %} ({{ major.code }}) {% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No majors listed yet.</p>
+  {% endif %}
+{% endblock %}

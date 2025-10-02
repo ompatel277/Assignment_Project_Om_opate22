@@ -1,24 +1,37 @@
 {% extends "accounts/base.html" %}
 
-{% block title %}
-    User List
-{% endblock %}
+{% block title %}User List{% endblock %}
 
-{% block user_content %}
-    <h2>User List</h2>
-    <ul>
+{% block content %}
+  <h2 class="mb-3">Registered Users</h2>
 
-
-        {% for user_for_loop in user %}
-
-            <li>
-                <a href=""> {{ user_for_loop }}</a>
-            </li>
-
-        {% empty %}
-
-            <li>No Users yet!</li>
-
-        {% endfor %}
-    </ul>
+  {% if users %}
+    <div class="card shadow-sm">
+      <div class="card-body p-0">
+        <table class="table table-striped mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Profile</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for u in users %}
+              <tr>
+                <td>{{ u.username }}</td>
+                <td>{{ u.email }}</td>
+                <td>
+                  <a href="{% url 'profile_other' username=u.username %}"
+                     class="btn btn-sm btn-outline-primary">View</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <p class="text-muted">No users have signed up yet.</p>
+  {% endif %}
 {% endblock %}

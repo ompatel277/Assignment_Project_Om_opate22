@@ -1,14 +1,14 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import render, redirect
-from .models import User, UserProfile
-from .forms import SignupForm, LoginForm  # make sure class name matches your forms.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 
+from .models import UserProfile
+from .forms import SignupForm, LoginForm, UserProfileForm
 
-# Signup
+
+# --- Signup ---
 def signup_view(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
@@ -16,10 +16,7 @@ def signup_view(request):
             user = User.objects.create_user(
                 username=form.cleaned_data['username'],
                 email=form.cleaned_data['email'],
-                phone_number=form.cleaned_data['phone_number'],  # ✅ corrected
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                password=form.cleaned_data['password1'],  # ✅ corrected
+                password=form.cleaned_data['password'],
             )
             UserProfile.objects.create(user=user)
             login(request, user)
@@ -28,51 +25,71 @@ def signup_view(request):
     else:
         form = SignupForm()
 
-    return render(request, "accounts/signup.html", {'form': form})  # ✅ always return
+    return render(request, "accounts/signup.html", {'form': form})
 
 
-# Login
+# --- Login ---
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcome Back, {user.username}!')
+                messages.success(request, f'Welcome back, {user.username}!')
                 return redirect('dashboard')
             else:
-                messages.error(request, 'Invalid Credentials')
+                messages.error(request, 'Invalid credentials.')
     else:
         form = LoginForm()
 
-    return render(request, "accounts/login.html", {'form': form})  # ✅ always return
+    return render(request, "accounts/login.html", {'form': form})
 
 
-# Logout
+# --- Logout ---
 def logout_view(request):
     logout(request)
-    messages.success(request, 'Logged Out')
-    return redirect('login')  # ✅ lowercase fixed
+    messages.success(request, 'Logged out successfully.')
+    return redirect('login')
 
 
-# Dashboard
+# --- Dashboard ---
 @login_required
 def dashboard_view(request):
-    return render(request, "accounts/dashboard.html")  # ✅ fixed typo
+    return render(request, "accounts/dashboard.html")
 
 
-# List users with HttpResponse
-def user_list_http(request):
-    users = User.objects.all()
-    template = loader.get_template('accounts/user_list.html')
-    context = {"users": users}
-    return HttpResponse(template.render(context, request))
+# --- Profile (self + others) ---
+@login_required
+def profile_view(request, username=None):
+    if username:
+        user_obj = get_object_or_404(User, username=username)
+    else:
+        user_obj = request.user
+
+    return render(request, "accounts/profile.html", {'user': user_obj})
 
 
-# List users with render shortcut
+# --- Edit Profile ---
+@login_required
+def edit_profile_view(request):
+    profile = request.user.profile
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect("profile")
+    else:
+        form = UserProfileForm(instance=profile)
+
+    return render(request, "accounts/edit_profile.html", {"form": form})
+
+
+# --- User List ---
+@login_required
 def user_list_render(request):
     users = User.objects.all()
     return render(request, 'accounts/user_list.html', {'users': users})

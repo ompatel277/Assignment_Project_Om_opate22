@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>
-    {% block title %}Traject{% endblock %}
-  </title>
+  <title>{% block title %}Traject{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap -->
@@ -29,22 +27,13 @@
         <li class="nav-item"><a class="nav-link" href="#">Careers</a></li>
       </ul>
 
-      <!-- Auth Links -->
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
         {% endif %}
       </ul>
     </div>
@@ -52,12 +41,14 @@
 
   <!-- Main Content -->
   <main class="container mb-5">
-    {% block content %}
-      <p class="text-muted">This is default content.</p>
-    {% endblock %}
+    {% block content %}{% endblock %}
   </main>
 
   <!-- Footer -->
   <footer class="bg-dark text-white py-3">
     <div class="container text-center small">
-      <p class="mb-1">Traject
+      <p class="mb-1">Traject © 2025</p>
+    </div>
+  </footer>
+</body>
+</html>
