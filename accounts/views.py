@@ -90,6 +90,9 @@ def edit_profile_view(request):
 
 # --- User List ---
 @login_required
-def user_list_render(request):
+def user_list_http(request):
+    """HttpResponse version: manually load template and return"""
     users = User.objects.all()
-    return render(request, 'accounts/user_list.html', {'users': users})
+    template = loader.get_template("accounts/user_list.html")
+    context = {"users": users}
+    return HttpResponse(template.render(context, request))

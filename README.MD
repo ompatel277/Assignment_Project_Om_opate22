@@ -15,4 +15,5 @@ I did make a unique and ordering but I got that from chatGPT and I do not know w
 How you seeded test data.
 I manually added the data from the admin dashboard. I do want to try to do the dummydata once I have everything connected. 
 
-For A4 I added 2 different urls in views. Both display a list of users# Assignment_Project_Om_opate22
+For A4 I added 2 different urls in views. Both display a list of users# Assignment_Project_Om_opate22.
+This shows the difference between manually entering HTML and using django's shortcut

@@ -13,5 +13,5 @@ urlpatterns = [
     path("profile/<str:username>/", views.profile_view, name="profile_other"),
 
     # Users list
-    path("users/", views.user_list_render, name="user_list"),
+    path("users/http/", views.user_list_http, name="user_list_http"),
 ]
