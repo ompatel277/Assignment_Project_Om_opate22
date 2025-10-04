@@ -17,3 +17,8 @@ I manually added the data from the admin dashboard. I do want to try to do the d
 
 For A4 I added 2 different urls in views. Both display a list of users# Assignment_Project_Om_opate22.
 This shows the difference between manually entering HTML and using django's shortcut
+
+
+Hw 5
+For homework 5, I added class based views. A base generic views and list view to the project.
+I also refactored the URL structures so it can use  "Included()", and created templated that used {% empty %}. I also wired most of the navigations to specific pages

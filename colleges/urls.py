@@ -1,7 +1,11 @@
+# colleges/urls.py
 from django.urls import path
-from . import views
+from .views import CollegeListView, CollegeGenericListView, CollegeDetailGenericView
+
+app_name = "colleges"
 
 urlpatterns = [
-    path("", views.college_list_view, name="college_list"),
-    path("<int:pk>/", views.college_detail_view, name="college_detail"),
+    path("list/", CollegeListView.as_view(), name="list"),
+    path("generic/", CollegeGenericListView.as_view(), name="list_generic"),
+    path("<int:pk>/", CollegeDetailGenericView.as_view(), name="detail"),
 ]

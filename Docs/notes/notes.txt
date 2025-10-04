@@ -32,3 +32,9 @@ The difference is that http requires you to load and render a template, unlike r
 any URL/template decisions you made.
 No I used the one we saw in class for now
 
+
+HW 5
+For base view I had to explicitly write the get() method and pass the context to the template,
+while the list view was a lot simple because I only had to add a specific  model and the template
+Generic views do save a lot of time and save on using repetitive code because it automatically handles the query set.
+
