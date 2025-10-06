@@ -22,3 +22,7 @@ This shows the difference between manually entering HTML and using django's shor
 Hw 5
 For homework 5, I added class based views. A base generic views and list view to the project.
 I also refactored the URL structures so it can use  "Included()", and created templated that used {% empty %}. I also wired most of the navigations to specific pages
+
+
+HW 6
+I added a searchable college list, where users can search up specific colleges by state, name, and abbreviation using a listview which is linked to a query. The page also shows aggregations like counting up the total schools in a specific state.  

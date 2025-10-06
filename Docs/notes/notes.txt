@@ -38,3 +38,6 @@ For base view I had to explicitly write the get() method and pass the context to
 while the list view was a lot simple because I only had to add a specific  model and the template
 Generic views do save a lot of time and save on using repetitive code because it automatically handles the query set.
 
+HW 6
+Filtering: the list view reads the q and narrows down the request and only returns the strings that match that row.
+Aggregation: returns a single summary example is total counts of colleges in a specific state.
