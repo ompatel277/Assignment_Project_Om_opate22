@@ -3,15 +3,19 @@
 {% block title %}Colleges{% endblock %}
 
 {% block content %}
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">Colleges</h2>
+<div class="container mt-5">
+
+  <!-- Header + Search -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-3 mb-md-0 text-primary">🎓 Explore Colleges</h2>
+
     <form method="get" class="d-flex" role="search">
       <input
         type="text"
         name="q"
         value="{{ q }}"
         class="form-control me-2"
-        placeholder="Search by name, abbr, city, state"
+        placeholder="Search by name, abbr, city, or state"
       />
       <button class="btn btn-primary" type="submit">Search</button>
       {% if q %}
@@ -24,9 +28,13 @@
     <p class="text-muted">{{ result_count|default:0 }} result{% if result_count != 1 %}s{% endif %} for “{{ q }}”.</p>
   {% endif %}
 
-  <div class="card shadow-sm mb-4">
+  <!-- Colleges Table -->
+  <div class="card shadow-sm hover-card mb-5">
+    <div class="card-header bg-primary text-white fw-semibold">
+      College Directory
+    </div>
     <div class="card-body p-0">
-      <table class="table table-striped mb-0">
+      <table class="table table-hover align-middle mb-0">
         <thead class="table-light">
           <tr>
             <th>Abbr</th>
@@ -39,11 +47,11 @@
         <tbody>
           {% for college in colleges %}
             <tr>
-              <td>{{ college.abbreviation }}</td>
+              <td class="fw-semibold text-primary">{{ college.abbreviation }}</td>
               <td>{{ college.college_name }}</td>
               <td>{{ college.city }}</td>
               <td>{{ college.state }}</td>
-              <td>
+              <td class="text-end">
                 <a href="{% url 'colleges:detail' college.pk %}" class="btn btn-sm btn-outline-primary">
                   View
                 </a>
@@ -51,7 +59,7 @@
             </tr>
           {% empty %}
             <tr>
-              <td colspan="5" class="text-muted p-3">No colleges found.</td>
+              <td colspan="5" class="text-center text-muted p-3">No colleges found.</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -59,28 +67,41 @@
     </div>
   </div>
 
-  <h4 class="mt-4">Totals</h4>
-  <ul class="list-group mb-4">
-    <li class="list-group-item d-flex justify-content-between">
-      <span>Total Colleges</span>
-      <strong>{{ total_colleges }}</strong>
-    </li>
-    <li class="list-group-item d-flex justify-content-between">
-      <span>Total Majors</span>
-      <strong>{{ total_majors }}</strong>
-    </li>
-    <li class="list-group-item d-flex justify-content-between">
-      <span>Total Students (with a college)</span>
-      <strong>{{ total_students }}</strong>
-    </li>
-  </ul>
-
+  <!-- Totals Overview -->
   <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm hover-card">
+        <div class="card-body">
+          <h6 class="text-muted">Total Colleges</h6>
+          <h3 class="fw-bold text-primary">{{ total_colleges }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm hover-card">
+        <div class="card-body">
+          <h6 class="text-muted">Total Majors</h6>
+          <h3 class="fw-bold text-primary">{{ total_majors }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm hover-card">
+        <div class="card-body">
+          <h6 class="text-muted">Total Students (with college)</h6>
+          <h3 class="fw-bold text-primary">{{ total_students }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Majors & Students per College -->
+  <div class="row g-4 mt-4">
     <div class="col-md-6">
-      <h4>Majors per College</h4>
-      <div class="card shadow-sm">
+      <div class="card shadow-sm hover-card">
+        <div class="card-header bg-primary text-white fw-semibold">Majors per College</div>
         <div class="card-body p-0">
-          <table class="table table-sm mb-0">
+          <table class="table table-sm mb-0 align-middle">
             <thead class="table-light">
               <tr>
                 <th>College</th>
@@ -91,10 +112,10 @@
               {% for row in majors_per_college %}
                 <tr>
                   <td>{{ row.abbreviation }} — {{ row.college_name }}</td>
-                  <td class="text-end">{{ row.major_count }}</td>
+                  <td class="text-end fw-semibold">{{ row.major_count }}</td>
                 </tr>
               {% empty %}
-                <tr><td colspan="2" class="text-muted p-2">No data.</td></tr>
+                <tr><td colspan="2" class="text-muted p-3 text-center">No data available.</td></tr>
               {% endfor %}
             </tbody>
           </table>
@@ -103,10 +124,10 @@
     </div>
 
     <div class="col-md-6">
-      <h4>Students per College</h4>
-      <div class="card shadow-sm">
+      <div class="card shadow-sm hover-card">
+        <div class="card-header bg-primary text-white fw-semibold">Students per College</div>
         <div class="card-body p-0">
-          <table class="table table-sm mb-0">
+          <table class="table table-sm mb-0 align-middle">
             <thead class="table-light">
               <tr>
                 <th>College</th>
@@ -117,10 +138,10 @@
               {% for row in students_per_college %}
                 <tr>
                   <td>{{ row.college__abbreviation }} — {{ row.college__college_name }}</td>
-                  <td class="text-end">{{ row.student_count }}</td>
+                  <td class="text-end fw-semibold">{{ row.student_count }}</td>
                 </tr>
               {% empty %}
-                <tr><td colspan="2" class="text-muted p-2">No data.</td></tr>
+                <tr><td colspan="2" class="text-muted p-3 text-center">No data available.</td></tr>
               {% endfor %}
             </tbody>
           </table>
@@ -128,4 +149,13 @@
       </div>
     </div>
   </div>
+
+  <!-- Optional Chart -->
+  <div class="text-center mt-5">
+    <h5 class="fw-bold mb-3">Majors per College (Chart)</h5>
+    <img src="{% url 'colleges:chart' %}" alt="Majors Chart"
+         class="img-fluid rounded shadow-sm chart-wrapper">
+  </div>
+
+</div>
 {% endblock %}

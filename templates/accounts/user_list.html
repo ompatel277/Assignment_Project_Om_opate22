@@ -1,29 +1,38 @@
 {% extends "accounts/base.html" %}
-
-{% block title %}User List{% endblock %}
+{% block title %}User Directory — Traject{% endblock %}
 
 {% block content %}
-  <h2 class="mb-3">Registered Users</h2>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold" style="background: linear-gradient(90deg, #007bff, #6610f2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      👥 User Directory
+    </h2>
+    <span class="badge bg-primary-subtle text-dark px-3 py-2 rounded-pill">
+      Total Users: {{ users|length }}
+    </span>
+  </div>
 
   {% if users %}
-    <div class="card shadow-sm">
+    <div class="card shadow-lg border-0 rounded-4">
       <div class="card-body p-0">
-        <table class="table table-striped mb-0">
+        <table class="table align-middle mb-0 table-striped table-hover">
           <thead class="table-light">
             <tr>
               <th>Username</th>
               <th>Email</th>
-              <th>Profile</th>
+              <th class="text-center">Profile</th>
             </tr>
           </thead>
           <tbody>
             {% for u in users %}
               <tr>
-                <td>{{ u.username }}</td>
-                <td>{{ u.email }}</td>
-                <td>
-                  <a href="{% url 'profile_other' username=u.username %}"
-                     class="btn btn-sm btn-outline-primary">View</a>
+                <td class="fw-semibold">{{ u.username }}</td>
+                <td class="text-muted text-truncate" style="max-width: 240px;">{{ u.email }}</td>
+                <td class="text-center">
+                  <a href="{% url 'accounts:profile_other' username=u.username %}"
+                     class="btn btn-sm btn-outline-primary px-3">
+                    View
+                  </a>
                 </td>
               </tr>
             {% endfor %}
@@ -32,6 +41,9 @@
       </div>
     </div>
   {% else %}
-    <p class="text-muted">No users have signed up yet.</p>
+    <div class="alert alert-secondary text-center mt-4 rounded-4" role="alert">
+      No users have signed up yet 🚀
+    </div>
   {% endif %}
+</div>
 {% endblock %}

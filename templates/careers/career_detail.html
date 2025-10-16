@@ -1,0 +1,21 @@
+{% extends "accounts/base.html" %}
+{% block title %}{{ career.title }} — Career Details{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="fw-bold">{{ career.title }}</h2>
+  <p class="text-muted">{{ career.company }}</p>
+
+  {% if career.industries %}
+    <p><strong>Industries:</strong> {{ career.industries|join:", " }}</p>
+  {% endif %}
+
+  {% if career.skills %}
+    <p><strong>Skills Required:</strong> {{ career.skills|join:", " }}</p>
+  {% endif %}
+
+  <hr>
+  <p>{{ career.description|linebreaks }}</p>
+
+  <a href="{% url 'careers:list' %}" class="btn btn-outline-primary mt-3">← Back to Careers</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "accounts/base.html" %}
+{% block title %}Degree Requirements{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="fw-bold mb-4">Degree Requirements</h2>
+  {% if requirements %}
+    <ul class="list-group">
+      {% for r in requirements %}
+        <li class="list-group-item">
+          <strong>{{ r.category.name }}:</strong>
+          {% if r.course %}
+            {{ r.course.subject }} {{ r.course.number }} – {{ r.course.title }}
+          {% else %}
+            {{ r.note }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No requirements defined.</p>
+  {% endif %}
+</div>
+{% endblock %}

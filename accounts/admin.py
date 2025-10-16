@@ -1,33 +1,43 @@
+# accounts/admin.py
 from django.contrib import admin
-from django.contrib.auth.models import User
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import UserProfile
-
-
-class UserProfileInline(admin.StackedInline):
-    model = UserProfile
-    can_delete = False
-    verbose_name_plural = 'Profile'
-
-
-class UserAdmin(BaseUserAdmin):
-    inlines = (UserProfileInline,)
-
-
-# Safely unregister and re-register User with inline profile
-try:
-    admin.site.unregister(User)
-except admin.sites.NotRegistered:
-    pass
-admin.site.register(User, UserAdmin)
+from .models import UserProfile, Course, Club, CareerPath
 
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for UserProfile model.
+    Displays key academic fields and enables searching/filtering by user and college.
+    """
     list_display = ("user", "college", "major", "academic_year", "gpa")
+    list_filter = ("college", "academic_year")
     search_fields = (
         "user__username",
-        "college__college_name",  # fixed to match model
-        "major__name"
+        "college__college_name",
+        "major__name",
     )
-    list_filter = ("academic_year", "college", "major")
+    ordering = ("user__username",)  # optional: keeps list ordered alphabetically by user
+
+
+# Simple registration for additional models
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ("subject", "number", "title", "credits")
+    search_fields = ("subject", "number", "title")
+    ordering = ("subject", "number")
+
+
+@admin.register(Club)
+class ClubAdmin(admin.ModelAdmin):
+    list_display = ("name", "college", "category")
+    search_fields = ("name", "college__college_name")
+    list_filter = ("college", "category")
+    ordering = ("name",)
+
+
+@admin.register(CareerPath)
+class CareerPathAdmin(admin.ModelAdmin):
+    list_display = ("title", "related_major", "salary_range")
+    search_fields = ("title", "related_major__name")
+    list_filter = ("related_major",)
+    ordering = ("title",)

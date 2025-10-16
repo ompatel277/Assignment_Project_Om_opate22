@@ -1,19 +1,252 @@
 {% extends "accounts/base.html" %}
-
+{% load static %}
 {% block title %}Dashboard{% endblock %}
-
 {% block content %}
-  <h2 class="mb-3">Welcome, {{ user.username }}!</h2>
 
-  <div class="card shadow-sm p-4 mb-4">
-    <h5 class="card-title">Account Information</h5>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-  </div>
+<style>
+  /* === THEME-ALIGNED DASHBOARD STYLING === */
 
-  <div class="d-flex gap-2">
-    <a href="{% url 'profile' %}" class="btn btn-primary">View Profile</a>
-    <a href="{% url 'edit_profile' %}" class="btn btn-warning">Edit Profile</a>
-    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+  .dashboard-card {
+    background-color: var(--tj-bg-light);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    color: var(--tj-text);
+  }
+
+  .dashboard-card h2 {
+    color: var(--tj-accent);
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+  }
+
+  .dashboard-card h5 {
+    color: var(--tj-accent-dark);
+  }
+
+  .dashboard-card strong {
+    color: var(--tj-accent);
+  }
+
+  .alert-aqua {
+    background-color: rgba(102, 252, 241, 0.1);
+    border: 1px solid var(--tj-accent);
+    color: var(--tj-accent);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .btn-outline-primary {
+    border-color: var(--tj-accent);
+    color: var(--tj-accent);
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--tj-accent);
+    color: var(--tj-bg-dark);
+    box-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
+  }
+
+  .btn-outline-secondary {
+    border-color: var(--tj-accent-dark);
+    color: var(--tj-accent-dark);
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: var(--tj-accent-dark);
+    color: var(--tj-bg-dark);
+  }
+
+  .btn-danger {
+    background-color: #e63946;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #ff5b5b;
+    box-shadow: 0 0 10px rgba(255, 91, 91, 0.4);
+  }
+</style>
+
+<div class="container mt-5">
+  <!-- Aqua Welcome Message -->
+  {% if messages %}
+    <div class="alert alert-aqua mb-4" role="alert">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="card dashboard-card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 900px;">
+    <div class="card-body p-5">
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <h2>Welcome back, {{ user.username }} 👋</h2>
+        <p class="text-muted">Here’s your personalized academic overview.</p>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Account Information -->
+      <h5 class="fw-semibold mb-3">Account Information</h5>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p><strong>Username:</strong> {{ user.username }}</p>
+          <p><strong>Email:</strong> {{ user.email|default:"N/A" }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Academic Year:</strong> {{ profile.get_academic_year_display|default:"N/A" }}</p>
+          <p><strong>GPA:</strong> {{ profile.gpa|default:"N/A" }}</p>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Academic Overview -->
+      <h5 class="fw-semibold mb-3">Academic Overview</h5>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <p><strong>College:</strong> {{ profile.college|default:"Not selected" }}</p>
+          <p><strong>Major:</strong> {{ profile.major|default:"Undeclared" }}</p>
+          <p><strong>Minors:</strong>
+            {% if profile.minors.all %}
+              {% for minor in profile.minors.all %}
+                {{ minor.name }}{% if not forloop.last %}, {% endif %}
+              {% empty %}
+                None
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Career Goals:</strong> {{ profile.career_goals|default:"Not specified" }}</p>
+          <p><strong>Preferred Locations:</strong>
+            {% if profile.preferred_locations %}
+              {{ profile.preferred_locations|join:", " }}
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <p><strong>Preferred Industries:</strong>
+            {% if profile.preferred_industries %}
+              {{ profile.preferred_industries|join:", " }}
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Skills and Interests -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h6 class="fw-bold text-accent">Skills</h6>
+          {% if profile.skills %}
+            {% if profile.skills.0 %}
+              <ul>
+                {% for skill in profile.skills %}
+                  <li>{{ skill }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="text-muted">{{ profile.skills }}</p>
+            {% endif %}
+          {% else %}
+            <p class="text-muted">No skills listed.</p>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <h6 class="fw-bold text-accent">Personal Interests</h6>
+          {% if profile.personal_interests %}
+            {% if profile.personal_interests.0 %}
+              <ul>
+                {% for interest in profile.personal_interests %}
+                  <li>{{ interest }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="text-muted">{{ profile.personal_interests }}</p>
+            {% endif %}
+          {% else %}
+            <p class="text-muted">No interests added yet.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- 🌟 Recommendations -->
+      <div class="mt-5">
+        <h4 class="fw-bold text-center mb-4 text-accent">Your Personalized Recommendations</h4>
+
+        <!-- Courses -->
+        <div class="mb-5">
+          <h6 class="fw-semibold text-accent mb-3">🎓 Recommended Courses</h6>
+          {% if recommended_courses %}
+            <ul>
+              {% for course in recommended_courses %}
+                <li>
+                  <strong>{{ course.name }}</strong><br>
+                  <small class="text-muted">{{ course.description|default:"No description available." }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No recommended courses yet. Select your major to see suggestions.</p>
+          {% endif %}
+        </div>
+
+        <!-- Clubs -->
+        <div class="mb-5">
+          <h6 class="fw-semibold text-accent-dark mb-3">🏫 Clubs That Match Your Interests</h6>
+          {% if recommended_clubs %}
+            <ul>
+              {% for club in recommended_clubs %}
+                <li>
+                  <strong>{{ club.name }}</strong><br>
+                  <small class="text-muted">{{ club.description|default:"No details available." }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No clubs match your interests yet. Add more to your profile.</p>
+          {% endif %}
+        </div>
+
+        <!-- Careers -->
+        <div class="mb-4">
+          <h6 class="fw-semibold text-accent-dark mb-3">🎯 Career Path Suggestions</h6>
+          {% if recommended_careers %}
+            <ul>
+              {% for career in recommended_careers %}
+                <li>
+                  <strong>{{ career.title }}</strong><br>
+                  <small class="text-muted">{{ career.description|default:"No description provided." }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No career paths found yet. Add skills to get personalized ideas.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between mt-3 flex-wrap">
+        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-primary px-4 mb-2">View Profile</a>
+        <a href="{% url 'accounts:logout' %}" class="btn btn-danger px-4 mb-2">Logout</a>
+      </div>
+
+    </div>
   </div>
+</div>
+
 {% endblock %}

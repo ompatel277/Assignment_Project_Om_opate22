@@ -26,3 +26,6 @@ I also refactored the URL structures so it can use  "Included()", and created te
 
 HW 6
 I added a searchable college list, where users can search up specific colleges by state, name, and abbreviation using a listview which is linked to a query. The page also shows aggregations like counting up the total schools in a specific state.  
+
+HW 7
+I added css code to make my web app look a bit better and I also added a chart which is not the most useful right now but it is a start. 

@@ -1,9 +1,21 @@
-# Assignment_Project_Om_opate22/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", TemplateView.as_view(template_name="accounts/home.html"), name="home"),
+
     path("accounts/", include("accounts.urls")),
     path("colleges/", include("colleges.urls")),
+    path("careers/", include("careers.urls")),
+    path("catalog/", include("catalog.urls")),
+    # path("recommender/", include("recommender.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    if hasattr(settings, "MEDIA_URL") and hasattr(settings, "MEDIA_ROOT"):
+        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,132 @@
+/* ==========================================
+   TRAJECT — BERT Dark Aqua Theme
+   ========================================== */
+
+/* === COLOR VARIABLES === */
+:root {
+  --tj-bg-dark: #0b0c10;
+  --tj-bg-light: #1f2833;
+  --tj-text: #c5c6c7;
+  --tj-accent: #66fcf1;
+  --tj-accent-dark: #45a29e;
+  --tj-white: #ffffff;
+}
+
+/* === GLOBAL BASE === */
+body {
+  background-color: var(--tj-bg-dark);
+  color: var(--tj-text);
+  font-family: 'Inter', 'Poppins', sans-serif;
+  transition: background 0.6s ease, color 0.6s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background-color: var(--tj-bg-light);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand {
+  color: var(--tj-accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navbar-nav .nav-link {
+  color: var(--tj-text);
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--tj-accent);
+}
+
+/* === BUTTONS === */
+.btn-outline-light,
+.btn {
+  border: 2px solid var(--tj-accent);
+  color: var(--tj-accent);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover,
+.btn:hover {
+  background: var(--tj-accent);
+  color: var(--tj-bg-dark);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+}
+
+/* === HEADINGS === */
+h1, h2, h3, h4, h5 {
+  color: var(--tj-accent);
+  font-weight: 700;
+}
+
+/* === LINKS === */
+a {
+  color: var(--tj-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--tj-accent-dark);
+}
+
+/* === CARDS === */
+.card {
+  background-color: var(--tj-bg-light);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* === ACCORDION === */
+.accordion-button {
+  background-color: var(--tj-bg-light);
+  color: var(--tj-text);
+  font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--tj-accent-dark);
+  color: var(--tj-bg-dark);
+  box-shadow: 0 0 12px rgba(102, 252, 241, 0.4);
+}
+
+.accordion-body {
+  background-color: var(--tj-bg-dark);
+  color: var(--tj-text);
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: var(--tj-bg-light);
+  color: var(--tj-text);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === DARK MODE TOGGLE === */
+.dark-toggle {
+  background: none;
+  border: none;
+  color: var(--tj-accent);
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+.dark-toggle:hover {
+  transform: rotate(20deg);
+}

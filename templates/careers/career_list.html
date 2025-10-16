@@ -1,0 +1,26 @@
+{% extends "accounts/base.html" %}
+{% block title %}Careers{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="fw-bold mb-4 text-primary">Explore Careers</h2>
+
+  {% if careers %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for career in careers %}
+        <div class="col">
+          <div class="card shadow-sm border-0 hover-card h-100">
+            <div class="card-body">
+              <h5 class="fw-bold">{{ career.title }}</h5>
+              <p class="text-muted small mb-2">{{ career.company }}</p>
+              <p class="mb-0">{{ career.description|truncatewords:25 }}</p>
+              <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-outline-primary mt-3">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">No careers available yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+/* ==========================================
+   TRAJECT — Yas Marina Blue Dual-Tone Theme
+   ========================================== */
+
+.traject-bg {
+  background: radial-gradient(
+      circle at 80% 70%,
+      rgba(80, 155, 255, 0.45) 0%,
+      rgba(80, 155, 255, 0.1) 40%,
+      rgba(50, 120, 255, 0.05) 65%,
+      transparent 85%
+    ),
+    linear-gradient(
+      180deg,
+      #163dbe 0%,
+      #2456e3 35%,
+      #3e7df6 70%,
+      #65b0ff 100%
+    );
+  color: #ffffff;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === NAVBAR === */
+.navbar-container {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0)
+  );
+  padding: 1.2rem 4rem;
+}
+
+.nav-links a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.75;
+}
+
+/* === LOGO BLEND === */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-img {
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.92;
+  mix-blend-mode: screen;
+  filter:
+    brightness(2.2)
+    contrast(1.15)
+    drop-shadow(0 0 10px rgba(255,255,255,0.25))
+    drop-shadow(0 0 20px rgba(255,255,255,0.18));
+  transition: all 0.4s ease-in-out;
+}
+
+.logo-img:hover {
+  filter:
+    brightness(2.5)
+    contrast(1.2)
+    drop-shadow(0 0 15px rgba(255,255,255,0.4))
+    drop-shadow(0 0 30px rgba(255,255,255,0.25));
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* === HERO === */
+.tj-hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.tj-title {
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.tj-subtitle {
+  font-size: 1.2rem;
+  color: #e5eeff;
+  margin-bottom: 2rem;
+  max-width: 550px;
+}
+
+/* === BUTTONS === */
+.tj-cta {
+  background: #3D7EF0;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.9rem 2.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.tj-cta:hover {
+  background: #5BA9FF;
+  box-shadow: 0 0 25px rgba(91, 169, 255, 0.7);
+  transform: scale(1.05);
+}
+
+.tj-ghost {
+  border: 2px solid #d3e6ff;
+  color: #d3e6ff !important;
+  font-weight: 600;
+  padding: 0.9rem 2.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tj-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.03);
+}
+
+/* === FOOTER === */
+.footer {
+  color: #cfe0ff;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .tj-title {
+    font-size: 2.8rem;
+  }
+  .tj-subtitle {
+    font-size: 1rem;
+  }
+  .navbar-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

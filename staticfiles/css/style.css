@@ -1,0 +1,242 @@
+/* === GLOBAL RESET & BODY === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0025, #25005f, #3d00a0);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === HERO SECTION === */
+.traject-hero {
+  background: linear-gradient(135deg, #190046, #32008a, #4500c0);
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.btn-hero {
+  background: linear-gradient(90deg, #6a00ff, #3b00c8);
+  color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+  box-shadow: 0 0 15px rgba(120, 0, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+/* === NAVBAR === */
+.navbar {
+  background: linear-gradient(90deg, #190046, #2b007a, #3f00b5) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #a57eff !important;
+  text-shadow: 0 0 10px rgba(180, 120, 255, 0.9);
+  transform: scale(1.03);
+}
+
+/* === MAIN CONTENT === */
+main.container {
+  flex-grow: 1;
+  padding: 2rem 1rem;
+}
+
+/* === FORMS === */
+form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form label {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+form input,
+form select,
+form textarea {
+  background: #ffffff;
+  border: 2px solid #c5b3ff;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  color: #1a0033;
+  font-size: 1rem;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #8e2de2;
+  box-shadow: 0 0 10px rgba(142, 45, 226, 0.5);
+}
+
+form button {
+  background: linear-gradient(90deg, #6a00ff, #3b00c8);
+  border: none;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  box-shadow: 0 0 15px rgba(120, 0, 255, 0.6);
+  transform: scale(1.02);
+}
+
+/* === PROFILE CARD === */
+.profile-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(120, 0, 255, 0.25);
+  padding: 2.5rem;
+  color: #ffffff;
+  max-width: 700px;
+  margin: 3rem auto;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(160, 60, 255, 0.35);
+}
+
+.profile-card h2 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.profile-card p {
+  font-size: 1rem;
+  color: #e3e3ff;
+}
+
+.profile-card strong {
+  color: #ffffff;
+}
+
+/* === PROFILE BUTTONS === */
+.btn-view {
+  background: linear-gradient(90deg, #6a00ff, #4500c0);
+  color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.3rem;
+  margin-right: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn-view:hover {
+  box-shadow: 0 0 12px rgba(120, 0, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.btn-edit {
+  background: linear-gradient(90deg, #ffbb33, #ff8800);
+  color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.3rem;
+  margin-right: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+  box-shadow: 0 0 12px rgba(255, 136, 0, 0.6);
+  transform: scale(1.05);
+}
+
+.btn-logout {
+  background: linear-gradient(90deg, #ff4444, #cc0000);
+  color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  box-shadow: 0 0 12px rgba(255, 70, 70, 0.6);
+  transform: scale(1.05);
+}
+
+/* === FOOTER === */
+footer {
+  background: linear-gradient(90deg, #10002b, #1e0050);
+  color: #bbb;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === WHITE SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Firefox scrollbar support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth page scroll */
+html {
+  scroll-behavior: smooth;
+}

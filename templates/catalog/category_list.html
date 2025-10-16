@@ -1,0 +1,19 @@
+{% extends "accounts/base.html" %}
+{% block title %}Degree Categories{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="fw-bold mb-4">Degree Categories</h2>
+  {% if categories %}
+    <ul class="list-group">
+      {% for c in categories %}
+        <li class="list-group-item d-flex justify-content-between">
+          <span>{{ c.name }} ({{ c.major.name }})</span>
+          {% if c.min_credits %}<span>{{ c.min_credits }} credits</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No degree categories found.</p>
+  {% endif %}
+</div>
+{% endblock %}

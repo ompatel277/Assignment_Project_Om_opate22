@@ -1,32 +1,84 @@
 {% extends "accounts/base.html" %}
-
 {% block title %}{{ college.college_name }}{% endblock %}
 
 {% block content %}
-  <h2 class="mb-2">{{ college.college_name }} ({{ college.abbreviation }})</h2>
-  <p class="text-muted mb-3">
-    <strong>Location:</strong> {{ college.city }}, {{ college.state }}
-  </p>
+<div class="container mt-5">
 
-  {% if college.logo_url %}
-    <img src="{{ college.logo_url }}" alt="{{ college.college_name }} Logo"
-         class="img-fluid mb-3" style="max-height: 100px;">
-  {% endif %}
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent px-0 mb-4">
+      <li class="breadcrumb-item">
+        <a href="{% url 'colleges:list' %}" class="text-decoration-none">Colleges</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ college.college_name }}
+      </li>
+    </ol>
+  </nav>
 
-  <h4>Majors Offered</h4>
-  {% with majors=majors|default:college.majors.all %}
-    {% if majors %}
-      <ul class="list-group">
-        {% for major in majors %}
-          <li class="list-group-item">
-            {{ major.name }}{% if major.code %} ({{ major.code }}){% endif %}
-          </li>
-        {% empty %}
-          <li class="list-group-item text-muted">No majors listed yet.</li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="text-muted">No majors listed yet.</p>
+  <!-- College Header -->
+  <div class="text-center mb-4">
+    {% if college.logo_url %}
+      <img src="{{ college.logo_url }}" alt="{{ college.college_name }} Logo"
+           class="img-fluid mb-3" style="max-height: 120px;">
     {% endif %}
-  {% endwith %}
+    <h2 class="fw-bold">{{ college.college_name }} ({{ college.abbreviation }})</h2>
+    <p class="text-muted">
+      <strong>Location:</strong> {{ college.city }}, {{ college.state }}
+    </p>
+
+    <!-- "Set as My College" Button -->
+    {% if user.is_authenticated %}
+      {% if user.profile.college == college %}
+        <p class="text-success fw-bold mt-3">🎓 You are currently enrolled at this college.</p>
+      {% else %}
+        <form method="post" action="{% url 'accounts:set_college' college.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-primary mt-3">
+            Set as My College
+          </button>
+        </form>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <hr>
+
+  <!-- Chart Integration -->
+  <div class="text-center my-4">
+    <h5 class="fw-bold mb-3">Majors per College (Chart)</h5>
+    <div class="chart-wrapper d-inline-block p-3 rounded shadow-sm bg-light">
+      <img src="{% url 'colleges:chart' %}" alt="Majors Chart" class="img-fluid rounded">
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Majors Section -->
+  <h4 class="mb-3 text-center fw-semibold">Majors Offered</h4>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for major in majors %}
+      <div class="col">
+        <div class="card shadow-sm border-0 hover-card h-100">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+            <h5 class="card-title fw-bold mb-2">
+              {{ major.name }}
+              {% if major.code %}
+                <span class="text-muted">({{ major.code }})</span>
+              {% endif %}
+            </h5>
+            <p class="text-secondary small mb-0">Degree requirements available soon</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted text-center">No majors available yet.</p>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'colleges:list' %}" class="btn btn-outline-secondary">← Back to Colleges</a>
+  </div>
+
+</div>
 {% endblock %}

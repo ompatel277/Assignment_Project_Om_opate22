@@ -1,40 +1,120 @@
 {% extends "accounts/base.html" %}
-
-{% block title %}Profile{% endblock %}
+{% block title %}{{ user.username }} — Profile{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>{{ user.username }}'s Profile</h2>
-  <p><strong>Email:</strong> {{ user.email }}</p>
+<div class="container my-5">
+  <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 900px;">
+    <div class="card-body p-5">
 
-  {% if user.profile %}
-    <h4 class="mt-4">Academic Information</h4>
-    <ul class="list-group mb-3">
-      <li class="list-group-item"><strong>College:</strong> {{ user.profile.college }}</li>
-      <li class="list-group-item"><strong>Major:</strong> {{ user.profile.major }}</li>
-      <li class="list-group-item"><strong>GPA:</strong> {{ user.profile.gpa }}</li>
-      <li class="list-group-item"><strong>Academic Year:</strong> {{ user.profile.get_academic_year_display }}</li>
-    </ul>
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <img src="{% static 'images/user_icon.png' %}" alt="Profile Icon" width="90" class="mb-3">
+        <h2 class="fw-bold mb-1">{{ user.username }}</h2>
+        <p class="text-muted mb-0">{{ user.email }}</p>
+      </div>
 
-    <h4>Career & Interests</h4>
-    <p>{{ user.profile.career_goals|default:"(not set)" }}</p>
+      {% if user.profile %}
+        <hr class="my-4">
 
-    <h4>Skills</h4>
-    {% if user.profile.skills %}
-      <ul>{% for skill in user.profile.skills %}<li>{{ skill }}</li>{% endfor %}</ul>
-    {% else %}<p><em>(none)</em></p>{% endif %}
+        <!-- Academic Information -->
+        <h4 class="fw-semibold mb-3 text-primary">🎓 Academic Information</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>College:</strong> {{ user.profile.college|default:"Not selected" }}</p>
+            <p><strong>Major:</strong> {{ user.profile.major|default:"Undeclared" }}</p>
+            <p><strong>Minors:</strong>
+              {% if user.profile.minors.all %}
+                {% for minor in user.profile.minors.all %}
+                  {{ minor.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Academic Year:</strong> {{ user.profile.get_academic_year_display|default:"N/A" }}</p>
+            <p><strong>GPA:</strong> {{ user.profile.gpa|default:"N/A" }}</p>
+          </div>
+        </div>
 
-    <h4>Preferences</h4>
-    <p><strong>Industries:</strong> {{ user.profile.preferred_industries }}</p>
-    <p><strong>Locations:</strong> {{ user.profile.preferred_locations }}</p>
-  {% else %}
-    <p>No profile information found.</p>
-  {% endif %}
-</div>
+        <hr class="my-4">
 
-<div class="mt-4">
-  {% if user == request.user %}
-    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
-  {% endif %}
+        <!-- Career & Interests -->
+        <h4 class="fw-semibold mb-3 text-success">💡 Career & Interests</h4>
+        <p><strong>Career Goals:</strong> {{ user.profile.career_goals|default:"Not specified" }}</p>
+
+        <p><strong>Skills:</strong>
+          {% if user.profile.skills %}
+            {{ user.profile.skills|join:", " }}
+          {% else %}
+            None
+          {% endif %}
+        </p>
+
+        <p><strong>Personal Interests:</strong>
+          {% if user.profile.personal_interests %}
+            {{ user.profile.personal_interests|join:", " }}
+          {% else %}
+            None
+          {% endif %}
+        </p>
+
+        <hr class="my-4">
+
+        <!-- Work Experience -->
+        <h4 class="fw-semibold mb-3 text-warning">⚙️ Experience</h4>
+        <p>{{ user.profile.work_experience|default:"No work experience added yet." }}</p>
+
+        <hr class="my-4">
+
+        <!-- Preferences -->
+        <h4 class="fw-semibold mb-3 text-info">🌍 Preferences</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Industries:</strong>
+              {% if user.profile.preferred_industries %}
+                {{ user.profile.preferred_industries|join:", " }}
+              {% else %}
+                None
+              {% endif %}
+            </p>
+            <p><strong>Positions:</strong>
+              {% if user.profile.preferred_positions %}
+                {{ user.profile.preferred_positions|join:", " }}
+              {% else %}
+                None
+              {% endif %}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Locations:</strong>
+              {% if user.profile.preferred_locations %}
+                {{ user.profile.preferred_locations|join:", " }}
+              {% else %}
+                None
+              {% endif %}
+            </p>
+            <p><strong>Company Preferences:</strong>
+              {% if user.profile.preferred_company %}
+                {{ user.profile.preferred_company|join:", " }}
+              {% else %}
+                None
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+      {% else %}
+        <p class="text-muted">No profile information found.</p>
+      {% endif %}
+
+      {% if user == request.user %}
+        <div class="text-center mt-4">
+          <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary px-4">✏️ Edit Profile</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock %}

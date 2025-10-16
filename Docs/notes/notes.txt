@@ -41,3 +41,8 @@ Generic views do save a lot of time and save on using repetitive code because it
 HW 6
 Filtering: the list view reads the q and narrows down the request and only returns the strings that match that row.
 Aggregation: returns a single summary example is total counts of colleges in a specific state.
+
+HW 7
+Static files work in django by adding css styling and customizing it. Implemented colleges_charts which shows majors per college
+As of right now the chart is not that useful but once I add more to the web-app it should become useful. I used total_colleges().
+BytesIO is memory stream whihc captures the matplotlib before it renders it to http
