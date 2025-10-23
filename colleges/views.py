@@ -1,16 +1,22 @@
 from io import BytesIO
 from django.db.models import Q, Count
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib import messages
+
 from .models import College, Major
+from .forms import CollegeSearchForm, MajorForm
 from accounts.models import UserProfile
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
 # ====================================
-# 🏫 College List View
+# 🏫 College List View (Existing)
 # ====================================
 class CollegeListView(ListView):
     model = College
@@ -59,7 +65,7 @@ class CollegeListView(ListView):
 
 
 # ====================================
-# 🎓 College Detail View
+# 🎓 College Detail View (Existing)
 # ====================================
 class CollegeDetailView(DetailView):
     model = College
@@ -75,7 +81,7 @@ class CollegeDetailView(DetailView):
 
 
 # ====================================
-# 📊 JSON Endpoint for Majors
+# 📊 JSON Endpoint for Majors (Existing)
 # ====================================
 def majors_json_view(request, college_id):
     """Return all majors for a given college in JSON format."""
@@ -88,12 +94,12 @@ def majors_json_view(request, college_id):
 
 
 # ====================================
-# 📈 Matplotlib Chart View (Bar Chart)
+# 📈 Matplotlib Chart View (Existing)
 # ====================================
 def college_chart(request):
     """Return a PNG bar chart showing number of majors per college."""
     data = (
-        College.objects.annotate(num_majors=Count("majors"))  # ✅ plural matches related_name
+        College.objects.annotate(num_majors=Count("majors"))
         .values_list("college_name", "num_majors")
         .order_by("-num_majors")
     )
@@ -101,7 +107,6 @@ def college_chart(request):
     labels = [d[0] for d in data]
     counts = [d[1] for d in data]
 
-    # --- Matplotlib Figure ---
     fig, ax = plt.subplots(figsize=(8, 4))
     bars = ax.bar(labels, counts, color="#3b82f6")
     ax.set_title("Majors per College", fontsize=14, weight="bold")
@@ -109,15 +114,78 @@ def college_chart(request):
     ax.set_ylabel("Number of Majors")
     ax.tick_params(axis="x", rotation=25)
 
-    # Annotate counts on top of bars
     for bar, c in zip(bars, counts):
         ax.text(bar.get_x() + bar.get_width() / 2, c + 0.1, str(c),
                 ha="center", va="bottom", fontsize=9)
 
-    # --- Return PNG as HTTP response ---
     buf = BytesIO()
     fig.tight_layout()
     fig.savefig(buf, format="png", dpi=150)
     plt.close(fig)
     buf.seek(0)
     return HttpResponse(buf.getvalue(), content_type="image/png")
+
+
+# ============================================================
+# === A8: Demonstration Views (GET vs POST, FBV vs CBV) ======
+# ============================================================
+
+# -------------------------------
+# 🧭 GET Example — College Search
+# -------------------------------
+def college_search_view(request):
+    """
+    Function-Based View demonstrating GET method.
+    When user submits a search, the query (?q=...) appears in the URL.
+    """
+    form = CollegeSearchForm(request.GET or None)
+    results = None
+
+    if form.is_valid() and form.cleaned_data.get("q"):
+        query = form.cleaned_data["q"]
+        results = College.objects.filter(
+            Q(college_name__icontains=query) | Q(abbreviation__icontains=query)
+        )
+
+    return render(request, "colleges/college_search.html", {
+        "form": form,
+        "results": results
+    })
+
+
+# -------------------------------------------
+# 🧩 POST Example — Function-Based (FBV)
+# -------------------------------------------
+def add_major_fbv(request):
+    """
+    Function-Based View for handling a POST form submission.
+    Demonstrates CSRF protection and validation logic.
+    """
+    if request.method == "POST":
+        form = MajorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Major added successfully via FBV!")
+            return redirect("colleges:major_add_fbv")
+    else:
+        form = MajorForm()
+
+    return render(request, "colleges/add_major_fbv.html", {"form": form})
+
+
+# -------------------------------------------
+# 🧱 POST Example — Class-Based (CBV)
+# -------------------------------------------
+class AddMajorCBV(FormView):
+    """
+    Class-Based View demonstrating POST handling via FormView.
+    Uses the same MajorForm as the FBV example.
+    """
+    template_name = "colleges/add_major_cbv.html"
+    form_class = MajorForm
+    success_url = reverse_lazy("colleges:major_add_cbv")
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Major added successfully via CBV!")
+        return super().form_valid(form)

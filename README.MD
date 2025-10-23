@@ -29,3 +29,8 @@ I added a searchable college list, where users can search up specific colleges b
 
 HW 7
 I added css code to make my web app look a bit better and I also added a chart which is not the most useful right now but it is a start. 
+
+HW 8
+In my Traject project, the **GET method** is used for retrieving or filtering data — for example, the `college_search_view` allows users to search colleges, and the query appears in the URL (`?q=Illinois`). The **POST method** is used for securely creating or submitting data, such as adding a new major through `add_major_fbv` or `AddMajorCBV`, with CSRF protection enabled.  
+
+A **Function-Based View (FBV)** handles both GET and POST manually inside one function using conditional logic (`if request.method == 'POST'`). In contrast, a **Class-Based View (CBV)** like Django’s `FormView` automatically handles form validation, success redirects, and template rendering in a structured way. Both achieve the same result, but CBVs reduce code repetition and are better suited for reusable, scalable form handling.

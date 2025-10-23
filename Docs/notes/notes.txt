@@ -35,7 +35,7 @@ No I used the one we saw in class for now
 
 HW 5
 For base view I had to explicitly write the get() method and pass the context to the template,
-while the list view was a lot simple because I only had to add a specific  model and the template
+while the list view was a lot simple because I only had to add a specific  model and the templaCSRFte
 Generic views do save a lot of time and save on using repetitive code because it automatically handles the query set.
 
 HW 6
@@ -46,3 +46,33 @@ HW 7
 Static files work in django by adding css styling and customizing it. Implemented colleges_charts which shows majors per college
 As of right now the chart is not that useful but once I add more to the web-app it should become useful. I used total_colleges().
 BytesIO is memory stream whihc captures the matplotlib before it renders it to http
+
+HW 8
+
+CSRF: (Cross-Site Request Forgery) protects against malicious sites submitting fake POST requests on behalf of a logged-in user.
+Django uses {% csrf_token %} to ensure only legitimate forms from your site are accepted.
+
+Django’s form process:
+  1. User loads a page with a form (GET request).
+  2. User fills it out and submits (POST request).
+  3. Django builds a form instance with request data.
+  4. Validation runs (built-in + custom clean_<field>() checks).
+  5. If invalid → re-render with errors; if valid → save and redirect.
+
+• Function-Based Views (FBV):
+  - Manually handle `if request.method == 'POST'` or `'GET'`.
+  - Easy to read and customize but can get repetitive in large apps.
+
+• Class-Based Views (CBV):
+  - Use Django’s built-in generic views (e.g., FormView, CreateView).
+  - Cleaner, reusable, and scalable for complex workflows, but harder to trace for beginners.
+
+• Use GET when reading, filtering, or searching data.
+  - Safe, no data changes, and query appears in the URL (?q=...).
+
+• Use POST when submitting or modifying data.
+  - Hides data from URL and requires CSRF protection for security.
+
+• In this project:
+  - `college_search_view` → GET example.
+  - `add_major_fbv` and `AddMajorCBV` → POST examples.

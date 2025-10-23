@@ -1,0 +1,38 @@
+{% extends "accounts/base.html" %}
+{% block title %}College Search — Traject{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="fw-bold text-primary mb-4">🔍 College Search (GET Example)</h2>
+
+  <form method="get" class="row g-3 mb-4" role="search">
+    <div class="col-md-8">
+      {{ form.q }}
+    </div>
+    <div class="col-md-4 d-flex">
+      <button type="submit" class="btn btn-primary me-2 flex-fill">Search</button>
+      <a href="{% url 'colleges:college_search' %}" class="btn btn-outline-secondary flex-fill">Clear</a>
+    </div>
+  </form>
+
+  {% if results %}
+    <h5 class="fw-semibold text-muted mb-3">
+      Results ({{ results.count }})
+    </h5>
+    <ul class="list-group shadow-sm">
+      {% for college in results %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>
+            <strong>{{ college.college_name }}</strong> ({{ college.abbreviation }})
+            <br>
+            <small class="text-muted">{{ college.city }}, {{ college.state }}</small>
+          </span>
+          <a href="{% url 'colleges:detail' college.id %}" class="btn btn-sm btn-outline-primary">View</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif form.cleaned_data.q %}
+    <div class="alert alert-info mt-3">No results found for “{{ form.cleaned_data.q }}”.</div>
+  {% endif %}
+</div>
+{% endblock %}
