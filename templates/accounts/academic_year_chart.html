@@ -1,0 +1,62 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Academic Year Distribution Chart — Traject{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  
+  <!-- Header -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-white">📊 Student Distribution by Academic Year</h2>
+    <p class="text-light">
+      This pie chart shows how students are distributed across different academic years.
+      <br>Generated server-side using our JSON API and matplotlib.
+    </p>
+  </div>
+
+  <!-- Chart Display -->
+  <div class="card shadow-lg" style="background: rgba(255, 255, 255, 0.08);">
+    <div class="card-body text-center p-4">
+      <img 
+        src="{% url 'accounts:chart_users_per_year_png' %}" 
+        alt="Academic Year Distribution Pie Chart"
+        class="img-fluid rounded"
+        style="max-width: 100%; height: auto;"
+      >
+    </div>
+  </div>
+
+  <!-- Data Flow Explanation -->
+  <div class="mt-4 p-4 rounded" style="background: rgba(255, 255, 255, 0.05);">
+    <h5 class="text-accent fw-bold mb-3">📈 Data Flow</h5>
+    <div class="text-light">
+      <p><strong>API Endpoint:</strong> <code>/api/users/academic-year/</code></p>
+      <p><strong>Data Processing:</strong></p>
+      <ul>
+        <li>Django queries UserProfile model and aggregates by academic_year</li>
+        <li>Returns JSON with readable labels (Freshman, Sophomore, etc.)</li>
+        <li>Chart view fetches this JSON using urllib.request</li>
+        <li>Matplotlib creates a pie chart with colors and percentages</li>
+        <li>Image is saved to BytesIO buffer and returned as PNG</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- API Links -->
+  <div class="mt-4 text-center">
+    <h5 class="text-accent fw-bold mb-3">🔗 Related Links</h5>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="{% url 'accounts:api_users_per_academic_year' %}" class="btn btn-outline-light btn-sm" target="_blank">
+        View JSON API Data
+      </a>
+      <a href="{% url 'accounts:chart_users_per_college_page' %}" class="btn btn-outline-light btn-sm">
+        College Chart
+      </a>
+      <a href="{% url 'accounts:dashboard' %}" class="btn btn-primary btn-sm">
+        Back to Dashboard
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
