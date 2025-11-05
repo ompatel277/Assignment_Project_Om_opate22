@@ -1,0 +1,145 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}My Roadmap — Traject{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold text-accent mb-3">🗺️ My College Roadmap</h2>
+    <p class="text-light">Your personalized semester-by-semester plan to graduation</p>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="row g-3 mb-5">
+    <div class="col-md-3">
+      <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+        <div class="card-body">
+          <h3 class="text-accent mb-0">{{ summary.total_semesters }}</h3>
+          <small class="text-light">Semesters</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+        <div class="card-body">
+          <h3 class="text-accent mb-0">{{ summary.total_courses }}</h3>
+          <small class="text-light">Courses</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+        <div class="card-body">
+          <h3 class="text-accent mb-0">{{ summary.total_credits|floatformat:0 }}</h3>
+          <small class="text-light">Credits</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+        <div class="card-body">
+          <h3 class="text-accent mb-0">{{ summary.graduation_season }} {{ summary.graduation_year }}</h3>
+          <small class="text-light">Graduation</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="mb-4">
+    <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-secondary">← Back to Dashboard</a>
+  </div>
+
+  <!-- Semester Plans -->
+  {% for semester in roadmap %}
+    <div class="card mb-4" style="border-left: 4px solid var(--tj-accent);">
+      <div class="card-header" style="background: rgba(102, 252, 241, 0.1);">
+        <h4 class="mb-0 text-accent">
+          Semester {{ semester.semester_number }}: {{ semester.season }} {{ semester.year }}
+        </h4>
+      </div>
+      <div class="card-body">
+
+        <!-- Courses -->
+        <div class="mb-4">
+          <h5 class="text-warning mb-3">📚 Courses ({{ semester.total_credits|floatformat:1 }} credits)</h5>
+          {% if semester.courses %}
+            <div class="row g-2">
+              {% for course_data in semester.courses %}
+                <div class="col-md-6">
+                  <div class="card h-100" style="background: rgba(255, 255, 255, 0.05);">
+                    <div class="card-body p-3">
+                      <h6 class="mb-1">{{ course_data.course.subject }} {{ course_data.course.number }}</h6>
+                      <p class="small mb-1">{{ course_data.course.title }}</p>
+                      <small class="text-muted">{{ course_data.credits }} credits</small>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-muted small">No courses scheduled for this semester.</p>
+          {% endif %}
+        </div>
+
+        <!-- Portfolio Items -->
+        <div class="mb-4">
+          <h5 class="text-info mb-3">📁 Portfolio Goals</h5>
+          {% if semester.portfolio_items %}
+            <ul class="list-unstyled">
+              {% for item_data in semester.portfolio_items %}
+                <li class="mb-2">
+                  <span class="badge bg-secondary">{{ item_data.item.get_item_type_display }}</span>
+                  <strong>{{ item_data.item.title }}</strong>
+                  {% if item_data.estimated_hours %}
+                    <small class="text-muted">(~{{ item_data.estimated_hours }}h)</small>
+                  {% endif %}
+                  <br>
+                  <small class="text-light">{{ item_data.reasoning }}</small>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted small">No portfolio items for this semester.</p>
+          {% endif %}
+        </div>
+
+        <!-- Clubs -->
+        {% if semester.clubs %}
+          <div class="mb-4">
+            <h5 class="text-success mb-3">🏫 Clubs & Organizations</h5>
+            <div class="d-flex gap-2 flex-wrap">
+              {% for club in semester.clubs %}
+                <span class="badge bg-success">{{ club }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Milestones -->
+        <div>
+          <h5 class="text-accent mb-3">🎯 Career Milestones</h5>
+          {% if semester.milestones %}
+            <ul>
+              {% for milestone in semester.milestones %}
+                <li class="text-light">{{ milestone }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted small">No specific milestones for this semester.</p>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  {% empty %}
+    <div class="alert alert-info">
+      No roadmap available. Make sure you have a major selected in your profile.
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

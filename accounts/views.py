@@ -1,5 +1,5 @@
 # accounts/views.py
-# Updated for A9 Assignment - JSON APIs + Chart Integration
+# Updated for A9 Assignment - JSON APIs + Chart Integration + AI Recommendations
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -73,39 +73,65 @@ def logout_view(request):
 
 
 # =====================================================
-#  DASHBOARD VIEW (Existing - No Changes)
+#  ENHANCED DASHBOARD VIEW
 # =====================================================
 
 @login_required
 def dashboard_view(request):
     """
-    Display the user's dashboard with personalized recommendations.
+    Enhanced dashboard with AI recommendations and portfolio progress.
     """
     profile = request.user.profile
 
-    # --- Recommended Courses (based on user's major) ---
+    # Import here to avoid circular imports
+    try:
+        from recommender.engine import get_all_recommendations
+        from recommender.roadmap import get_roadmap_summary
+        recommendations = get_all_recommendations(profile)
+        roadmap_summary = get_roadmap_summary(profile)
+    except ImportError:
+        # Fallback if recommender not available
+        recommendations = {
+            'careers': [],
+            'portfolio_items': [],
+            'courses': [],
+            'clubs': []
+        }
+        roadmap_summary = {}
+
+    # Get portfolio checklist stats
+    from accounts.models import UserChecklist
+    checklist_items = UserChecklist.objects.filter(user_profile=profile)
+    total_checklist = checklist_items.count()
+    completed_checklist = checklist_items.filter(status='COMPLETED').count()
+    completion_rate = int((completed_checklist / total_checklist * 100)) if total_checklist > 0 else 0
+
+    # Get courses for the user's major
     recommended_courses = []
     if profile.major:
-        recommended_courses = (
-            Course.objects.filter(major=profile.major)
-            .order_by("subject", "number")[:8]
-        )
+        from accounts.models import Course
+        recommended_courses = Course.objects.filter(major=profile.major)[:5]
 
-    # --- Placeholder lists (to be expanded later) ---
+    # Get clubs for the user's college
     recommended_clubs = []
-    recommended_careers = []
+    if profile.college:
+        from accounts.models import Club
+        recommended_clubs = Club.objects.filter(college=profile.college)[:5]
 
-    return render(
-        request,
-        "accounts/dashboard.html",
-        {
-            "user": request.user,
-            "profile": profile,
-            "recommended_courses": recommended_courses,
-            "recommended_clubs": recommended_clubs,
-            "recommended_careers": recommended_careers,
-        },
-    )
+    context = {
+        'profile': profile,
+        'recommendations': recommendations,
+        'roadmap_summary': roadmap_summary,
+        'recommended_courses': recommended_courses,
+        'recommended_clubs': recommended_clubs,
+        'checklist_stats': {
+            'total': total_checklist,
+            'completed': completed_checklist,
+            'completion_rate': completion_rate,
+        }
+    }
+
+    return render(request, 'accounts/dashboard.html', context)
 
 
 # =====================================================

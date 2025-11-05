@@ -79,6 +79,18 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username} ({self.get_academic_year_display()})"
 
+    def get_skills_list(self):
+        """Return skills as a list."""
+        if not self.skills:
+            return []
+        return [s.strip() for s in self.skills.split(',') if s.strip()]
+
+    def get_interests_list(self):
+        """Return interests as a list."""
+        if not self.personal_interests:
+            return []
+        return [i.strip() for i in self.personal_interests.split(',') if i.strip()]
+
 
 # =====================================================
 #  COURSE MODEL
@@ -146,3 +158,159 @@ class CareerPath(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# =====================================================
+#  PORTFOLIO ITEM MODEL
+# =====================================================
+
+class PortfolioItem(models.Model):
+    """
+    Represents a suggested project, certification, or milestone
+    that students can track for career preparation.
+    """
+    ITEM_TYPES = [
+        ('PROJECT', 'Project'),
+        ('CERT', 'Certification'),
+        ('MILESTONE', 'Milestone'),
+        ('INTERNSHIP', 'Internship'),
+        ('COMPETITION', 'Competition'),
+    ]
+
+    title = models.CharField(max_length=200)
+    item_type = models.CharField(max_length=20, choices=ITEM_TYPES, default='PROJECT')
+    description = models.TextField(blank=True)
+
+    # Link to careers that benefit from this item
+    related_careers = models.ManyToManyField(
+        'careers.Career',
+        blank=True,
+        related_name='portfolio_items'
+    )
+
+    # Skills gained from completing this item
+    skills_gained = models.TextField(
+        blank=True,
+        help_text="Comma-separated list of skills"
+    )
+
+    # Estimated time to complete
+    estimated_hours = models.PositiveIntegerField(
+        null=True, blank=True,
+        help_text="Estimated hours to complete"
+    )
+
+    # Difficulty level
+    difficulty_level = models.CharField(
+        max_length=20,
+        choices=[
+            ('BEGINNER', 'Beginner'),
+            ('INTERMEDIATE', 'Intermediate'),
+            ('ADVANCED', 'Advanced'),
+        ],
+        default='BEGINNER'
+    )
+
+    # External resources
+    resource_url = models.URLField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['difficulty_level', 'title']
+        verbose_name = "Portfolio Item"
+        verbose_name_plural = "Portfolio Items"
+
+    def __str__(self):
+        return f"{self.title} ({self.get_item_type_display()})"
+
+    def get_skills_list(self):
+        """Return skills as a list."""
+        if not self.skills_gained:
+            return []
+        return [s.strip() for s in self.skills_gained.split(',') if s.strip()]
+
+
+# =====================================================
+#  USER CHECKLIST MODEL
+# =====================================================
+
+class UserChecklist(models.Model):
+    """
+    Tracks a user's progress on portfolio items.
+    Links users to portfolio items with status tracking.
+    """
+    STATUS_CHOICES = [
+        ('PLANNED', 'Planned'),
+        ('IN_PROGRESS', 'In Progress'),
+        ('COMPLETED', 'Completed'),
+        ('ABANDONED', 'Abandoned'),
+    ]
+
+    user_profile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name='checklist_items'
+    )
+
+    portfolio_item = models.ForeignKey(
+        PortfolioItem,
+        on_delete=models.CASCADE,
+        related_name='user_checklists'
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='PLANNED'
+    )
+
+    # User notes
+    notes = models.TextField(blank=True)
+
+    # Progress tracking
+    progress_percentage = models.PositiveIntegerField(
+        default=0,
+        help_text="Percentage complete (0-100)"
+    )
+
+    # Timestamps
+    added_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    # Priority level
+    priority = models.CharField(
+        max_length=10,
+        choices=[
+            ('LOW', 'Low'),
+            ('MEDIUM', 'Medium'),
+            ('HIGH', 'High'),
+        ],
+        default='MEDIUM'
+    )
+
+    class Meta:
+        ordering = ['-priority', '-added_at']
+        unique_together = ('user_profile', 'portfolio_item')
+        verbose_name = "User Checklist Item"
+        verbose_name_plural = "User Checklist Items"
+
+    def __str__(self):
+        return f"{self.user_profile.user.username} - {self.portfolio_item.title} ({self.status})"
+
+    def mark_completed(self):
+        """Mark this item as completed and set completion timestamp."""
+        from django.utils import timezone
+        self.status = 'COMPLETED'
+        self.progress_percentage = 100
+        self.completed_at = timezone.now()
+        self.save()
+
+    def mark_in_progress(self):
+        """Mark this item as in progress and set start timestamp."""
+        from django.utils import timezone
+        if not self.started_at:
+            self.started_at = timezone.now()
+        self.status = 'IN_PROGRESS'
+        self.save()

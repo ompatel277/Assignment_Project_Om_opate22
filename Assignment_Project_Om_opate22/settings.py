@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'colleges',
     'careers',
     'catalog',
-    # 'recommender',  # keep commented out until we build it
+    'recommender',
 ]
 
 

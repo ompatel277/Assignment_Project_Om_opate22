@@ -12,7 +12,8 @@ urlpatterns = [
     path("colleges/", include("colleges.urls")),
     path("careers/", include("careers.urls")),
     path("catalog/", include("catalog.urls")),
-    # path("recommender/", include("recommender.urls")),
+    path("recommender/", include("recommender.urls")),
+
 ]
 
 if settings.DEBUG:
