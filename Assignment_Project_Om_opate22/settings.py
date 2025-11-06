@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'careers',
     'catalog',
     'recommender',
+    'rest_framework',
 ]
 
 

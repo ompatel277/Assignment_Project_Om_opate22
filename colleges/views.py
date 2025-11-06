@@ -134,10 +134,6 @@ def college_chart(request):
 # 🧭 GET Example — College Search
 # -------------------------------
 def college_search_view(request):
-    """
-    Function-Based View demonstrating GET method.
-    When user submits a search, the query (?q=...) appears in the URL.
-    """
     form = CollegeSearchForm(request.GET or None)
     results = None
 
@@ -157,10 +153,6 @@ def college_search_view(request):
 # 🧩 POST Example — Function-Based (FBV)
 # -------------------------------------------
 def add_major_fbv(request):
-    """
-    Function-Based View for handling a POST form submission.
-    Demonstrates CSRF protection and validation logic.
-    """
     if request.method == "POST":
         form = MajorForm(request.POST)
         if form.is_valid():
@@ -177,10 +169,6 @@ def add_major_fbv(request):
 # 🧱 POST Example — Class-Based (CBV)
 # -------------------------------------------
 class AddMajorCBV(FormView):
-    """
-    Class-Based View demonstrating POST handling via FormView.
-    Uses the same MajorForm as the FBV example.
-    """
     template_name = "colleges/add_major_cbv.html"
     form_class = MajorForm
     success_url = reverse_lazy("colleges:major_add_cbv")

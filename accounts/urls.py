@@ -3,7 +3,9 @@
 
 from django.urls import path
 from . import views
-from . import portfolio_views  # 🆕 Import new portfolio views
+from . import portfolio_views  # Import portfolio views
+from .external_views import GitHubUserAPIView  # 🆕 ADD THIS LINE
+
 from .views import (
     UsersAPI,
     UsersChartPage,
@@ -72,7 +74,7 @@ urlpatterns = [
     path("charts/academic-year/", AcademicYearChartPage.as_view(), name="chart_academic_year_page"),
 
     # =====================================================
-    #  🆕 PORTFOLIO CHECKLIST (NEW)
+    #  PORTFOLIO CHECKLIST
     # =====================================================
 
     # Main checklist view
@@ -95,4 +97,18 @@ urlpatterns = [
 
     # Remove from checklist
     path("portfolio/remove/<int:checklist_id>/", portfolio_views.remove_from_checklist, name="remove_from_checklist"),
+
+    # =====================================================
+    #  🆕 EXTERNAL API ROUTES (A10 Assignment)
+    # =====================================================
+
+    # HTML view for GitHub user search
+    path("external/github/",
+         GitHubUserAPIView.as_view(),
+         name="external_github_search"),
+
+    # JSON API endpoint
+    path("api/external/github/",
+         GitHubUserAPIView.as_view(),
+         name="api_external_github_search"),
 ]
