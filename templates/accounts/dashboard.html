@@ -387,3 +387,49 @@
 }
 </style>
 {% endblock %}
+
+<div class="col-md-3">
+  <a href="{% url 'accounts:external_github_search' %}" class="card h-100 text-decoration-none hover-card" style="border-top: 3px solid #6e5494;">
+    <div class="card-body text-center">
+      <div class="fs-2 mb-2">💻</div>
+      <h5 class="card-title" style="color: #6e5494;">GitHub Profiles</h5>
+      <p class="card-text small text-muted">Research developer portfolios</p>
+    </div>
+  </a>
+</div>
+
+<!-- System-Wide Stats -->
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card text-center" style="background: rgba(255, 107, 53, 0.1);">
+      <div class="card-body">
+        <h3 class="text-warning mb-0">{{ total_careers|default:0 }}</h3>
+        <small class="text-muted">Career Paths</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center" style="background: rgba(102, 252, 241, 0.1);">
+      <div class="card-body">
+        <h3 class="text-info mb-0">{{ total_courses|default:0 }}</h3>
+        <small class="text-muted">Courses Available</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center" style="background: rgba(40, 167, 69, 0.1);">
+      <div class="card-body">
+        <h3 class="text-success mb-0">{{ total_clubs|default:0 }}</h3>
+        <small class="text-muted">Clubs & Organizations</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center" style="background: rgba(255, 193, 7, 0.1);">
+      <div class="card-body">
+        <h3 class="text-accent mb-0">{{ total_portfolio_items|default:0 }}</h3>
+        <small class="text-muted">Portfolio Items</small>
+      </div>
+    </div>
+  </div>
+</div>

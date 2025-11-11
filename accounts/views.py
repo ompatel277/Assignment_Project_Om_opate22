@@ -525,3 +525,125 @@ class AcademicYearChartPage(TemplateView):
     Displays the academic year distribution chart in a template.
     """
     template_name = "accounts/academic_year_chart.html"
+
+    # Add to context in dashboard_view
+    from careers.models import Career
+    from accounts.models import Course, Club, PortfolioItem
+
+    context = {
+        # ... existing context ...
+        'total_careers': Career.objects.count(),
+        'total_courses': Course.objects.count(),
+        'total_clubs': Club.objects.count(),
+        'total_portfolio_items': PortfolioItem.objects.count(),
+    }
+
+    # ============================================================
+    # B10 Assignment: Dynamic Content Type View
+    # ============================================================
+
+    from django.http import HttpResponse, JsonResponse
+    import json
+
+
+def dynamic_view(request):
+    """Dynamic view that returns different content types based on ?q= parameter."""
+    query_type = request.GET.get('q', '').lower().strip()
+
+    # TEXT FORMATS
+    if query_type == 'html':
+        html_content = """<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Mode</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 50px; text-align: center;
+        }
+        h2 { font-size: 2.5em; }
+    </style>
+</head>
+<body>
+    <h2>Hello from HTML mode!</h2>
+</body>
+</html>"""
+        return HttpResponse(html_content, content_type='text/html')
+
+    elif query_type == 'text':
+        return HttpResponse("Hello from plain text mode.", content_type='text/plain')
+
+    # APPLICATION FORMATS
+    elif query_type == 'json':
+        return JsonResponse({"message": "Hello from JSON mode!", "ok": True})
+
+    elif query_type == 'xml':
+        xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<response>
+    <message>Hello from XML mode!</message>
+    <ok>true</ok>
+</response>"""
+        return HttpResponse(xml_content, content_type='application/xml')
+
+    # IMAGE FORMATS
+    elif query_type == 'svg':
+        svg_content = """<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200">
+    <rect width="400" height="200" fill="#667eea"/>
+    <circle cx="200" cy="100" r="50" fill="#ffd700"/>
+    <text x="200" y="110" font-size="20" fill="white" text-anchor="middle">Hello from SVG!</text>
+</svg>"""
+        return HttpResponse(svg_content, content_type='image/svg+xml')
+
+    elif query_type == 'png':
+        import base64
+        png_data = base64.b64decode(
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==')
+        return HttpResponse(png_data, content_type='image/png')
+
+    # AUDIO FORMATS
+    elif query_type == 'mp3':
+        return HttpResponse("This is an MP3 audio file placeholder", content_type='audio/mpeg')
+
+    elif query_type == 'wav':
+        return HttpResponse("This is a WAV audio file placeholder", content_type='audio/wav')
+
+    # VIDEO FORMATS
+    elif query_type == 'mp4':
+        return HttpResponse("This is an MP4 video file placeholder", content_type='video/mp4')
+
+    elif query_type == 'webm':
+        return HttpResponse("This is a WebM video file placeholder", content_type='video/webm')
+
+    # WEB-SPECIFIC FORMATS
+    elif query_type == 'javascript' or query_type == 'js':
+        js_content = """// Hello from JavaScript!
+console.log('This is JavaScript content');
+function greet() { return 'Hello World!'; }"""
+        return HttpResponse(js_content, content_type='application/javascript')
+
+    elif query_type == 'rss':
+        rss_content = """<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>My Feed</title>
+        <description>RSS feed example</description>
+    </channel>
+</rss>"""
+        return HttpResponse(rss_content, content_type='application/rss+xml')
+
+    # SPECIAL: Students Dataset
+    elif query_type == 'students':
+        return JsonResponse({
+            "students": [
+                {"name": "Alice", "major": "CS", "gpa": 3.85},
+                {"name": "Bob", "major": "DS", "gpa": 3.72},
+                {"name": "Charlie", "major": "Engineering", "gpa": 3.91}
+            ]
+        })
+
+    # DEFAULT
+    else:
+        return HttpResponse("<h1>Add ?q= to the URL</h1><p>Try: ?q=html, ?q=json, ?q=text, ?q=students</p>",
+                            content_type='text/html')

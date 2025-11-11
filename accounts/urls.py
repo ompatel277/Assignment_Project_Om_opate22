@@ -111,4 +111,5 @@ urlpatterns = [
     path("api/external/github/",
          GitHubUserAPIView.as_view(),
          name="api_external_github_search"),
+    path("dynamic/", views.dynamic_view, name="dynamic_view"),
 ]
