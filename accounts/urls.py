@@ -1,10 +1,10 @@
 # accounts/urls.py
-# Updated for A9 Assignment - JSON APIs + Chart Integration + Portfolio Checklist
+# Updated for A11 Assignment - Data Exports + Reports + Authentication
 
 from django.urls import path
 from . import views
 from . import portfolio_views  # Import portfolio views
-from .external_views import GitHubUserAPIView  # 🆕 ADD THIS LINE
+from .external_views import GitHubUserAPIView
 
 from .views import (
     UsersAPI,
@@ -12,6 +12,7 @@ from .views import (
     AcademicYearChartPage,
     users_per_college_chart_png,
     users_per_year_chart_png,
+    ReportsView,  # NEW FOR A11
 )
 
 app_name = "accounts"
@@ -99,7 +100,7 @@ urlpatterns = [
     path("portfolio/remove/<int:checklist_id>/", portfolio_views.remove_from_checklist, name="remove_from_checklist"),
 
     # =====================================================
-    #  🆕 EXTERNAL API ROUTES (A10 Assignment)
+    #  EXTERNAL API ROUTES (A10 Assignment)
     # =====================================================
 
     # HTML view for GitHub user search
@@ -112,4 +113,22 @@ urlpatterns = [
          GitHubUserAPIView.as_view(),
          name="api_external_github_search"),
     path("dynamic/", views.dynamic_view, name="dynamic_view"),
+
+    # =====================================================
+    #  ASSIGNMENT 11: CSV/JSON EXPORTS + REPORTS
+    # =====================================================
+
+    # Public signup (for external users)
+    path("public-signup/", views.public_signup_view, name="public_signup"),
+
+    # Reports page
+    path("reports/", ReportsView.as_view(), name="reports"),
+
+    # CSV Exports
+    path("export/courses.csv", views.export_courses_csv, name="export_courses_csv"),
+    path("export/colleges.csv", views.export_colleges_csv, name="export_colleges_csv"),
+
+    # JSON Exports
+    path("export/courses.json", views.export_courses_json, name="export_courses_json"),
+    path("export/colleges.json", views.export_colleges_json, name="export_colleges_json"),
 ]

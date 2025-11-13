@@ -39,13 +39,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center gap-2">
             {% if user.is_authenticated %}
+              <!-- Authenticated User Menu -->
               <li class="nav-item"><a class="nav-link" href="{% url 'accounts:dashboard' %}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
+
+              <!-- A11: Reports Link (Protected - Only for Logged-in Users) -->
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:reports' %}">Reports</a></li>
+
               <li class="nav-item">
                 <a class="nav-link fw-semibold text-accent-dark" href="{% url 'accounts:logout' %}">Logout</a>
               </li>
 
+              <!-- User Badges -->
               {% if user.profile.college %}
                 <li class="nav-item">
                   <span class="badge bg-accent text-dark">{{ user.profile.college.abbreviation }}</span>
@@ -57,8 +63,11 @@
                 </li>
               {% endif %}
             {% else %}
+              <!-- Public Menu (Not Logged In) -->
               <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">Sign Up</a></li>
+
+              <!-- A11: Updated to use public_signup -->
+              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:public_signup' %}">Sign Up</a></li>
             {% endif %}
           </ul>
         </div>

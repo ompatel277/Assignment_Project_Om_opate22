@@ -1,5 +1,5 @@
 # accounts/views.py
-# Updated for A9 Assignment - JSON APIs + Chart Integration + AI Recommendations
+# Updated for A11 Assignment - Data Exports + Reports + Authentication
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -11,9 +11,11 @@ from django.db.models import Q, Count
 from django.template import loader
 from django.views import View
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin  # NEW FOR A11
 
 from .models import UserProfile, Club, CareerPath
 from .forms import SignupForm, LoginForm, UserProfileForm
+from .forms_auth import TrajectSignUpForm  # NEW FOR A11
 from colleges.models import College, Major, Course
 
 # NEW IMPORTS for Week 9 (APIs + Charts)
@@ -25,9 +27,13 @@ import matplotlib
 matplotlib.use("Agg")  # Use non-GUI backend
 import matplotlib.pyplot as plt
 
+# NEW IMPORTS for A11 (CSV/JSON Exports)
+import csv
+from datetime import datetime
+
 
 # =====================================================
-#  AUTHENTICATION VIEWS (Existing - No Changes)
+#  AUTHENTICATION VIEWS
 # =====================================================
 
 def signup_view(request):
@@ -44,6 +50,31 @@ def signup_view(request):
         form = SignupForm()
 
     return render(request, "accounts/signup.html", {"form": form})
+
+
+def public_signup_view(request):
+    """
+    Assignment 11: Public signup for external users.
+    Creates regular non-staff users, logs them in automatically,
+    and redirects to onboarding (college selection).
+    """
+    if request.method == "POST":
+        form = TrajectSignUpForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            # Create associated profile
+            UserProfile.objects.create(user=new_user)
+            # Auto-login the new user
+            login(request, new_user)
+            messages.success(
+                request,
+                f"🎉 Welcome to Traject, {new_user.username}! Let's get you set up."
+            )
+            return redirect("accounts:choose_college")
+    else:
+        form = TrajectSignUpForm()
+
+    return render(request, "accounts/public_signup.html", {"form": form})
 
 
 def login_view(request):
@@ -135,7 +166,7 @@ def dashboard_view(request):
 
 
 # =====================================================
-#  ONBOARDING (Existing - No Changes)
+#  ONBOARDING
 # =====================================================
 
 @login_required
@@ -174,7 +205,7 @@ def choose_college_view(request):
 
 
 # =====================================================
-#  PROFILE VIEWS (Existing - No Changes)
+#  PROFILE VIEWS
 # =====================================================
 
 @login_required
@@ -206,7 +237,7 @@ def edit_profile_view(request):
 
 
 # =====================================================
-#  USER LIST & COLLEGE SHORTCUT (Existing - No Changes)
+#  USER LIST & COLLEGE SHORTCUT
 # =====================================================
 
 @login_required
@@ -232,7 +263,7 @@ def set_college(request, college_id):
 
 
 # =====================================================
-#  NEW: JSON API ENDPOINTS (Week 9 - Function-Based)
+#  JSON API ENDPOINTS (Week 9 - Function-Based)
 # =====================================================
 
 def api_ping_httpresponse(request):
@@ -366,7 +397,7 @@ def api_clubs_per_college(request):
 
 
 # =====================================================
-#  NEW: JSON API ENDPOINTS (Week 9 - Class-Based)
+#  JSON API ENDPOINTS (Week 9 - Class-Based)
 # =====================================================
 
 class UsersAPI(View):
@@ -403,7 +434,7 @@ class UsersAPI(View):
 
 
 # =====================================================
-#  NEW: CHART GENERATION (Server-Side)
+#  CHART GENERATION (Server-Side)
 # =====================================================
 
 def users_per_college_chart_png(request):
@@ -510,7 +541,7 @@ def users_per_year_chart_png(request):
 
 
 # =====================================================
-#  NEW: CHART PAGE VIEWS (Templates that show charts)
+#  CHART PAGE VIEWS (Templates that show charts)
 # =====================================================
 
 class UsersChartPage(TemplateView):
@@ -526,25 +557,218 @@ class AcademicYearChartPage(TemplateView):
     """
     template_name = "accounts/academic_year_chart.html"
 
-    # Add to context in dashboard_view
-    from careers.models import Career
-    from accounts.models import Course, Club, PortfolioItem
 
-    context = {
-        # ... existing context ...
-        'total_careers': Career.objects.count(),
-        'total_courses': Course.objects.count(),
-        'total_clubs': Club.objects.count(),
-        'total_portfolio_items': PortfolioItem.objects.count(),
+# =====================================================
+#  CSV EXPORT VIEWS (Assignment 11)
+# =====================================================
+
+@login_required(login_url='accounts:login')
+def export_courses_csv(request):
+    """
+    Assignment 11: Export all courses to CSV.
+    Useful for students planning their course schedules.
+    Returns a downloadable CSV file with timestamp.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filename = f"traject_courses_{timestamp}.csv"
+
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+
+    writer = csv.writer(response)
+    # Header row
+    writer.writerow(["Subject", "Number", "Title", "Credits", "Major"])
+
+    # Get all courses from colleges.Course
+    from colleges.models import Course as CollegeCourse
+    courses = (
+        CollegeCourse.objects
+        .select_related("major")
+        .order_by("subject", "number")
+    )
+
+    for course in courses:
+        writer.writerow([
+            course.subject,
+            course.number,
+            course.title,
+            str(course.credits),
+            course.major.name if course.major else "N/A"
+        ])
+
+    return response
+
+
+@login_required(login_url='accounts:login')
+def export_colleges_csv(request):
+    """
+    Assignment 11: Export all colleges to CSV.
+    Useful for students comparing different schools.
+    Includes aggregated major count for each college.
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filename = f"traject_colleges_{timestamp}.csv"
+
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+
+    writer = csv.writer(response)
+    # Header row
+    writer.writerow(["Abbreviation", "College Name", "City", "State", "Number of Majors"])
+
+    colleges = (
+        College.objects
+        .annotate(major_count=Count("majors"))
+        .order_by("abbreviation")
+    )
+
+    for college in colleges:
+        writer.writerow([
+            college.abbreviation,
+            college.college_name,
+            college.city,
+            college.state,
+            college.major_count
+        ])
+
+    return response
+
+
+# =====================================================
+#  JSON EXPORT VIEWS (Assignment 11)
+# =====================================================
+
+@login_required(login_url='accounts:login')
+def export_courses_json(request):
+    """
+    Assignment 11: Export all courses to JSON.
+    Returns JSON with metadata (timestamp, count).
+    """
+    from colleges.models import Course as CollegeCourse
+
+    courses = (
+        CollegeCourse.objects
+        .select_related("major", "major__college")
+        .values(
+            "subject",
+            "number",
+            "title",
+            "credits",
+            "major__name",
+            "major__college__abbreviation"
+        )
+        .order_by("subject", "number")
+    )
+
+    data = {
+        "generated_at": datetime.now().isoformat(),
+        "record_count": courses.count(),
+        "courses": list(courses)
     }
 
-    # ============================================================
-    # B10 Assignment: Dynamic Content Type View
-    # ============================================================
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filename = f"traject_courses_{timestamp}.json"
 
-    from django.http import HttpResponse, JsonResponse
-    import json
+    response = JsonResponse(data, json_dumps_params={"indent": 2})
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    return response
 
+
+@login_required(login_url='accounts:login')
+def export_colleges_json(request):
+    """
+    Assignment 11: Export all colleges to JSON.
+    Returns JSON with metadata (timestamp, count).
+    """
+    colleges = (
+        College.objects
+        .annotate(major_count=Count("majors"))
+        .values(
+            "abbreviation",
+            "college_name",
+            "city",
+            "state",
+            "logo_url",
+            "major_count"
+        )
+        .order_by("abbreviation")
+    )
+
+    data = {
+        "generated_at": datetime.now().isoformat(),
+        "record_count": colleges.count(),
+        "colleges": list(colleges)
+    }
+
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filename = f"traject_colleges_{timestamp}.json"
+
+    response = JsonResponse(data, json_dumps_params={"indent": 2})
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    return response
+
+
+# =====================================================
+#  REPORTS VIEW (Assignment 11)
+# =====================================================
+
+class ReportsView(LoginRequiredMixin, TemplateView):
+    """
+    Assignment 11: Reports page showing grouped summaries.
+    Displays:
+    - Courses per Major
+    - Students (Users) per College
+    - Students per Major
+    - Total counts
+    """
+    template_name = "accounts/reports.html"
+    login_url = 'accounts:login'
+    redirect_field_name = 'next'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        # 1. Courses per Major
+        courses_per_major = (
+            Major.objects
+            .annotate(course_count=Count("courses"))
+            .values("name", "college__abbreviation", "course_count")
+            .order_by("-course_count")
+        )
+
+        # 2. Students (UserProfiles) per College
+        students_per_college = (
+            College.objects
+            .annotate(student_count=Count("students"))
+            .values("abbreviation", "college_name", "student_count")
+            .order_by("-student_count")
+        )
+
+        # 3. Students per Major
+        students_per_major = (
+            Major.objects
+            .annotate(student_count=Count("major_students"))
+            .values("name", "college__abbreviation", "student_count")
+            .order_by("-student_count")
+        )
+
+        # Summary totals
+        from colleges.models import Course as CollegeCourse
+        ctx["total_courses"] = CollegeCourse.objects.count()
+        ctx["total_colleges"] = College.objects.count()
+        ctx["total_majors"] = Major.objects.count()
+        ctx["total_users"] = UserProfile.objects.count()
+
+        ctx["courses_per_major"] = courses_per_major
+        ctx["students_per_college"] = students_per_college
+        ctx["students_per_major"] = students_per_major
+
+        return ctx
+
+
+# =====================================================
+#  B10 ASSIGNMENT: DYNAMIC CONTENT TYPE VIEW
+# =====================================================
 
 def dynamic_view(request):
     """Dynamic view that returns different content types based on ?q= parameter."""

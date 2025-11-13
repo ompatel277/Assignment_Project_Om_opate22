@@ -34,3 +34,7 @@ HW 8
 In my Traject project, the **GET method** is used for retrieving or filtering data — for example, the `college_search_view` allows users to search colleges, and the query appears in the URL (`?q=Illinois`). The **POST method** is used for securely creating or submitting data, such as adding a new major through `add_major_fbv` or `AddMajorCBV`, with CSRF protection enabled.  
 
 A **Function-Based View (FBV)** handles both GET and POST manually inside one function using conditional logic (`if request.method == 'POST'`). In contrast, a **Class-Based View (CBV)** like Django’s `FormView` automatically handles form validation, success redirects, and template rendering in a structured way. Both achieve the same result, but CBVs reduce code repetition and are better suited for reusable, scalable form handling.
+
+
+For README.md:
+Assignment 11 implements data export functionality and authentication controls. Part 1 adds CSV and JSON exports for Courses and Colleges, plus a Reports page with grouped summaries (Courses per Major, Students per College, Students per Major). Part 2 creates a public signup form that ensures external users are created as regular non-staff users, protects all export/report routes with login requirements, and implements proper redirect flows using Django's authentication system.

@@ -1,0 +1,233 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Reports & Data Exports - Traject{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5">Reports & Data Exports</h1>
+            <p class="text-muted">
+                View grouped summaries and download data in CSV or JSON format.
+            </p>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Total Courses</h5>
+                    <h2 class="display-4">{{ total_courses }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Total Colleges</h5>
+                    <h2 class="display-4">{{ total_colleges }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">Total Majors</h5>
+                    <h2 class="display-4">{{ total_majors }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Total Users</h5>
+                    <h2 class="display-4">{{ total_users }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Export Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Download Data</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Courses Export -->
+                        <div class="col-md-6 mb-3">
+                            <h5>Courses Data</h5>
+                            <p class="text-muted">Export all course information for schedule planning.</p>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'accounts:export_courses_csv' %}" 
+                                   class="btn btn-outline-success">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Download CSV
+                                </a>
+                                <a href="{% url 'accounts:export_courses_json' %}" 
+                                   class="btn btn-outline-primary">
+                                    <i class="bi bi-filetype-json"></i> Download JSON
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Colleges Export -->
+                        <div class="col-md-6 mb-3">
+                            <h5>Colleges Data</h5>
+                            <p class="text-muted">Export all college information for comparison.</p>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'accounts:export_colleges_csv' %}" 
+                                   class="btn btn-outline-success">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Download CSV
+                                </a>
+                                <a href="{% url 'accounts:export_colleges_json' %}" 
+                                   class="btn btn-outline-primary">
+                                    <i class="bi bi-filetype-json"></i> Download JSON
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grouped Summaries -->
+    <div class="row">
+        <!-- Courses per Major -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Courses per Major</h5>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-sm table-hover">
+                        <thead class="sticky-top bg-white">
+                            <tr>
+                                <th>Major</th>
+                                <th>College</th>
+                                <th class="text-end">Courses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in courses_per_major %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td><small class="text-muted">{{ item.college__abbreviation }}</small></td>
+                                <td class="text-end">
+                                    <span class="badge bg-info">{{ item.course_count }}</span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">No data available</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students per College -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Students per College</h5>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-sm table-hover">
+                        <thead class="sticky-top bg-white">
+                            <tr>
+                                <th>Abbreviation</th>
+                                <th>College Name</th>
+                                <th class="text-end">Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in students_per_college %}
+                            <tr>
+                                <td><strong>{{ item.abbreviation }}</strong></td>
+                                <td><small>{{ item.college_name|truncatewords:4 }}</small></td>
+                                <td class="text-end">
+                                    <span class="badge bg-success">{{ item.student_count }}</span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">No data available</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students per Major -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Students per Major</h5>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-sm table-hover">
+                        <thead class="sticky-top bg-white">
+                            <tr>
+                                <th>Major</th>
+                                <th>College</th>
+                                <th class="text-end">Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in students_per_major %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td><small class="text-muted">{{ item.college__abbreviation }}</small></td>
+                                <td class="text-end">
+                                    <span class="badge bg-warning text-dark">{{ item.student_count }}</span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">No data available</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="row mt-4 mb-5">
+        <div class="col-12 text-center">
+            <a href="{% url 'accounts:dashboard' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 8px;
+    }
+    
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}
