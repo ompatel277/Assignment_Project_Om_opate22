@@ -1,0 +1,134 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Create Career Plan - Traject{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="display-5 mb-4"><i class="bi bi-plus-circle"></i> Create a New Career Plan</h1>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="name" class="form-label fw-bold">Plan Name *</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="e.g., Plan A: Software Engineer at FAANG" required>
+                            <small class="text-muted">Give your plan a descriptive name</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="career" class="form-label fw-bold">Target Career *</label>
+
+                            {% if recommended_careers %}
+                                <div class="mb-3">
+                                    <p class="small text-muted mb-2">
+                                        <i class="bi bi-stars"></i> Recommended for you based on your skills:
+                                    </p>
+                                    <div class="row g-2">
+                                        {% for rec in recommended_careers|slice:":6" %}
+                                            <div class="col-md-6">
+                                                <div class="form-check card">
+                                                    <div class="card-body py-2">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="career" id="career_{{ rec.career.id }}"
+                                                               value="{{ rec.career.id }}" required>
+                                                        <label class="form-check-label" for="career_{{ rec.career.id }}">
+                                                            <strong>{{ rec.career.title }}</strong>
+                                                            <span class="badge bg-success ms-2">{{ rec.match_score }}% match</span>
+                                                            <br>
+                                                            <small class="text-muted">{{ rec.career.company }}</small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <details class="mt-3">
+                                <summary class="btn btn-sm btn-outline-secondary mb-2">
+                                    <i class="bi bi-search"></i> Browse all careers
+                                </summary>
+                                <select class="form-select" name="career" id="career_all">
+                                    <option value="">Select a career...</option>
+                                    {% for career in all_careers %}
+                                        <option value="{{ career.id }}">
+                                            {{ career.title }} - {{ career.company }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </details>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Why this career? (Optional)</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"
+                                      placeholder="Why are you interested in this career path?"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_primary" name="is_primary">
+                                <label class="form-check-label" for="is_primary">
+                                    <strong>Set as primary plan</strong>
+                                    <br>
+                                    <small class="text-muted">Your primary plan is your main focus</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Create Plan
+                            </button>
+                            <a href="{% url 'accounts:career_plans_list' %}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h6><i class="bi bi-info-circle"></i> What happens next?</h6>
+                    <ol class="mb-0">
+                        <li>After creating your plan, you'll add specific action items</li>
+                        <li>Add courses, projects, certifications, and milestones</li>
+                        <li>Track your progress as you complete each item</li>
+                        <li>Update your plan as you learn and grow</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Sync radio buttons and select dropdown
+document.addEventListener('DOMContentLoaded', function() {
+    const radioButtons = document.querySelectorAll('input[name="career"][type="radio"]');
+    const selectDropdown = document.getElementById('career_all');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                selectDropdown.value = '';
+            }
+        });
+    });
+
+    selectDropdown.addEventListener('change', function() {
+        if (this.value) {
+            radioButtons.forEach(radio => radio.checked = false);
+        }
+    });
+});
+</script>
+{% endblock %}
