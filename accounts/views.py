@@ -954,21 +954,27 @@ def career_plan_detail(request, plan_id):
     
     # Get plan items
     plan_items = plan.plan_items.all()
-    
+
     # Get recommendations for this career
     engine = RecommendationEngine(request.user.profile)
     portfolio_recs = engine.get_portfolio_recommendations(limit=20)
     course_recs = engine.get_course_recommendations(limit=10)
-    
-    # Calculate progress
+
+    # Calculate progress and counts
     progress = plan.get_progress_percentage()
-    
+    completed_count = plan_items.filter(status='COMPLETED').count()
+    in_progress_count = plan_items.filter(status='IN_PROGRESS').count()
+    planned_count = plan_items.filter(status='PLANNED').count()
+
     context = {
         'plan': plan,
         'plan_items': plan_items,
         'portfolio_recs': portfolio_recs,
         'course_recs': course_recs,
         'progress': progress,
+        'completed_count': completed_count,
+        'in_progress_count': in_progress_count,
+        'planned_count': planned_count,
     }
     
     return render(request, 'accounts/career_plans/detail.html', context)

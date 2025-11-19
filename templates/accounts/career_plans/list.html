@@ -59,23 +59,10 @@
                                 </div>
                             </div>
 
-                            <div class="row g-2 text-center mb-3">
-                                <div class="col-6">
-                                    <div class="card bg-light">
-                                        <div class="card-body py-2">
-                                            <h6 class="mb-0">{{ plan.plan_items.count }}</h6>
-                                            <small class="text-muted">Items</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="card bg-light">
-                                        <div class="card-body py-2">
-                                            <h6 class="mb-0">{{ plan.plan_items.filter.status='COMPLETED'.count }}</h6>
-                                            <small class="text-muted">Completed</small>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-list-check"></i> {{ plan.plan_items.count }} items in plan
+                                </small>
                             </div>
 
                             <small class="text-muted">

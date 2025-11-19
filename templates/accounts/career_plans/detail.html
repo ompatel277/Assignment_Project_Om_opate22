@@ -57,19 +57,19 @@
                         </div>
                         <div class="col-md-3">
                             <div class="text-center">
-                                <h4 class="mb-0 text-success">{{ plan_items|filter:status='COMPLETED'|length }}</h4>
+                                <h4 class="mb-0 text-success">{{ completed_count }}</h4>
                                 <small class="text-muted">Completed</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-center">
-                                <h4 class="mb-0 text-info">{{ plan_items|filter:status='IN_PROGRESS'|length }}</h4>
+                                <h4 class="mb-0 text-info">{{ in_progress_count }}</h4>
                                 <small class="text-muted">In Progress</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="text-center">
-                                <h4 class="mb-0 text-warning">{{ plan_items|filter:status='PLANNED'|length }}</h4>
+                                <h4 class="mb-0 text-warning">{{ planned_count }}</h4>
                                 <small class="text-muted">Planned</small>
                             </div>
                         </div>
