@@ -15,25 +15,39 @@
  align-items: center;
  justify-content: center;
  padding: 3rem 1rem;
- color: #c5c6c7;
- background: radial-gradient(
- circle at 80% 20%,
- rgba(102, 252, 241, 0.1),
- rgba(31, 40, 51, 0.95)
- );
+ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ position: relative;
+ overflow: hidden;
+ }
+
+ .tj-hero::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.3), transparent 50%),
+             radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.3), transparent 50%);
+ pointer-events: none;
+ }
+
+ .tj-hero > * {
+ position: relative;
+ z-index: 1;
  }
 
  .tj-title {
  font-size: 3.5rem;
  font-weight: 800;
- color: #66fcf1;
- text-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+ color: #ffffff;
+ text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
  line-height: 1.2;
  }
 
  .tj-subtitle {
  font-size: 1.3rem;
- color: #c5c6c7;
+ color: rgba(255, 255, 255, 0.95);
  margin-top: 1.2rem;
  max-width: 650px;
  line-height: 1.7;
@@ -51,47 +65,48 @@
  }
 
  .tj-cta {
- background: #66fcf1;
- color: #0b0c10;
+ background: #ffffff;
+ color: #667eea;
  border: none;
- box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+ box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
  }
 
  .tj-cta:hover {
- background: #45a29e;
- color: #0b0c10;
+ background: #f8f9fa;
+ color: #667eea;
  transform: translateY(-2px);
- box-shadow: 0 5px 35px rgba(102, 252, 241, 0.6);
+ box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
  }
 
  .tj-ghost {
- border: 2px solid #66fcf1;
- color: #66fcf1;
+ border: 2px solid rgba(255, 255, 255, 0.9);
+ color: #ffffff;
  background: transparent;
  }
 
  .tj-ghost:hover {
- background: #66fcf1;
- color: #0b0c10;
+ background: rgba(255, 255, 255, 0.15);
+ color: #ffffff;
+ border-color: #ffffff;
  transform: translateY(-2px);
- box-shadow: 0 5px 25px rgba(102, 252, 241, 0.4);
+ box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
  }
 
  .feature-card {
  transition: transform 0.3s ease, box-shadow 0.3s ease;
- border: 1px solid rgba(102, 252, 241, 0.2);
+ border: 1px solid rgba(102, 126, 234, 0.2);
  background: rgba(31, 40, 51, 0.5);
  }
 
  .feature-card:hover {
  transform: translateY(-8px);
- box-shadow: 0 8px 30px rgba(102, 252, 241, 0.3);
- border-color: rgba(102, 252, 241, 0.5);
+ box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+ border-color: rgba(102, 126, 234, 0.5);
  }
 
  .feature-icon {
  font-size: 3rem;
- color: #66fcf1;
+ color: #667eea;
  margin-bottom: 1rem;
  }
 
@@ -137,9 +152,9 @@
  </a>
  </div>
  <div class="mt-4">
- <p class="text-muted">
+ <p class="text-white" style="opacity: 0.9;">
  Already have an account?
- <a href="{% url 'accounts:login' %}" class="text-accent text-decoration-none fw-semibold">
+ <a href="{% url 'accounts:login' %}" class="text-white text-decoration-none fw-semibold" style="text-decoration: underline !important;">
  Log in here <i class="bi bi-arrow-right"></i>
  </a>
  </p>
