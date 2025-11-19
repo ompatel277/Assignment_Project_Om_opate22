@@ -72,7 +72,7 @@ def portfolio_recommendations_view(request):
 
 
 # =====================================================
-#  🆕 ROADMAP VIEWS (NEW)
+#  ROADMAP VIEWS
 # =====================================================
 
 @login_required
