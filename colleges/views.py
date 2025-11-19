@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 
 # ====================================
-# 🏫 College List View (Existing)
+# College List View (Existing)
 # ====================================
 class CollegeListView(ListView):
     model = College
@@ -65,7 +65,7 @@ class CollegeListView(ListView):
 
 
 # ====================================
-# 🎓 College Detail View (Existing)
+# College Detail View (Existing)
 # ====================================
 class CollegeDetailView(DetailView):
     model = College
@@ -81,7 +81,7 @@ class CollegeDetailView(DetailView):
 
 
 # ====================================
-# 📊 JSON Endpoint for Majors (Existing)
+# JSON Endpoint for Majors (Existing)
 # ====================================
 def majors_json_view(request, college_id):
     """Return all majors for a given college in JSON format."""
@@ -94,7 +94,7 @@ def majors_json_view(request, college_id):
 
 
 # ====================================
-# 📈 Matplotlib Chart View (Existing)
+# Matplotlib Chart View (Existing)
 # ====================================
 def college_chart(request):
     """Return a PNG bar chart showing number of majors per college."""
@@ -131,7 +131,7 @@ def college_chart(request):
 # ============================================================
 
 # -------------------------------
-# 🧭 GET Example — College Search
+# GET Example — College Search
 # -------------------------------
 def college_search_view(request):
     form = CollegeSearchForm(request.GET or None)
@@ -150,7 +150,7 @@ def college_search_view(request):
 
 
 # -------------------------------------------
-# 🧩 POST Example — Function-Based (FBV)
+# POST Example — Function-Based (FBV)
 # -------------------------------------------
 def add_major_fbv(request):
     if request.method == "POST":
@@ -166,7 +166,7 @@ def add_major_fbv(request):
 
 
 # -------------------------------------------
-# 🧱 POST Example — Class-Based (CBV)
+# POST Example — Class-Based (CBV)
 # -------------------------------------------
 class AddMajorCBV(FormView):
     template_name = "colleges/add_major_cbv.html"

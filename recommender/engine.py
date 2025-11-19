@@ -91,25 +91,25 @@ class RecommendationEngine:
         """Generate human-readable explanation for why a career matches."""
 
         if score >= 70:
-            reason = f"✨ **Strong Match** ({score}%): You already have {len(matched)} out of {len(matched) + len(missing)} key skills for {career.title}. "
+            reason = f"**Strong Match** ({score}%): You already have {len(matched)} out of {len(matched) + len(missing)} key skills for {career.title}. "
             if matched:
                 reason += f"Your skills in {', '.join(list(matched)[:3])} align well with this role. "
             if missing:
                 reason += f"Consider developing: {', '.join(list(missing)[:3])}."
         elif score >= 40:
-            reason = f"🎯 **Good Match** ({score}%): You have {len(matched)} relevant skills for {career.title}. "
+            reason = f"**Good Match** ({score}%): You have {len(matched)} relevant skills for {career.title}. "
             if matched:
                 reason += f"Your experience in {', '.join(list(matched)[:2])} is valuable. "
             if missing:
                 reason += f"To strengthen your fit, focus on: {', '.join(list(missing)[:3])}."
         elif score > 0:
-            reason = f"💡 **Growing Opportunity** ({score}%): {career.title} could be a future path. "
+            reason = f"**Growing Opportunity** ({score}%): {career.title} could be a future path. "
             if matched:
                 reason += f"You have some foundation with {', '.join(list(matched)[:2])}. "
             if missing:
                 reason += f"Key areas to develop: {', '.join(list(missing)[:3])}."
         else:
-            reason = f"📚 **Exploratory Path**: {career.title} requires different skills. Consider if this aligns with your long-term interests."
+            reason = f"**Exploratory Path**: {career.title} requires different skills. Consider if this aligns with your long-term interests."
 
         return reason
 

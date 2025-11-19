@@ -44,7 +44,7 @@ def signup_view(request):
             user = form.save()
             UserProfile.objects.create(user=user)
             login(request, user)
-            messages.success(request, "🎉 Account created successfully!")
+            messages.success(request, "Account created successfully!")
             return redirect("accounts:dashboard")
     else:
         form = SignupForm()
@@ -68,7 +68,7 @@ def public_signup_view(request):
             login(request, new_user)
             messages.success(
                 request,
-                f"🎉 Welcome to Traject, {new_user.username}! Let's get you set up."
+                f"Welcome to Traject, {new_user.username}! Let's get you set up."
             )
             return redirect("accounts:choose_college")
     else:
@@ -228,7 +228,7 @@ def edit_profile_view(request):
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "✅ Profile updated successfully!")
+            messages.success(request, "Profile updated successfully!")
             return redirect("accounts:profile")
     else:
         form = UserProfileForm(instance=profile)
@@ -258,7 +258,7 @@ def set_college(request, college_id):
     profile.college = college
     profile.save()
 
-    messages.success(request, f"🎓 College set to {college.college_name}.")
+    messages.success(request, f"College set to {college.college_name}.")
     return redirect("colleges:detail", pk=college.id)
 
 
