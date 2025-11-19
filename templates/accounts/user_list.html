@@ -5,54 +5,54 @@
 {% block content %}
 <div class="container mt-5">
 
-  <!-- Header -->
-  <div class="text-center mb-4">
-    <h2 class="fw-bold text-white">📊 Students per College</h2>
-    <p class="text-light">
-      This chart is generated <strong>server-side</strong> using our JSON API and matplotlib.
-      <br>No JavaScript required!
-    </p>
-  </div>
+ <!-- Header -->
+ <div class="text-center mb-4">
+ <h2 class="fw-bold text-white"><i class="bi bi-graph-up"></i> Students per College</h2>
+ <p class="text-light">
+ This chart is generated <strong>server-side</strong> using our JSON API and matplotlib.
+ <br>No JavaScript required!
+ </p>
+ </div>
 
-  <!-- Chart Display -->
-  <div class="card shadow-lg" style="background: rgba(255, 255, 255, 0.08);">
-    <div class="card-body text-center p-4">
-      <img
-        src="{% url 'accounts:chart_users_per_college_png' %}"
-        alt="Students per College Bar Chart"
-        class="img-fluid rounded"
-        style="max-width: 100%; height: auto;"
-      >
-    </div>
-  </div>
+ <!-- Chart Display -->
+ <div class="card shadow-lg" style="background: rgba(255, 255, 255, 0.08);">
+ <div class="card-body text-center p-4">
+ <img
+ src="{% url 'accounts:chart_users_per_college_png' %}"
+ alt="Students per College Bar Chart"
+ class="img-fluid rounded"
+ style="max-width: 100%; height: auto;"
+ >
+ </div>
+ </div>
 
-  <!-- How It Works Section -->
-  <div class="mt-4 p-4 rounded" style="background: rgba(255, 255, 255, 0.05);">
-    <h5 class="text-accent fw-bold mb-3">🔍 How This Works</h5>
-    <ol class="text-light">
-      <li><strong>Step 1:</strong> The chart view fetches data from our API: <code>/api/colleges/users/</code></li>
-      <li><strong>Step 2:</strong> The data is parsed using <code>json.load()</code></li>
-      <li><strong>Step 3:</strong> Matplotlib generates a bar chart from the data</li>
-      <li><strong>Step 4:</strong> The chart is returned as a PNG image using <code>HttpResponse</code></li>
-      <li><strong>Step 5:</strong> This template displays the image using an <code>&lt;img&gt;</code> tag</li>
-    </ol>
-  </div>
+ <!-- How It Works Section -->
+ <div class="mt-4 p-4 rounded" style="background: rgba(255, 255, 255, 0.05);">
+ <h5 class="text-accent fw-bold mb-3"><i class="bi bi-search"></i> How This Works</h5>
+ <ol class="text-light">
+ <li><strong>Step 1:</strong> The chart view fetches data from our API: <code>/api/colleges/users/</code></li>
+ <li><strong>Step 2:</strong> The data is parsed using <code>json.load()</code></li>
+ <li><strong>Step 3:</strong> Matplotlib generates a bar chart from the data</li>
+ <li><strong>Step 4:</strong> The chart is returned as a PNG image using <code>HttpResponse</code></li>
+ <li><strong>Step 5:</strong> This template displays the image using an <code>&lt;img&gt;</code> tag</li>
+ </ol>
+ </div>
 
-  <!-- API Links -->
-  <div class="mt-4 text-center">
-    <h5 class="text-accent fw-bold mb-3">🔗 Related Links</h5>
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="{% url 'accounts:api_users_per_college' %}" class="btn btn-outline-light btn-sm" target="_blank">
-        View JSON API Data
-      </a>
-      <a href="{% url 'accounts:chart_academic_year_page' %}" class="btn btn-outline-light btn-sm">
-        Academic Year Chart
-      </a>
-      <a href="{% url 'accounts:dashboard' %}" class="btn btn-primary btn-sm">
-        Back to Dashboard
-      </a>
-    </div>
-  </div>
+ <!-- API Links -->
+ <div class="mt-4 text-center">
+ <h5 class="text-accent fw-bold mb-3"><i class="bi bi-link-45deg"></i> Related Links</h5>
+ <div class="d-flex justify-content-center gap-3 flex-wrap">
+ <a href="{% url 'accounts:api_users_per_college' %}" class="btn btn-outline-light btn-sm" target="_blank">
+ View JSON API Data
+ </a>
+ <a href="{% url 'accounts:chart_academic_year_page' %}" class="btn btn-outline-light btn-sm">
+ Academic Year Chart
+ </a>
+ <a href="{% url 'accounts:dashboard' %}" class="btn btn-primary btn-sm">
+ Back to Dashboard
+ </a>
+ </div>
+ </div>
 
 </div>
 {% endblock %}

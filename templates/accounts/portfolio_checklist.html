@@ -6,209 +6,209 @@
 {% block content %}
 <div class="container mt-5">
 
-  <!-- Header with Stats -->
-  <div class="text-center mb-5">
-    <h2 class="fw-bold text-accent mb-3">📋 My Portfolio Checklist</h2>
-    <p class="text-light">Track your projects, certifications, and career milestones</p>
+ <!-- Header with Stats -->
+ <div class="text-center mb-5">
+ <h2 class="fw-bold text-accent mb-3"><i class="bi bi-list-check"></i> My Portfolio Checklist</h2>
+ <p class="text-light">Track your projects, certifications, and career milestones</p>
 
-    <!-- Progress Stats -->
-    <div class="row g-3 mt-4 justify-content-center">
-      <div class="col-md-3">
-        <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
-          <div class="card-body">
-            <h3 class="text-accent mb-0">{{ total_items }}</h3>
-            <small class="text-light">Total Items</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
-          <div class="card-body">
-            <h3 class="text-accent mb-0">{{ completed_count }}</h3>
-            <small class="text-light">Completed</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
-          <div class="card-body">
-            <h3 class="text-accent mb-0">{{ completion_rate }}%</h3>
-            <small class="text-light">Completion Rate</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <!-- Progress Stats -->
+ <div class="row g-3 mt-4 justify-content-center">
+ <div class="col-md-3">
+ <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+ <div class="card-body">
+ <h3 class="text-accent mb-0">{{ total_items }}</h3>
+ <small class="text-light">Total Items</small>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-3">
+ <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+ <div class="card-body">
+ <h3 class="text-accent mb-0">{{ completed_count }}</h3>
+ <small class="text-light">Completed</small>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-3">
+ <div class="card text-center" style="background: rgba(102, 252, 241, 0.1); border: 1px solid var(--tj-accent);">
+ <div class="card-body">
+ <h3 class="text-accent mb-0">{{ completion_rate }}%</h3>
+ <small class="text-light">Completion Rate</small>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <!-- Action Buttons -->
-  <div class="text-center mb-4">
-    <a href="{% url 'accounts:browse_portfolio' %}" class="btn btn-primary me-2">
-      ➕ Browse Portfolio Items
-    </a>
-    <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-secondary">
-      ← Back to Dashboard
-    </a>
-  </div>
+ <!-- Action Buttons -->
+ <div class="text-center mb-4">
+ <a href="{% url 'accounts:browse_portfolio' %}" class="btn btn-primary me-2">
+ Browse Portfolio Items
+ </a>
+ <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-secondary">
+ ← Back to Dashboard
+ </a>
+ </div>
 
-  <!-- IN PROGRESS Section -->
-  <div class="mb-5">
-    <h4 class="text-warning fw-bold mb-3">🚀 In Progress ({{ in_progress.count }})</h4>
-    {% if in_progress %}
-      <div class="row g-3">
-        {% for item in in_progress %}
-          <div class="col-md-6">
-            <div class="card h-100" style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107;">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title text-warning mb-0">
-                    {{ item.portfolio_item.title }}
-                  </h5>
-                  <span class="badge bg-{{ item.priority|lower }}">{{ item.get_priority_display }}</span>
-                </div>
+ <!-- IN PROGRESS Section -->
+ <div class="mb-5">
+ <h4 class="text-warning fw-bold mb-3"> In Progress ({{ in_progress.count }})</h4>
+ {% if in_progress %}
+ <div class="row g-3">
+ {% for item in in_progress %}
+ <div class="col-md-6">
+ <div class="card h-100" style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107;">
+ <div class="card-body">
+ <div class="d-flex justify-content-between align-items-start mb-2">
+ <h5 class="card-title text-warning mb-0">
+ {{ item.portfolio_item.title }}
+ </h5>
+ <span class="badge bg-{{ item.priority|lower }}">{{ item.get_priority_display }}</span>
+ </div>
 
-                <p class="small text-muted mb-2">
-                  {{ item.portfolio_item.get_item_type_display }} •
-                  {{ item.portfolio_item.get_difficulty_level_display }}
-                </p>
+ <p class="small text-muted mb-2">
+ {{ item.portfolio_item.get_item_type_display }} •
+ {{ item.portfolio_item.get_difficulty_level_display }}
+ </p>
 
-                <p class="small mb-3">{{ item.portfolio_item.description|truncatewords:20 }}</p>
+ <p class="small mb-3">{{ item.portfolio_item.description|truncatewords:20 }}</p>
 
-                <!-- Progress Bar -->
-                <div class="mb-3">
-                  <label class="form-label small">Progress: {{ item.progress_percentage }}%</label>
-                  <div class="progress" style="height: 8px;">
-                    <div class="progress-bar bg-warning" role="progressbar"
-                         style="width: {{ item.progress_percentage }}%"
-                         aria-valuenow="{{ item.progress_percentage }}"
-                         aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                  </div>
-                </div>
+ <!-- Progress Bar -->
+ <div class="mb-3">
+ <label class="form-label small">Progress: {{ item.progress_percentage }}%</label>
+ <div class="progress" style="height: 8px;">
+ <div class="progress-bar bg-warning" role="progressbar"
+ style="width: {{ item.progress_percentage }}%"
+ aria-valuenow="{{ item.progress_percentage }}"
+ aria-valuemin="0" aria-valuemax="100">
+ </div>
+ </div>
+ </div>
 
-                <!-- Action Buttons -->
-                <div class="d-flex gap-2">
-                  <a href="{% url 'accounts:portfolio_item_detail' item.portfolio_item.id %}"
-                     class="btn btn-sm btn-outline-warning">
-                    View Details
-                  </a>
-                  <form method="POST" action="{% url 'accounts:update_checklist_status' item.id %}" class="d-inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="status" value="COMPLETED">
-                    <button type="submit" class="btn btn-sm btn-success">✓ Mark Complete</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="alert alert-info">
-        No items in progress. Move items from Planned to start working on them!
-      </div>
-    {% endif %}
-  </div>
+ <!-- Action Buttons -->
+ <div class="d-flex gap-2">
+ <a href="{% url 'accounts:portfolio_item_detail' item.portfolio_item.id %}"
+ class="btn btn-sm btn-outline-warning">
+ View Details
+ </a>
+ <form method="POST" action="{% url 'accounts:update_checklist_status' item.id %}" class="d-inline">
+ {% csrf_token %}
+ <input type="hidden" name="status" value="COMPLETED">
+ <button type="submit" class="btn btn-sm btn-success"> Mark Complete</button>
+ </form>
+ </div>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-info">
+ No items in progress. Move items from Planned to start working on them!
+ </div>
+ {% endif %}
+ </div>
 
-  <!-- PLANNED Section -->
-  <div class="mb-5">
-    <h4 class="text-info fw-bold mb-3">📝 Planned ({{ planned.count }})</h4>
-    {% if planned %}
-      <div class="row g-3">
-        {% for item in planned %}
-          <div class="col-md-4">
-            <div class="card h-100" style="background: rgba(102, 252, 241, 0.05);">
-              <div class="card-body">
-                <h6 class="card-title text-accent">{{ item.portfolio_item.title }}</h6>
-                <p class="small text-muted mb-2">
-                  {{ item.portfolio_item.get_item_type_display }} •
-                  {{ item.portfolio_item.estimated_hours }}h
-                </p>
-                <p class="small mb-3">{{ item.portfolio_item.description|truncatewords:15 }}</p>
+ <!-- PLANNED Section -->
+ <div class="mb-5">
+ <h4 class="text-info fw-bold mb-3"> Planned ({{ planned.count }})</h4>
+ {% if planned %}
+ <div class="row g-3">
+ {% for item in planned %}
+ <div class="col-md-4">
+ <div class="card h-100" style="background: rgba(102, 252, 241, 0.05);">
+ <div class="card-body">
+ <h6 class="card-title text-accent">{{ item.portfolio_item.title }}</h6>
+ <p class="small text-muted mb-2">
+ {{ item.portfolio_item.get_item_type_display }} •
+ {{ item.portfolio_item.estimated_hours }}h
+ </p>
+ <p class="small mb-3">{{ item.portfolio_item.description|truncatewords:15 }}</p>
 
-                <div class="d-flex gap-2">
-                  <form method="POST" action="{% url 'accounts:update_checklist_status' item.id %}" class="d-inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="status" value="IN_PROGRESS">
-                    <button type="submit" class="btn btn-sm btn-warning">Start</button>
-                  </form>
-                  <a href="{% url 'accounts:remove_from_checklist' item.id %}"
-                     class="btn btn-sm btn-outline-danger"
-                     onclick="return confirm('Remove this item?')">
-                    Remove
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="alert alert-info">
-        No planned items. Browse the portfolio library to add items!
-      </div>
-    {% endif %}
-  </div>
+ <div class="d-flex gap-2">
+ <form method="POST" action="{% url 'accounts:update_checklist_status' item.id %}" class="d-inline">
+ {% csrf_token %}
+ <input type="hidden" name="status" value="IN_PROGRESS">
+ <button type="submit" class="btn btn-sm btn-warning">Start</button>
+ </form>
+ <a href="{% url 'accounts:remove_from_checklist' item.id %}"
+ class="btn btn-sm btn-outline-danger"
+ onclick="return confirm('Remove this item?')">
+ Remove
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-info">
+ No planned items. Browse the portfolio library to add items!
+ </div>
+ {% endif %}
+ </div>
 
-  <!-- COMPLETED Section -->
-  <div class="mb-5">
-    <h4 class="text-success fw-bold mb-3">✅ Completed ({{ completed.count }})</h4>
-    {% if completed %}
-      <div class="row g-3">
-        {% for item in completed %}
-          <div class="col-md-4">
-            <div class="card h-100" style="background: rgba(40, 167, 69, 0.1); border-left: 4px solid #28a745;">
-              <div class="card-body">
-                <h6 class="card-title text-success">✓ {{ item.portfolio_item.title }}</h6>
-                <p class="small text-muted mb-2">
-                  Completed: {{ item.completed_at|date:"M d, Y" }}
-                </p>
-                <p class="small mb-0">{{ item.portfolio_item.description|truncatewords:15 }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="alert alert-info">
-        No completed items yet. Keep working on your goals!
-      </div>
-    {% endif %}
-  </div>
+ <!-- COMPLETED Section -->
+ <div class="mb-5">
+ <h4 class="text-success fw-bold mb-3"> Completed ({{ completed.count }})</h4>
+ {% if completed %}
+ <div class="row g-3">
+ {% for item in completed %}
+ <div class="col-md-4">
+ <div class="card h-100" style="background: rgba(40, 167, 69, 0.1); border-left: 4px solid #28a745;">
+ <div class="card-body">
+ <h6 class="card-title text-success"> {{ item.portfolio_item.title }}</h6>
+ <p class="small text-muted mb-2">
+ Completed: {{ item.completed_at|date:"M d, Y" }}
+ </p>
+ <p class="small mb-0">{{ item.portfolio_item.description|truncatewords:15 }}</p>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-info">
+ No completed items yet. Keep working on your goals!
+ </div>
+ {% endif %}
+ </div>
 
-  <!-- SUGGESTED ITEMS -->
-  <div class="mb-5">
-    <h4 class="text-accent fw-bold mb-3">💡 Suggested for You</h4>
-    {% if suggested_items %}
-      <div class="row g-3">
-        {% for item in suggested_items %}
-          <div class="col-md-4">
-            <div class="card h-100">
-              <div class="card-body">
-                <span class="badge bg-secondary mb-2">{{ item.get_item_type_display }}</span>
-                <h6 class="card-title">{{ item.title }}</h6>
-                <p class="small text-muted mb-2">
-                  {{ item.get_difficulty_level_display }} • {{ item.estimated_hours }}h
-                </p>
-                <p class="small mb-3">{{ item.description|truncatewords:15 }}</p>
+ <!-- SUGGESTED ITEMS -->
+ <div class="mb-5">
+ <h4 class="text-accent fw-bold mb-3"><i class="bi bi-lightbulb-fill"></i> Suggested for You</h4>
+ {% if suggested_items %}
+ <div class="row g-3">
+ {% for item in suggested_items %}
+ <div class="col-md-4">
+ <div class="card h-100">
+ <div class="card-body">
+ <span class="badge bg-secondary mb-2">{{ item.get_item_type_display }}</span>
+ <h6 class="card-title">{{ item.title }}</h6>
+ <p class="small text-muted mb-2">
+ {{ item.get_difficulty_level_display }} • {{ item.estimated_hours }}h
+ </p>
+ <p class="small mb-3">{{ item.description|truncatewords:15 }}</p>
 
-                <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-primary">
-                  ➕ Add to Checklist
-                </a>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="text-muted">All items have been added to your checklist!</p>
-    {% endif %}
-  </div>
+ <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-primary">
+ Add to Checklist
+ </a>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <p class="text-muted">All items have been added to your checklist!</p>
+ {% endif %}
+ </div>
 
 </div>
 
 <style>
-  .badge.bg-high { background-color: #dc3545 !important; }
-  .badge.bg-medium { background-color: #ffc107 !important; color: #000; }
-  .badge.bg-low { background-color: #6c757d !important; }
+ .badge.bg-high { background-color: #dc3545 !important; }
+ .badge.bg-medium { background-color: #ffc107 !important; color: #000; }
+ .badge.bg-low { background-color: #6c757d !important; }
 </style>
 {% endblock %}

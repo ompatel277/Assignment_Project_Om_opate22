@@ -6,80 +6,80 @@
 {% block content %}
 <div class="container mt-5 text-white">
 
-  <!-- Header -->
-  <div class="text-center mb-5">
-    <h2 class="fw-bold">🎓 Choose Your College</h2>
-    <p class="text-light">Start by selecting your college and major — Traject will tailor courses, clubs, and recommendations just for you.</p>
-  </div>
+ <!-- Header -->
+ <div class="text-center mb-5">
+ <h2 class="fw-bold"><i class="bi bi-mortarboard-fill"></i> Choose Your College</h2>
+ <p class="text-light">Start by selecting your college and major — Traject will tailor courses, clubs, and recommendations just for you.</p>
+ </div>
 
-  <!-- Form -->
-  <form method="POST" class="p-4 rounded shadow-lg" style="background: rgba(255, 255, 255, 0.08);">
-    {% csrf_token %}
+ <!-- Form -->
+ <form method="POST" class="p-4 rounded shadow-lg" style="background: rgba(255, 255, 255, 0.08);">
+ {% csrf_token %}
 
-    <!-- College Selector -->
-    <div class="mb-4">
-      <label for="college" class="form-label fw-semibold">Select Your College</label>
-      <select name="college" id="college" class="form-select">
-        <option value="">-- Choose a College --</option>
-        {% for college in colleges %}
-          <option value="{{ college.id }}">{{ college.college_name }} ({{ college.abbreviation }})</option>
-        {% endfor %}
-      </select>
-    </div>
+ <!-- College Selector -->
+ <div class="mb-4">
+ <label for="college" class="form-label fw-semibold">Select Your College</label>
+ <select name="college" id="college" class="form-select">
+ <option value="">-- Choose a College --</option>
+ {% for college in colleges %}
+ <option value="{{ college.id }}">{{ college.college_name }} ({{ college.abbreviation }})</option>
+ {% endfor %}
+ </select>
+ </div>
 
-    <!-- Major (Dynamic) -->
-    <div class="mb-4">
-      <label for="major" class="form-label fw-semibold">Select Your Major</label>
-      <select name="major" id="major" class="form-select">
-        <option value="">Select a college first</option>
-      </select>
-    </div>
+ <!-- Major (Dynamic) -->
+ <div class="mb-4">
+ <label for="major" class="form-label fw-semibold">Select Your Major</label>
+ <select name="major" id="major" class="form-select">
+ <option value="">Select a college first</option>
+ </select>
+ </div>
 
-    <!-- Submit -->
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold">Continue →</button>
-    </div>
-  </form>
+ <!-- Submit -->
+ <div class="text-center mt-4">
+ <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold">Continue →</button>
+ </div>
+ </form>
 
-  <!-- Back to Dashboard -->
-  <div class="text-center mt-4">
-    <a href="{% url 'accounts:dashboard' %}" class="text-decoration-none text-light">← Back to Dashboard</a>
-  </div>
+ <!-- Back to Dashboard -->
+ <div class="text-center mt-4">
+ <a href="{% url 'accounts:dashboard' %}" class="text-decoration-none text-light">← Back to Dashboard</a>
+ </div>
 
 </div>
 
 <!-- Dynamic Major Loader -->
 <script>
-  const majorSelect = document.getElementById("major");
-  const collegeSelect = document.getElementById("college");
+ const majorSelect = document.getElementById("major");
+ const collegeSelect = document.getElementById("college");
 
-  collegeSelect.addEventListener("change", function() {
-    const collegeId = this.value;
-    majorSelect.innerHTML = "<option>Loading majors...</option>";
+ collegeSelect.addEventListener("change", function() {
+ const collegeId = this.value;
+ majorSelect.innerHTML = "<option>Loading majors...</option>";
 
-    if (!collegeId) {
-      majorSelect.innerHTML = "<option>Select a college first</option>";
-      return;
-    }
+ if (!collegeId) {
+ majorSelect.innerHTML = "<option>Select a college first</option>";
+ return;
+ }
 
-    fetch(`/colleges/${collegeId}/majors-json/`)
-      .then(response => response.json())
-      .then(data => {
-        majorSelect.innerHTML = "";
-        if (data.majors.length > 0) {
-          data.majors.forEach(m => {
-            const opt = document.createElement("option");
-            opt.value = m.id;
-            opt.textContent = `${m.name} (${m.code})`;
-            majorSelect.appendChild(opt);
-          });
-        } else {
-          majorSelect.innerHTML = "<option>No majors available for this college</option>";
-        }
-      })
-      .catch(() => {
-        majorSelect.innerHTML = "<option>Error loading majors</option>";
-      });
-  });
+ fetch(`/colleges/${collegeId}/majors-json/`)
+ .then(response => response.json())
+ .then(data => {
+ majorSelect.innerHTML = "";
+ if (data.majors.length > 0) {
+ data.majors.forEach(m => {
+ const opt = document.createElement("option");
+ opt.value = m.id;
+ opt.textContent = `${m.name} (${m.code})`;
+ majorSelect.appendChild(opt);
+ });
+ } else {
+ majorSelect.innerHTML = "<option>No majors available for this college</option>";
+ }
+ })
+ .catch(() => {
+ majorSelect.innerHTML = "<option>Error loading majors</option>";
+ });
+ });
 </script>
 {% endblock %}

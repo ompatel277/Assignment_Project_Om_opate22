@@ -1,198 +1,298 @@
+{% extends "accounts/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Traject | {% block title %}Dashboard{% endblock %}</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    >
+{% block title %}Dashboard{% endblock %}
 
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    >
+{% block content %}
+<div class="container-fluid">
+ <!-- Welcome Header -->
+ <div class="row mb-4">
+ <div class="col-12">
+ <div class="card bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+ <div class="card-body p-4">
+ <h1 class="display-5 fw-bold mb-2">
+ <i class="bi bi-speedometer2"></i> Welcome back, {{ user.first_name|default:user.username }}!
+ </h1>
+ <p class="lead mb-0">
+ {% if profile.college %}
+ {{ profile.college.abbreviation }}
+ {% if profile.major %}· {{ profile.major.name }}{% endif %}
+ · {{ profile.get_academic_year_display }}
+ {% else %}
+ Ready to plan your academic journey?
+ {% endif %}
+ </p>
+ </div>
+ </div>
+ </div>
+ </div>
 
-    <!-- Traject Theme -->
-    <link rel="stylesheet" href="{% static 'css/traject.css' %}">
+ <!-- Quick Stats -->
+ <div class="row g-3 mb-4">
+ <div class="col-md-3">
+ <div class="card bg-primary text-white h-100">
+ <div class="card-body text-center">
+ <i class="bi bi-trophy-fill fs-1 mb-2"></i>
+ <h3 class="fw-bold mb-1">{{ checklist_stats.completion_rate }}%</h3>
+ <p class="small mb-0">Portfolio Complete</p>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-3">
+ <div class="card bg-success text-white h-100">
+ <div class="card-body text-center">
+ <i class="bi bi-list-check fs-1 mb-2"></i>
+ <h3 class="fw-bold mb-1">{{ checklist_stats.completed }}/{{ checklist_stats.total }}</h3>
+ <p class="small mb-0">Tasks Completed</p>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-3">
+ <div class="card bg-warning text-dark h-100">
+ <div class="card-body text-center">
+ <i class="bi bi-briefcase-fill fs-1 mb-2"></i>
+ <h3 class="fw-bold mb-1">{{ recommendations.careers|length }}</h3>
+ <p class="small mb-0">Career Matches</p>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-3">
+ <div class="card bg-info text-white h-100">
+ <div class="card-body text-center">
+ <i class="bi bi-star-fill fs-1 mb-2"></i>
+ <h3 class="fw-bold mb-1">{{ recommendations.portfolio_items|length }}</h3>
+ <p class="small mb-0">Suggested Items</p>
+ </div>
+ </div>
+ </div>
+ </div>
 
-    <!-- Optional Favicon -->
-    <link rel="icon" href="{% static 'images/favicon.png' %}">
-  </head>
+ <!-- Main Content Row -->
+ <div class="row g-4">
+ <!-- Left Column -->
+ <div class="col-lg-8">
 
-  <body class="traject-bg d-flex flex-column min-vh-100">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg traject-navbar py-3">
-      <div class="container">
-        <a class="navbar-brand fw-bold text-accent" href="/">
-          <i class="bi bi-rocket-takeoff"></i> Traject
-        </a>
+ <!-- Career Recommendations -->
+ <div class="card shadow-sm mb-4">
+ <div class="card-header bg-primary text-white">
+ <h5 class="mb-0"><i class="bi bi-briefcase"></i> Top Career Matches</h5>
+ </div>
+ <div class="card-body">
+ {% if recommendations.careers %}
+ <div class="list-group list-group-flush">
+ {% for rec in recommendations.careers|slice:":5" %}
+ <div class="list-group-item">
+ <div class="d-flex justify-content-between align-items-center">
+ <div class="flex-grow-1">
+ <h6 class="mb-1 fw-bold">{{ rec.career.title }}</h6>
+ <p class="mb-1 small text-muted">{{ rec.career.company }}</p>
+ <div class="mb-1">
+ <span class="badge bg-success">{{ rec.match_score }}% Match</span>
+ </div>
+ <p class="mb-0 small">{{ rec.reasoning|truncatewords:20 }}</p>
+ </div>
+ <a href="{% url 'careers:detail' rec.career.pk %}" class="btn btn-sm btn-outline-primary ms-3">
+ View
+ </a>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ <div class="text-center mt-3">
+ <a href="{% url 'recommender:careers' %}" class="btn btn-primary">
+ View All Career Matches
+ </a>
+ </div>
+ {% else %}
+ <div class="text-center py-4">
+ <i class="bi bi-info-circle fs-1 text-muted mb-3"></i>
+ <p class="text-muted">
+ Add skills and interests to your profile to get personalized career recommendations!
+ </p>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">
+ Update Profile
+ </a>
+ </div>
+ {% endif %}
+ </div>
+ </div>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+ <!-- Recommended Courses -->
+ <div class="card shadow-sm mb-4">
+ <div class="card-header bg-success text-white">
+ <h5 class="mb-0"><i class="bi bi-journal-text"></i> Courses for Your Major</h5>
+ </div>
+ <div class="card-body">
+ {% if recommended_courses %}
+ <div class="row g-3">
+ {% for course in recommended_courses %}
+ <div class="col-md-6">
+ <div class="card h-100 border-success">
+ <div class="card-body">
+ <h6 class="card-title">{{ course.subject }} {{ course.number }}</h6>
+ <p class="card-text small">{{ course.title }}</p>
+ <span class="badge bg-success">{{ course.credits }} Credits</span>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <p class="text-muted text-center mb-0">
+ Select a major to see recommended courses.
+ </p>
+ {% endif %}
+ </div>
+ </div>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto align-items-center gap-2">
-            {% if user.is_authenticated %}
-              <!-- Dashboard -->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:dashboard' %}">
-                  <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
-              </li>
+ <!-- Clubs & Organizations -->
+ <div class="card shadow-sm mb-4">
+ <div class="card-header bg-warning text-dark">
+ <h5 class="mb-0"><i class="bi bi-people"></i> Clubs at Your College</h5>
+ </div>
+ <div class="card-body">
+ {% if recommended_clubs %}
+ <div class="row g-2">
+ {% for club in recommended_clubs %}
+ <div class="col-md-6">
+ <div class="card border-warning">
+ <div class="card-body py-2">
+ <h6 class="mb-1">{{ club.name }}</h6>
+ <span class="badge bg-warning text-dark small">{{ club.category }}</span>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <p class="text-muted text-center mb-0">
+ Select a college to see available clubs.
+ </p>
+ {% endif %}
+ </div>
+ </div>
 
-              <!-- Explore Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-compass"></i> Explore
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'colleges:list' %}"><i class="bi bi-building"></i> Colleges</a></li>
-                  <li><a class="dropdown-item" href="{% url 'careers:list' %}"><i class="bi bi-briefcase"></i> Careers</a></li>
-                  <li><a class="dropdown-item" href="{% url 'catalog:courses' %}"><i class="bi bi-journal-text"></i> Courses</a></li>
-                </ul>
-              </li>
+ </div>
 
-              <!-- Recommender Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-stars"></i> AI Recommender
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'recommender:dashboard' %}"><i class="bi bi-grid"></i> Overview</a></li>
-                  <li><a class="dropdown-item" href="{% url 'recommender:careers' %}"><i class="bi bi-briefcase"></i> Career Matches</a></li>
-                  <li><a class="dropdown-item" href="{% url 'recommender:portfolio' %}"><i class="bi bi-star"></i> Portfolio Tips</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'recommender:roadmap' %}"><i class="bi bi-map"></i> My Roadmap</a></li>
-                </ul>
-              </li>
+ <!-- Right Column -->
+ <div class="col-lg-4">
 
-              <!-- Profile Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-person-circle"></i> Profile
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="bi bi-person"></i> View Profile</a></li>
-                  <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' %}"><i class="bi bi-pencil"></i> Edit Profile</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'accounts:portfolio_checklist' %}"><i class="bi bi-list-check"></i> My Portfolio</a></li>
-                  <li><a class="dropdown-item" href="{% url 'accounts:browse_portfolio' %}"><i class="bi bi-collection"></i> Browse Portfolios</a></li>
-                </ul>
-              </li>
+ <!-- Profile Summary -->
+ <div class="card shadow-sm mb-4">
+ <div class="card-header bg-info text-white">
+ <h5 class="mb-0"><i class="bi bi-person-circle"></i> Your Profile</h5>
+ </div>
+ <div class="card-body">
+ <div class="mb-3">
+ <p class="mb-1"><strong>College:</strong></p>
+ <p class="text-muted">{{ profile.college.college_name|default:"Not set" }}</p>
+ </div>
+ <div class="mb-3">
+ <p class="mb-1"><strong>Major:</strong></p>
+ <p class="text-muted">{{ profile.major.name|default:"Not set" }}</p>
+ </div>
+ <div class="mb-3">
+ <p class="mb-1"><strong>Academic Year:</strong></p>
+ <p class="text-muted">{{ profile.get_academic_year_display|default:"Not set" }}</p>
+ </div>
+ <div class="mb-3">
+ <p class="mb-1"><strong>GPA:</strong></p>
+ <p class="text-muted">{{ profile.gpa|default:"Not set" }}</p>
+ </div>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-info w-100">
+ <i class="bi bi-pencil"></i> Edit Profile
+ </a>
+ </div>
+ </div>
 
-              <!-- Reports -->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:reports' %}">
-                  <i class="bi bi-file-earmark-bar-graph"></i> Reports
-                </a>
-              </li>
+ <!-- Portfolio Progress -->
+ <div class="card shadow-sm mb-4">
+ <div class="card-header bg-secondary text-white">
+ <h5 class="mb-0"><i class="bi bi-list-check"></i> Portfolio</h5>
+ </div>
+ <div class="card-body">
+ <div class="mb-3">
+ <div class="d-flex justify-content-between mb-2">
+ <span>Completion</span>
+ <span class="fw-bold">{{ checklist_stats.completion_rate }}%</span>
+ </div>
+ <div class="progress" style="height: 25px;">
+ <div class="progress-bar bg-success" role="progressbar"
+ style="width: {{ checklist_stats.completion_rate }}%"
+ aria-valuenow="{{ checklist_stats.completion_rate }}"
+ aria-valuemin="0" aria-valuemax="100">
+ {{ checklist_stats.completion_rate }}%
+ </div>
+ </div>
+ </div>
+ <p class="small mb-3">
+ {{ checklist_stats.completed }} of {{ checklist_stats.total }} items completed
+ </p>
+ <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-secondary w-100 mb-2">
+ <i class="bi bi-list-check"></i> View Checklist
+ </a>
+ <a href="{% url 'accounts:browse_portfolio' %}" class="btn btn-outline-secondary w-100">
+ <i class="bi bi-plus-circle"></i> Add Items
+ </a>
+ </div>
+ </div>
 
-              <!-- Logout -->
-              <li class="nav-item">
-                <a class="nav-link fw-semibold text-accent-dark" href="{% url 'accounts:logout' %}">
-                  <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
-              </li>
+ <!-- External APIs -->
+ <div class="card shadow-sm mb-4 border-primary">
+ <div class="card-header bg-primary text-white">
+ <h5 class="mb-0"><i class="bi bi-github"></i> GitHub Projects</h5>
+ </div>
+ <div class="card-body">
+ <p class="small mb-3">Search for open source projects to contribute to or get inspired.</p>
+ <a href="{% url 'accounts:external_github_search' %}" class="btn btn-primary w-100">
+ <i class="bi bi-search"></i> Search GitHub
+ </a>
+ </div>
+ </div>
 
-              <!-- User Badges -->
-              {% if user.profile.college %}
-                <li class="nav-item">
-                  <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your College">
-                    {{ user.profile.college.abbreviation }}
-                  </span>
-                </li>
-              {% endif %}
-              {% if user.profile.major %}
-                <li class="nav-item">
-                  <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your Major">
-                    {{ user.profile.major.name }}
-                  </span>
-                </li>
-              {% endif %}
-            {% else %}
-              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
-              <li class="nav-item">
-                <a class="btn btn-accent btn-sm" href="{% url 'accounts:signup' %}">Sign Up</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
+ <!-- Roadmap Summary -->
+ {% if roadmap_summary %}
+ <div class="card shadow-sm mb-4 border-danger">
+ <div class="card-header bg-danger text-white">
+ <h5 class="mb-0"><i class="bi bi-map"></i> Your Roadmap</h5>
+ </div>
+ <div class="card-body">
+ <p class="mb-2"><strong>Remaining Semesters:</strong> {{ roadmap_summary.total_semesters }}</p>
+ <p class="mb-2"><strong>Total Credits:</strong> {{ roadmap_summary.total_credits }}</p>
+ <p class="mb-3"><strong>Graduation:</strong> {{ roadmap_summary.graduation_season }} {{ roadmap_summary.graduation_year }}</p>
+ <a href="{% url 'recommender:roadmap' %}" class="btn btn-danger w-100">
+ <i class="bi bi-map"></i> View Full Roadmap
+ </a>
+ </div>
+ </div>
+ {% endif %}
 
-    <!-- Main -->
-    <main class="flex-grow-1 py-5">
-      <div class="container">
-        {% if messages %}
-          <div class="mb-3">
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-        {% block content %}{% endblock %}
-      </div>
-    </main>
+ <!-- Quick Actions -->
+ <div class="card shadow-sm">
+ <div class="card-header">
+ <h5 class="mb-0"><i class="bi bi-lightning"></i> Quick Actions</h5>
+ </div>
+ <div class="list-group list-group-flush">
+ <a href="{% url 'recommender:dashboard' %}" class="list-group-item list-group-item-action">
+ <i class="bi bi-stars"></i> AI Recommendations
+ </a>
+ <a href="{% url 'colleges:list' %}" class="list-group-item list-group-item-action">
+ <i class="bi bi-building"></i> Explore Colleges
+ </a>
+ <a href="{% url 'careers:list' %}" class="list-group-item list-group-item-action">
+ <i class="bi bi-briefcase"></i> Browse Careers
+ </a>
+ <a href="{% url 'accounts:reports' %}" class="list-group-item list-group-item-action">
+ <i class="bi bi-file-earmark-bar-graph"></i> View Reports
+ </a>
+ </div>
+ </div>
 
-    <!-- Footer -->
-    <footer class="footer text-center py-4 border-top">
-      <div class="container">
-        <div class="row mb-3">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-accent fw-bold">Quick Links</h6>
-            <ul class="list-unstyled small">
-              <li><a href="{% url 'colleges:list' %}" class="text-decoration-none">Colleges</a></li>
-              <li><a href="{% url 'careers:list' %}" class="text-decoration-none">Careers</a></li>
-              <li><a href="{% url 'catalog:courses' %}" class="text-decoration-none">Courses</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-accent fw-bold">Tools</h6>
-            <ul class="list-unstyled small">
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'recommender:dashboard' %}" class="text-decoration-none">AI Recommender</a></li>
-                <li><a href="{% url 'accounts:reports' %}" class="text-decoration-none">Reports</a></li>
-              {% else %}
-                <li><a href="{% url 'accounts:login' %}" class="text-decoration-none">Login</a></li>
-                <li><a href="{% url 'accounts:signup' %}" class="text-decoration-none">Sign Up</a></li>
-              {% endif %}
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6 class="text-accent fw-bold">About</h6>
-            <p class="small mb-0">Empowering Students to Navigate Their Future</p>
-          </div>
-        </div>
-        <p class="mb-0 small">&copy; {% now "Y" %} Traject <i class="bi bi-rocket-takeoff"></i></p>
-      </div>
-    </footer>
+ </div>
+ </div>
+</div>
 
-    <!-- Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Add some spacing at bottom -->
+<div class="mb-5"></div>
 
-    <!-- Initialize Tooltips -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.map(function (tooltipTriggerEl) {
-          return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-      });
-    </script>
-  </body>
-</html>
+{% endblock %}

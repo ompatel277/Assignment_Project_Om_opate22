@@ -4,31 +4,31 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h2 class="fw-bold mb-4 text-primary">🎓 Colleges — Generic ListView</h2>
+ <h2 class="fw-bold mb-4 text-primary"><i class="bi bi-mortarboard-fill"></i> Colleges — Generic ListView</h2>
 
-  {% if colleges %}
-    <ul class="list-group shadow-sm">
-      {% for college in colleges %}
-        <li class="list-group-item d-flex justify-content-between align-items-center hover-card">
-          <div>
-            <div class="fw-semibold text-dark">
-              {{ college.college_name }}
-            </div>
-            <small class="text-muted">
-              {{ college.abbreviation }} · {{ college.city }}, {{ college.state }}
-            </small>
-          </div>
-          <a class="btn btn-sm btn-outline-primary"
-             href="{% url 'colleges:detail' college.pk %}">
-            View Details
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <div class="alert alert-info mt-4">
-      No colleges available yet.
-    </div>
-  {% endif %}
+ {% if colleges %}
+ <ul class="list-group shadow-sm">
+ {% for college in colleges %}
+ <li class="list-group-item d-flex justify-content-between align-items-center hover-card">
+ <div>
+ <div class="fw-semibold text-dark">
+ {{ college.college_name }}
+ </div>
+ <small class="text-muted">
+ {{ college.abbreviation }} · {{ college.city }}, {{ college.state }}
+ </small>
+ </div>
+ <a class="btn btn-sm btn-outline-primary"
+ href="{% url 'colleges:detail' college.pk %}">
+ View Details
+ </a>
+ </li>
+ {% endfor %}
+ </ul>
+ {% else %}
+ <div class="alert alert-info mt-4">
+ No colleges available yet.
+ </div>
+ {% endif %}
 </div>
 {% endblock %}

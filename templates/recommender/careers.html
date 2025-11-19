@@ -5,70 +5,70 @@
 
 {% block content %}
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h1 class="display-5">💼 Your Career Matches</h1>
-            <p class="lead text-muted">Careers tailored to your skills, interests, and academic background</p>
-        </div>
-    </div>
+ <div class="row mb-4">
+ <div class="col-12">
+ <h1 class="display-5"><i class="bi bi-briefcase-fill"></i> Your Career Matches</h1>
+ <p class="lead text-muted">Careers tailored to your skills, interests, and academic background</p>
+ </div>
+ </div>
 
-    {% if careers %}
-        <div class="row">
-            {% for career in careers %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h5 class="card-title">{{ career.title }}</h5>
-                            <span class="badge bg-success">{{ career.match_score }}%</span>
-                        </div>
-                        
-                        <p class="card-text text-muted">{{ career.description|truncatewords:25 }}</p>
-                        
-                        {% if career.required_skills %}
-                        <div class="mb-3">
-                            <small class="text-muted d-block mb-1">Required Skills:</small>
-                            <div class="d-flex flex-wrap gap-1">
-                                {% for skill in career.required_skills|slice:":5" %}
-                                    <span class="badge bg-secondary">{{ skill }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endif %}
+ {% if careers %}
+ <div class="row">
+ {% for career in careers %}
+ <div class="col-md-6 col-lg-4 mb-4">
+ <div class="card h-100 shadow-sm">
+ <div class="card-body">
+ <div class="d-flex justify-content-between align-items-start mb-3">
+ <h5 class="card-title">{{ career.title }}</h5>
+ <span class="badge bg-success">{{ career.match_score }}%</span>
+ </div>
+ 
+ <p class="card-text text-muted">{{ career.description|truncatewords:25 }}</p>
+ 
+ {% if career.required_skills %}
+ <div class="mb-3">
+ <small class="text-muted d-block mb-1">Required Skills:</small>
+ <div class="d-flex flex-wrap gap-1">
+ {% for skill in career.required_skills|slice:":5" %}
+ <span class="badge bg-secondary">{{ skill }}</span>
+ {% endfor %}
+ </div>
+ </div>
+ {% endif %}
 
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <small class="text-muted">Avg Salary: ${{ career.average_salary|default:"N/A" }}</small>
-                            <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-info text-center">
-            <h4>No career recommendations yet</h4>
-            <p>Complete your profile with your interests, skills, and career goals to get personalized recommendations.</p>
-            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary mt-3">Complete Profile</a>
-        </div>
-    {% endif %}
+ <div class="d-flex justify-content-between align-items-center mt-3">
+ <small class="text-muted">Avg Salary: ${{ career.average_salary|default:"N/A" }}</small>
+ <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-primary">Learn More</a>
+ </div>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-info text-center">
+ <h4>No career recommendations yet</h4>
+ <p>Complete your profile with your interests, skills, and career goals to get personalized recommendations.</p>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary mt-3">Complete Profile</a>
+ </div>
+ {% endif %}
 
-    <!-- Match Explanation -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <h5>How are careers matched?</h5>
-                    <p class="mb-0">Our AI algorithm considers:</p>
-                    <ul>
-                        <li>Your selected major and academic interests</li>
-                        <li>Skills and competencies from your profile</li>
-                        <li>Career goals and preferences</li>
-                        <li>Industry trends and job market data</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+ <!-- Match Explanation -->
+ <div class="row mt-5">
+ <div class="col-12">
+ <div class="card bg-light">
+ <div class="card-body">
+ <h5>How are careers matched?</h5>
+ <p class="mb-0">Our AI algorithm considers:</p>
+ <ul>
+ <li>Your selected major and academic interests</li>
+ <li>Skills and competencies from your profile</li>
+ <li>Career goals and preferences</li>
+ <li>Industry trends and job market data</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+ </div>
 </div>
 {% endblock %}

@@ -6,120 +6,120 @@
 {% block content %}
 <div class="container mt-5">
 
-  <!-- Header -->
-  <div class="text-center mb-5">
-    <h2 class="fw-bold text-accent mb-3">🔍 Browse Portfolio Items</h2>
-    <p class="text-light">Discover projects, certifications, and milestones to boost your career</p>
-  </div>
+ <!-- Header -->
+ <div class="text-center mb-5">
+ <h2 class="fw-bold text-accent mb-3"><i class="bi bi-search"></i> Browse Portfolio Items</h2>
+ <p class="text-light">Discover projects, certifications, and milestones to boost your career</p>
+ </div>
 
-  <!-- Filters -->
-  <div class="card mb-4" style="background: rgba(255, 255, 255, 0.05);">
-    <div class="card-body">
-      <form method="GET" class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label text-accent">Filter by Type</label>
-          <select name="type" class="form-select" onchange="this.form.submit()">
-            <option value="">All Types</option>
-            {% for type_code, type_name in item_types %}
-              <option value="{{ type_code }}" {% if selected_type == type_code %}selected{% endif %}>
-                {{ type_name }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
+ <!-- Filters -->
+ <div class="card mb-4" style="background: rgba(255, 255, 255, 0.05);">
+ <div class="card-body">
+ <form method="GET" class="row g-3">
+ <div class="col-md-4">
+ <label class="form-label text-accent">Filter by Type</label>
+ <select name="type" class="form-select" onchange="this.form.submit()">
+ <option value="">All Types</option>
+ {% for type_code, type_name in item_types %}
+ <option value="{{ type_code }}" {% if selected_type == type_code %}selected{% endif %}>
+ {{ type_name }}
+ </option>
+ {% endfor %}
+ </select>
+ </div>
 
-        <div class="col-md-4">
-          <label class="form-label text-accent">Filter by Difficulty</label>
-          <select name="difficulty" class="form-select" onchange="this.form.submit()">
-            <option value="">All Levels</option>
-            <option value="BEGINNER" {% if selected_difficulty == 'BEGINNER' %}selected{% endif %}>Beginner</option>
-            <option value="INTERMEDIATE" {% if selected_difficulty == 'INTERMEDIATE' %}selected{% endif %}>Intermediate</option>
-            <option value="ADVANCED" {% if selected_difficulty == 'ADVANCED' %}selected{% endif %}>Advanced</option>
-          </select>
-        </div>
+ <div class="col-md-4">
+ <label class="form-label text-accent">Filter by Difficulty</label>
+ <select name="difficulty" class="form-select" onchange="this.form.submit()">
+ <option value="">All Levels</option>
+ <option value="BEGINNER" {% if selected_difficulty == 'BEGINNER' %}selected{% endif %}>Beginner</option>
+ <option value="INTERMEDIATE" {% if selected_difficulty == 'INTERMEDIATE' %}selected{% endif %}>Intermediate</option>
+ <option value="ADVANCED" {% if selected_difficulty == 'ADVANCED' %}selected{% endif %}>Advanced</option>
+ </select>
+ </div>
 
-        <div class="col-md-4 d-flex align-items-end">
-          <a href="{% url 'accounts:browse_portfolio' %}" class="btn btn-outline-secondary w-100">
-            Clear Filters
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
+ <div class="col-md-4 d-flex align-items-end">
+ <a href="{% url 'accounts:browse_portfolio' %}" class="btn btn-outline-secondary w-100">
+ Clear Filters
+ </a>
+ </div>
+ </form>
+ </div>
+ </div>
 
-  <!-- Back to Checklist Button -->
-  <div class="mb-4">
-    <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-outline-primary">
-      ← Back to My Checklist
-    </a>
-  </div>
+ <!-- Back to Checklist Button -->
+ <div class="mb-4">
+ <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-outline-primary">
+ ← Back to My Checklist
+ </a>
+ </div>
 
-  <!-- Portfolio Items Grid -->
-  <div class="row g-4">
-    {% for item_data in items %}
-      {% with item=item_data.item in_checklist=item_data.in_checklist %}
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 hover-card" style="border-top: 3px solid var(--tj-accent);">
-            <div class="card-body">
-              <!-- Type Badge -->
-              <div class="mb-2">
-                <span class="badge bg-primary">{{ item.get_item_type_display }}</span>
-                <span class="badge bg-secondary ms-1">{{ item.get_difficulty_level_display }}</span>
-              </div>
+ <!-- Portfolio Items Grid -->
+ <div class="row g-4">
+ {% for item_data in items %}
+ {% with item=item_data.item in_checklist=item_data.in_checklist %}
+ <div class="col-md-6 col-lg-4">
+ <div class="card h-100 hover-card" style="border-top: 3px solid var(--tj-accent);">
+ <div class="card-body">
+ <!-- Type Badge -->
+ <div class="mb-2">
+ <span class="badge bg-primary">{{ item.get_item_type_display }}</span>
+ <span class="badge bg-secondary ms-1">{{ item.get_difficulty_level_display }}</span>
+ </div>
 
-              <!-- Title -->
-              <h5 class="card-title text-accent mb-2">{{ item.title }}</h5>
+ <!-- Title -->
+ <h5 class="card-title text-accent mb-2">{{ item.title }}</h5>
 
-              <!-- Meta Info -->
-              <div class="mb-3">
-                <small class="text-muted">
-                  {% if item.estimated_hours %}
-                    ⏱️ ~{{ item.estimated_hours }} hours
-                  {% endif %}
-                </small>
-              </div>
+ <!-- Meta Info -->
+ <div class="mb-3">
+ <small class="text-muted">
+ {% if item.estimated_hours %}
+ ⏱ ~{{ item.estimated_hours }} hours
+ {% endif %}
+ </small>
+ </div>
 
-              <!-- Description -->
-              <p class="small mb-3">{{ item.description|truncatewords:25 }}</p>
+ <!-- Description -->
+ <p class="small mb-3">{{ item.description|truncatewords:25 }}</p>
 
-              <!-- Skills -->
-              {% if item.skills_gained %}
-                <div class="mb-3">
-                  <small class="text-accent fw-bold">Skills:</small><br>
-                  <small class="text-light">{{ item.skills_gained|truncatewords:8 }}</small>
-                </div>
-              {% endif %}
+ <!-- Skills -->
+ {% if item.skills_gained %}
+ <div class="mb-3">
+ <small class="text-accent fw-bold">Skills:</small><br>
+ <small class="text-light">{{ item.skills_gained|truncatewords:8 }}</small>
+ </div>
+ {% endif %}
 
-              <!-- Actions -->
-              <div class="d-flex gap-2 mt-auto">
-                <a href="{% url 'accounts:portfolio_item_detail' item.id %}"
-                   class="btn btn-sm btn-outline-primary flex-grow-1">
-                  View Details
-                </a>
+ <!-- Actions -->
+ <div class="d-flex gap-2 mt-auto">
+ <a href="{% url 'accounts:portfolio_item_detail' item.id %}"
+ class="btn btn-sm btn-outline-primary flex-grow-1">
+ View Details
+ </a>
 
-                {% if in_checklist %}
-                  <button class="btn btn-sm btn-success" disabled>
-                    ✓ In Checklist
-                  </button>
-                {% else %}
-                  <a href="{% url 'accounts:add_to_checklist' item.id %}"
-                     class="btn btn-sm btn-primary">
-                    ➕ Add
-                  </a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endwith %}
-    {% empty %}
-      <div class="col-12">
-        <div class="alert alert-info text-center">
-          No portfolio items found matching your filters.
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+ {% if in_checklist %}
+ <button class="btn btn-sm btn-success" disabled>
+ In Checklist
+ </button>
+ {% else %}
+ <a href="{% url 'accounts:add_to_checklist' item.id %}"
+ class="btn btn-sm btn-primary">
+ Add
+ </a>
+ {% endif %}
+ </div>
+ </div>
+ </div>
+ </div>
+ {% endwith %}
+ {% empty %}
+ <div class="col-12">
+ <div class="alert alert-info text-center">
+ No portfolio items found matching your filters.
+ </div>
+ </div>
+ {% endfor %}
+ </div>
 
 </div>
 {% endblock %}
