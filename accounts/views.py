@@ -303,6 +303,10 @@ def api_users(request):
 
     data = []
     for user in users.order_by("username"):
+        # Skip users without profiles (like superusers)
+        if not hasattr(user, 'profile'):
+            continue
+
         profile = user.profile
         data.append({
             "id": user.id,
