@@ -84,7 +84,7 @@ def add_to_checklist(request, item_id):
         priority='MEDIUM'
     )
 
-    messages.success(request, f"✅ Added {portfolio_item.title} to your checklist!")
+    messages.success(request, f"Added {portfolio_item.title} to your checklist!")
     return redirect('accounts:portfolio_checklist')
 
 

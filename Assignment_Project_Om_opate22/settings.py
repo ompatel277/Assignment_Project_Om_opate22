@@ -11,9 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # --- SECURITY ---
-SECRET_KEY = 'django-insecure-!fw%$(xv6=#(!j6prmygw_a+9uuh=n8gnk77b8hotyjdh@xik$'
-DEBUG = True
-ALLOWED_HOSTS = []  # Add "127.0.0.1" or "localhost" if needed
+# Use environment variables for sensitive settings
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-!fw%$(xv6=#(!j6prmygw_a+9uuh=n8gnk77b8hotyjdh@xik$'
+)
+
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 
 # --- INSTALLED APPS ---
@@ -112,8 +118,25 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # --- DEFAULT PRIMARY KEY ---
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# --- AUTHENTICATION ---
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'accounts:dashboard'
 LOGOUT_REDIRECT_URL = 'accounts:login'
+
+# --- APPLICATION SETTINGS ---
 ITEMS_PER_PAGE = 20
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# --- SECURITY SETTINGS (For Production) ---
+# These should be enabled in production by setting appropriate environment variables
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'

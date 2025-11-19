@@ -2,7 +2,7 @@ from django.db import models
 
 
 # ====================================
-# 🏫 College Model
+# College Model
 # ====================================
 class College(models.Model):
     college_name = models.CharField(max_length=300)  # Full college name
@@ -19,7 +19,7 @@ class College(models.Model):
 
 
 # ====================================
-# 🎓 Major Model
+# Major Model
 # ====================================
 class Major(models.Model):
     college = models.ForeignKey(
@@ -37,7 +37,7 @@ class Major(models.Model):
 
 
 # ====================================
-# 📚 Course Model
+# Course Model
 # ====================================
 class Course(models.Model):
     subject = models.CharField(max_length=10)  # e.g. "CS"
@@ -64,7 +64,7 @@ class Course(models.Model):
 
 
 # ====================================
-# 📖 Degree Requirement Category
+# Degree Requirement Category
 # ====================================
 class DegreeRequirementCategory(models.Model):
     major = models.ForeignKey(
@@ -84,7 +84,7 @@ class DegreeRequirementCategory(models.Model):
 
 
 # ====================================
-# ✅ Degree Requirement Item
+# Degree Requirement Item
 # ====================================
 class DegreeRequirementItem(models.Model):
     category = models.ForeignKey(
