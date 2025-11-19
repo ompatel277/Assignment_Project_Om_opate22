@@ -138,7 +138,9 @@ urlpatterns = [
     path("career-plans/", views.career_plans_list, name="career_plans_list"),
     path("career-plans/create/", views.career_plan_create, name="career_plan_create"),
     path("career-plans/<int:plan_id>/", views.career_plan_detail, name="career_plan_detail"),
+    path("career-plans/<int:plan_id>/edit/", views.career_plan_edit, name="career_plan_edit"),
     path("career-plans/<int:plan_id>/delete/", views.career_plan_delete, name="career_plan_delete"),
+    path("career-plans/<int:plan_id>/set-primary/", views.career_plan_set_primary, name="career_plan_set_primary"),
     path("career-plans/<int:plan_id>/add-item/", views.career_plan_add_item, name="career_plan_add_item"),
     path("plan-items/<int:item_id>/update-status/", views.plan_item_update_status, name="plan_item_update_status"),
 ]
