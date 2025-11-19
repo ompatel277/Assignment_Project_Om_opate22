@@ -20,18 +20,19 @@
  <h4 class="mb-0"><i class="bi bi-briefcase-fill"></i> Recommended Careers</h4>
  </div>
  <div class="card-body">
- {% if recommended_careers %}
+ {% if career_recommendations %}
  <div class="row">
- {% for career in recommended_careers %}
+ {% for rec in career_recommendations %}
  <div class="col-md-4 mb-3">
  <div class="card h-100 border-primary">
  <div class="card-body">
- <h5 class="card-title">{{ career.title }}</h5>
- <p class="card-text text-muted small">{{ career.description|truncatewords:20 }}</p>
+ <h5 class="card-title">{{ rec.career.title }}</h5>
+ <p class="card-text text-muted small">{{ rec.career.description|truncatewords:20 }}</p>
  <div class="mb-2">
- <span class="badge bg-success">Match: {{ career.match_score }}%</span>
+ <span class="badge bg-success">Match: {{ rec.match_score }}%</span>
  </div>
- <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+ <p class="small text-muted">{{ rec.reasoning|truncatewords:15 }}</p>
+ <a href="{% url 'careers:detail' rec.career.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
  </div>
  </div>
  </div>
@@ -56,18 +57,20 @@
  <h4 class="mb-0"><i class="bi bi-list-check"></i> Recommended Portfolio Items</h4>
  </div>
  <div class="card-body">
- {% if recommended_portfolio %}
+ {% if portfolio_recommendations %}
  <div class="row">
- {% for item in recommended_portfolio %}
+ {% for rec in portfolio_recommendations %}
  <div class="col-md-6 mb-3">
  <div class="card border-info">
  <div class="card-body">
- <h6 class="card-title">{{ item.title }}</h6>
- <p class="card-text small">{{ item.description|truncatewords:15 }}</p>
- <div class="d-flex justify-content-between align-items-center">
- <span class="badge bg-{{ item.category|lower }}">{{ item.category }}</span>
- <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-info">Add to Checklist</a>
+ <h6 class="card-title">{{ rec.item.title }}</h6>
+ <p class="card-text small">{{ rec.item.description|truncatewords:15 }}</p>
+ <div class="mb-2">
+ <span class="badge bg-info">{{ rec.item.get_item_type_display }}</span>
+ <span class="badge bg-secondary">{{ rec.item.get_difficulty_level_display }}</span>
+ <span class="badge bg-primary">Relevance: {{ rec.relevance_score }}</span>
  </div>
+ <p class="small text-muted">{{ rec.reasoning }}</p>
  </div>
  </div>
  </div>
@@ -89,13 +92,14 @@
  <h4 class="mb-0"><i class="bi bi-book-fill"></i> Recommended Courses</h4>
  </div>
  <div class="card-body">
- {% if recommended_courses %}
+ {% if course_recommendations %}
  <ul class="list-group list-group-flush">
- {% for course in recommended_courses %}
+ {% for rec in course_recommendations %}
  <li class="list-group-item d-flex justify-content-between align-items-center">
  <div>
- <strong>{{ course.subject }} {{ course.number }}</strong> - {{ course.title }}
- <br><small class="text-muted">{{ course.credits }} credits</small>
+ <strong>{{ rec.course.subject }} {{ rec.course.number }}</strong> - {{ rec.course.title }}
+ <br><small class="text-muted">{{ rec.course.credits }} credits</small>
+ <br><small class="text-info">{{ rec.reasoning }}</small>
  </div>
  </li>
  {% endfor %}
@@ -114,12 +118,13 @@
  <h4 class="mb-0"><i class="bi bi-bullseye"></i> Recommended Clubs</h4>
  </div>
  <div class="card-body">
- {% if recommended_clubs %}
+ {% if club_recommendations %}
  <ul class="list-group list-group-flush">
- {% for club in recommended_clubs %}
+ {% for rec in club_recommendations %}
  <li class="list-group-item">
- <strong>{{ club.name }}</strong>
- <br><small class="text-muted">{{ club.description|truncatewords:10 }}</small>
+ <strong>{{ rec.club.name }}</strong>
+ <br><small class="text-muted">{{ rec.club.description|truncatewords:10 }}</small>
+ <br><small class="text-warning">Relevance: {{ rec.relevance_score }} - {{ rec.reasoning }}</small>
  </li>
  {% endfor %}
  </ul>
