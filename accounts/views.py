@@ -13,10 +13,10 @@ from django.views import View
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin  # NEW FOR A11
 
-from .models import UserProfile, Club, CareerPath
+from .models import UserProfile, Club, CareerPath, CareerPlan, PlanItem, Course
 from .forms import SignupForm, LoginForm, UserProfileForm
 from .forms_auth import TrajectSignUpForm  # NEW FOR A11
-from colleges.models import College, Major, Course
+from colleges.models import College, Major
 
 # NEW IMPORTS for Week 9 (APIs + Charts)
 import json
@@ -878,3 +878,172 @@ function greet() { return 'Hello World!'; }"""
     else:
         return HttpResponse("<h1>Add ?q= to the URL</h1><p>Try: ?q=html, ?q=json, ?q=text, ?q=students</p>",
                             content_type='text/html')
+
+# =====================================================
+#  CAREER PLANNING VIEWS
+# =====================================================
+
+@login_required
+def career_plans_list(request):
+    """List all career plans for the current user."""
+    profile = request.user.profile
+    plans = CareerPlan.objects.filter(user_profile=profile)
+    
+    context = {
+        'plans': plans,
+        'profile': profile,
+    }
+    
+    return render(request, 'accounts/career_plans/list.html', context)
+
+
+@login_required
+def career_plan_create(request):
+    """Create a new career plan."""
+    from careers.models import Career
+    from accounts.models import CareerPlan
+    
+    if request.method == 'POST':
+        career_id = request.POST.get('career')
+        name = request.POST.get('name')
+        description = request.POST.get('description', '')
+        is_primary = request.POST.get('is_primary') == 'on'
+        
+        try:
+            career = Career.objects.get(id=career_id)
+            plan = CareerPlan.objects.create(
+                user_profile=request.user.profile,
+                target_career=career,
+                name=name,
+                description=description,
+                is_primary=is_primary
+            )
+            
+            if is_primary:
+                plan.set_as_primary()
+            
+            messages.success(request, f"Career plan '{name}' created successfully!")
+            return redirect('accounts:career_plan_detail', plan_id=plan.id)
+        except Career.DoesNotExist:
+            messages.error(request, "Selected career not found.")
+    
+    # Get top career recommendations for quick selection
+    from recommender.engine import RecommendationEngine
+    engine = RecommendationEngine(request.user.profile)
+    recommended_careers = engine.get_career_recommendations(limit=10)
+    
+    # Get all careers
+    from careers.models import Career
+    all_careers = Career.objects.all()
+    
+    context = {
+        'recommended_careers': recommended_careers,
+        'all_careers': all_careers,
+    }
+    
+    return render(request, 'accounts/career_plans/create.html', context)
+
+
+@login_required
+def career_plan_detail(request, plan_id):
+    """View and manage a specific career plan."""
+    from accounts.models import CareerPlan, PlanItem
+    from recommender.engine import RecommendationEngine
+    
+    plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
+    
+    # Get plan items
+    plan_items = plan.plan_items.all()
+    
+    # Get recommendations for this career
+    engine = RecommendationEngine(request.user.profile)
+    portfolio_recs = engine.get_portfolio_recommendations(limit=20)
+    course_recs = engine.get_course_recommendations(limit=10)
+    
+    # Calculate progress
+    progress = plan.get_progress_percentage()
+    
+    context = {
+        'plan': plan,
+        'plan_items': plan_items,
+        'portfolio_recs': portfolio_recs,
+        'course_recs': course_recs,
+        'progress': progress,
+    }
+    
+    return render(request, 'accounts/career_plans/detail.html', context)
+
+
+@login_required
+def career_plan_add_item(request, plan_id):
+    """Add an item to a career plan."""
+    from accounts.models import CareerPlan, PlanItem, PortfolioItem
+    
+    plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
+    
+    if request.method == 'POST':
+        item_type = request.POST.get('item_type')  # 'portfolio' or 'course' or 'custom'
+        priority = int(request.POST.get('priority', 5))
+        target_semester = request.POST.get('target_semester', '')
+        notes = request.POST.get('notes', '')
+        
+        plan_item = PlanItem(
+            career_plan=plan,
+            priority=priority,
+            target_semester=target_semester,
+            notes=notes
+        )
+        
+        if item_type == 'portfolio':
+            portfolio_item_id = request.POST.get('portfolio_item_id')
+            portfolio_item = PortfolioItem.objects.get(id=portfolio_item_id)
+            plan_item.portfolio_item = portfolio_item
+        elif item_type == 'course':
+            course_id = request.POST.get('course_id')
+            course = Course.objects.get(id=course_id)
+            plan_item.course = course
+        elif item_type == 'custom':
+            plan_item.custom_title = request.POST.get('custom_title')
+            plan_item.custom_description = request.POST.get('custom_description', '')
+        
+        plan_item.save()
+        messages.success(request, "Item added to your career plan!")
+        return redirect('accounts:career_plan_detail', plan_id=plan.id)
+    
+    return redirect('accounts:career_plan_detail', plan_id=plan.id)
+
+
+@login_required
+def career_plan_delete(request, plan_id):
+    """Delete a career plan."""
+    from accounts.models import CareerPlan
+    
+    plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
+    
+    if request.method == 'POST':
+        plan_name = plan.name
+        plan.delete()
+        messages.success(request, f"Career plan '{plan_name}' deleted successfully.")
+        return redirect('accounts:career_plans_list')
+    
+    return redirect('accounts:career_plan_detail', plan_id=plan.id)
+
+
+@login_required
+def plan_item_update_status(request, item_id):
+    """Update the status of a plan item."""
+    from accounts.models import PlanItem
+    
+    item = get_object_or_404(PlanItem, id=item_id, career_plan__user_profile=request.user.profile)
+    
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        if new_status in dict(PlanItem.STATUS_CHOICES):
+            item.status = new_status
+            if new_status == 'COMPLETED':
+                item.mark_completed()
+            else:
+                item.save()
+            messages.success(request, f"Status updated to {item.get_status_display()}")
+    
+    return redirect('accounts:career_plan_detail', plan_id=item.career_plan.id)

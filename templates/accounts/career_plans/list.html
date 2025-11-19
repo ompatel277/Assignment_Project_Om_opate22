@@ -1,0 +1,137 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}My Career Plans - Traject{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-5"><i class="bi bi-diagram-3"></i> My Career Plans</h1>
+            <p class="lead text-muted">Create and manage multiple career paths to explore your options</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'accounts:career_plan_create' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Create New Plan
+            </a>
+        </div>
+    </div>
+
+    {% if plans %}
+        <div class="row g-4">
+            {% for plan in plans %}
+                <div class="col-md-6">
+                    <div class="card h-100 {% if plan.is_primary %}border-primary{% endif %} shadow-sm">
+                        <div class="card-header {% if plan.is_primary %}bg-primary text-white{% else %}bg-light{% endif %}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">
+                                    {{ plan.name }}
+                                    {% if plan.is_primary %}
+                                        <span class="badge bg-success ms-2">Primary</span>
+                                    {% endif %}
+                                </h5>
+                                {% if not plan.is_active %}
+                                    <span class="badge bg-secondary">Inactive</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="text-muted mb-2">
+                                <i class="bi bi-briefcase"></i> Target Career
+                            </h6>
+                            <p class="fw-bold mb-3">{{ plan.target_career.title }}</p>
+
+                            {% if plan.description %}
+                                <p class="small text-muted">{{ plan.description|truncatewords:20 }}</p>
+                            {% endif %}
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <small class="text-muted">Progress</small>
+                                    <small class="fw-bold">{{ plan.get_progress_percentage }}%</small>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                         style="width: {{ plan.get_progress_percentage }}%"
+                                         aria-valuenow="{{ plan.get_progress_percentage }}"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-2 text-center mb-3">
+                                <div class="col-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body py-2">
+                                            <h6 class="mb-0">{{ plan.plan_items.count }}</h6>
+                                            <small class="text-muted">Items</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body py-2">
+                                            <h6 class="mb-0">{{ plan.plan_items.filter.status='COMPLETED'.count }}</h6>
+                                            <small class="text-muted">Completed</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <small class="text-muted">
+                                <i class="bi bi-calendar"></i> Created {{ plan.created_at|date:"M d, Y" }}
+                            </small>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'accounts:career_plan_detail' plan.id %}"
+                                   class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="bi bi-eye"></i> View Plan
+                                </a>
+                                <form method="post" action="{% url 'accounts:career_plan_delete' plan.id %}"
+                                      onsubmit="return confirm('Delete this plan?')" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-diagram-3 fs-1 text-muted mb-3 d-block"></i>
+                <h4 class="mb-3">No Career Plans Yet</h4>
+                <p class="text-muted mb-4">
+                    Create a career plan to map out your path to your dream job.<br>
+                    Compare multiple career options and track your progress!
+                </p>
+                <a href="{% url 'accounts:career_plan_create' %}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-plus-circle"></i> Create Your First Plan
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5><i class="bi bi-lightbulb"></i> Tips for Career Planning</h5>
+                    <ul class="mb-0">
+                        <li>Create multiple plans to explore different career paths</li>
+                        <li>Mark one plan as "Primary" to focus your efforts</li>
+                        <li>Add courses, certifications, and projects to each plan</li>
+                        <li>Track your progress and adjust as you learn more</li>
+                        <li>Compare plans side-by-side to make informed decisions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
