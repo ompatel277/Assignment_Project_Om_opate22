@@ -1036,12 +1036,56 @@ def career_plan_delete(request, plan_id):
 
 
 @login_required
+def career_plan_edit(request, plan_id):
+    """Edit a career plan."""
+    from accounts.models import CareerPlan
+    from careers.models import Career
+
+    plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
+
+    if request.method == 'POST':
+        plan.name = request.POST.get('name')
+        plan.description = request.POST.get('description', '')
+        plan.is_active = request.POST.get('is_active') == 'on'
+        plan.save()
+
+        messages.success(request, f"Career plan '{plan.name}' updated successfully!")
+        return redirect('accounts:career_plan_detail', plan_id=plan.id)
+
+    context = {
+        'plan': plan,
+    }
+
+    return render(request, 'accounts/career_plans/edit.html', context)
+
+
+@login_required
+def career_plan_set_primary(request, plan_id):
+    """Set a career plan as the primary plan."""
+    from accounts.models import CareerPlan
+
+    plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
+
+    if request.method == 'POST':
+        # Unset all other primary plans
+        CareerPlan.objects.filter(user_profile=request.user.profile).update(is_primary=False)
+
+        # Set this plan as primary
+        plan.is_primary = True
+        plan.save()
+
+        messages.success(request, f"'{plan.name}' is now your primary career plan!")
+
+    return redirect('accounts:career_plan_detail', plan_id=plan.id)
+
+
+@login_required
 def plan_item_update_status(request, item_id):
     """Update the status of a plan item."""
     from accounts.models import PlanItem
-    
+
     item = get_object_or_404(PlanItem, id=item_id, career_plan__user_profile=request.user.profile)
-    
+
     if request.method == 'POST':
         new_status = request.POST.get('status')
         if new_status in dict(PlanItem.STATUS_CHOICES):
@@ -1051,5 +1095,5 @@ def plan_item_update_status(request, item_id):
             else:
                 item.save()
             messages.success(request, f"Status updated to {item.get_status_display()}")
-    
+
     return redirect('accounts:career_plan_detail', plan_id=item.career_plan.id)

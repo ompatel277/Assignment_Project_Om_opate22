@@ -26,53 +26,58 @@
  </div>
  </div>
 
- {% if portfolio_items %}
+ {% if recommendations %}
  <div class="row">
- {% for item in portfolio_items %}
+ {% for rec in recommendations %}
+ {% with item=rec.item %}
  <div class="col-md-6 col-lg-4 mb-4">
- <div class="card h-100 shadow-sm border-{{ item.category|lower }}">
- <div class="card-header bg-{{ item.category|lower }} text-white">
- <span class="badge bg-light text-dark">{{ item.category }}</span>
+ <div class="card h-100 shadow-sm border-{{ item.item_type|lower }}">
+ <div class="card-header bg-{{ item.item_type|lower }} text-white">
+ <div class="d-flex justify-content-between align-items-center">
+ <span class="badge bg-light text-dark">{{ item.get_item_type_display }}</span>
+ <span class="badge bg-success">{{ rec.relevance_score }}% Match</span>
+ </div>
  </div>
  <div class="card-body">
  <h5 class="card-title">{{ item.title }}</h5>
- <p class="card-text">{{ item.description|truncatewords:20 }}</p>
- 
- {% if item.estimated_time %}
- <small class="text-muted d-block mb-2">
- ⏱ Est. Time: {{ item.estimated_time }}
- </small>
- {% endif %}
+ <p class="card-text small">{{ item.description|truncatewords:15 }}</p>
 
- {% if item.difficulty %}
- <small class="text-muted d-block mb-3">
- <i class="bi bi-graph-up"></i> Difficulty: {{ item.get_difficulty_display }}
- </small>
+ <div class="mb-2">
+ <span class="badge bg-secondary">{{ item.get_difficulty_level_display }}</span>
+ {% if item.estimated_hours %}
+ <span class="badge bg-info">~{{ item.estimated_hours }}h</span>
  {% endif %}
+ </div>
 
- {% if item.related_careers.all %}
  <div class="mb-3">
- <small class="text-muted d-block mb-1">Relevant for:</small>
- {% for career in item.related_careers.all|slice:":3" %}
- <span class="badge bg-secondary me-1">{{ career.title }}</span>
- {% endfor %}
+ <small class="text-muted"><strong>Why recommended:</strong></small>
+ <p class="small mb-0">{{ rec.reasoning|truncatewords:15 }}</p>
  </div>
- {% endif %}
 
- <div class="d-flex justify-content-between align-items-center">
- <a href="{% url 'accounts:portfolio_item_detail' item.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
- <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-primary">Add to List</a>
+ <div class="d-grid">
+ <form method="post" action="{% url 'accounts:add_portfolio_to_checklist' item.id %}">
+ {% csrf_token %}
+ <button type="submit" class="btn btn-sm btn-primary w-100">
+ <i class="bi bi-plus-circle"></i> Add to My Portfolio
+ </button>
+ </form>
  </div>
  </div>
  </div>
  </div>
+ {% endwith %}
  {% endfor %}
  </div>
  {% else %}
- <div class="alert alert-info text-center">
- <h4>No portfolio items found</h4>
- <p>Complete your profile to get personalized portfolio recommendations.</p>
- <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Update Profile</a>
+ <div class="card shadow-sm">
+ <div class="card-body text-center py-5">
+ <i class="bi bi-list-check fs-1 text-muted mb-3 d-block"></i>
+ <h4 class="mb-3">No Portfolio Recommendations Yet</h4>
+ <p class="text-muted">Complete your profile to get personalized portfolio recommendations!</p>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">
+ <i class="bi bi-pencil"></i> Update Profile
+ </a>
+ </div>
  </div>
  {% endif %}
 

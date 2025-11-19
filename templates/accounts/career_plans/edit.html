@@ -1,0 +1,75 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Edit {{ plan.name}} - Traject{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Back button and title -->
+            <div class="mb-4">
+                <a href="{% url 'accounts:career_plan_detail' plan.id %}" class="btn btn-sm btn-outline-secondary mb-2">
+                    <i class="bi bi-arrow-left"></i> Back to Plan
+                </a>
+                <h1 class="display-5"><i class="bi bi-pencil"></i> Edit Career Plan</h1>
+                <p class="text-muted">Update your career plan details</p>
+            </div>
+
+            <div class="card shadow-sm mb-4 border-primary">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="name" class="form-label fw-bold">Plan Name *</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   value="{{ plan.name }}" required>
+                            <small class="text-muted">Give your plan a descriptive name</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Description (Optional)</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ plan.description }}</textarea>
+                            <small class="text-muted">Why are you pursuing this career path?</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
+                                       {% if plan.is_active %}checked{% endif %}>
+                                <label class="form-check-label" for="is_active">
+                                    <strong>Keep this plan active</strong>
+                                    <br>
+                                    <small class="text-muted">Inactive plans won't appear in recommendations</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Save Changes
+                            </button>
+                            <a href="{% url 'accounts:career_plan_detail' plan.id %}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card border-info shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="bi bi-info-circle"></i> Note</h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">
+                        The target career for this plan is <strong>{{ plan.target_career.title }}</strong>.
+                        To change the target career, you'll need to create a new plan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
