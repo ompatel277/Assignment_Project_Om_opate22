@@ -131,4 +131,14 @@ urlpatterns = [
     # JSON Exports
     path("export/courses.json", views.export_courses_json, name="export_courses_json"),
     path("export/colleges.json", views.export_colleges_json, name="export_colleges_json"),
+
+    # =====================================================
+    #  CAREER PLANNING
+    # =====================================================
+    path("career-plans/", views.career_plans_list, name="career_plans_list"),
+    path("career-plans/create/", views.career_plan_create, name="career_plan_create"),
+    path("career-plans/<int:plan_id>/", views.career_plan_detail, name="career_plan_detail"),
+    path("career-plans/<int:plan_id>/delete/", views.career_plan_delete, name="career_plan_delete"),
+    path("career-plans/<int:plan_id>/add-item/", views.career_plan_add_item, name="career_plan_add_item"),
+    path("plan-items/<int:item_id>/update-status/", views.plan_item_update_status, name="plan_item_update_status"),
 ]
