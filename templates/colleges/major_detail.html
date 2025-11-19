@@ -4,118 +4,118 @@
 {% block content %}
 <div class="container mt-5">
 
-  <!-- Breadcrumb Navigation -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb bg-transparent px-0 mb-4">
-      <li class="breadcrumb-item">
-        <a href="{% url 'colleges:list' %}" class="text-white text-decoration-none">Colleges</a>
-      </li>
-      <li class="breadcrumb-item">
-        <a href="{% url 'colleges:detail' college.id %}" class="text-white text-decoration-none">
-          {{ college.abbreviation }}
-        </a>
-      </li>
-      <li class="breadcrumb-item active text-light" aria-current="page">
-        {{ major.name }}
-      </li>
-    </ol>
-  </nav>
+ <!-- Breadcrumb Navigation -->
+ <nav aria-label="breadcrumb">
+ <ol class="breadcrumb bg-transparent px-0 mb-4">
+ <li class="breadcrumb-item">
+ <a href="{% url 'colleges:list' %}" class="text-white text-decoration-none">Colleges</a>
+ </li>
+ <li class="breadcrumb-item">
+ <a href="{% url 'colleges:detail' college.id %}" class="text-white text-decoration-none">
+ {{ college.abbreviation }}
+ </a>
+ </li>
+ <li class="breadcrumb-item active text-light" aria-current="page">
+ {{ major.name }}
+ </li>
+ </ol>
+ </nav>
 
-  <!-- Major Header -->
-  <div class="text-center mb-4">
-    <h2 class="fw-bold">{{ major.name }}
-      {% if major.code %}
-        <span class="text-muted">({{ major.code }})</span>
-      {% endif %}
-    </h2>
-    <p class="text-muted">
-      {{ college.college_name }} – {{ college.city }}, {{ college.state }}
-    </p>
-  </div>
+ <!-- Major Header -->
+ <div class="text-center mb-4">
+ <h2 class="fw-bold">{{ major.name }}
+ {% if major.code %}
+ <span class="text-muted">({{ major.code }})</span>
+ {% endif %}
+ </h2>
+ <p class="text-muted">
+ {{ college.college_name }} – {{ college.city }}, {{ college.state }}
+ </p>
+ </div>
 
-  <hr>
+ <hr>
 
-  <!-- Degree Requirements Section -->
-  <h4 class="text-center mb-3">Degree Requirements</h4>
+ <!-- Degree Requirements Section -->
+ <h4 class="text-center mb-3">Degree Requirements</h4>
 
-  {% if categories %}
-    <div class="accordion" id="degreeAccordion">
-      {% for category in categories %}
-        <div class="accordion-item mb-2 shadow-sm">
-          <h6 class="accordion-header" id="heading-{{ category.id }}">
-            <button class="accordion-button collapsed fw-bold" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse-{{ category.id }}"
-                    aria-expanded="false"
-                    aria-controls="collapse-{{ category.id }}">
-              {{ category.name }}
-              {% if category.min_credits %}
-                <span class="text-muted ms-2">({{ category.min_credits }} credits minimum)</span>
-              {% endif %}
-            </button>
-          </h6>
-          <div id="collapse-{{ category.id }}" class="accordion-collapse collapse"
-               aria-labelledby="heading-{{ category.id }}">
-            <div class="accordion-body">
-              <ul class="list-group">
-                {% for item in category.items.all %}
-                  <li class="list-group-item">
-                    {% if item.course %}
-                      <!-- Course Trigger -->
-                      <a href="#" class="text-decoration-none fw-bold text-primary"
-                         data-bs-toggle="modal"
-                         data-bs-target="#courseModal-{{ item.course.id }}">
-                        {{ item.course.subject }} {{ item.course.number }}
-                      </a> – {{ item.course.title }}
-                      <span class="text-muted">({{ item.course.credits }} cr)</span>
+ {% if categories %}
+ <div class="accordion" id="degreeAccordion">
+ {% for category in categories %}
+ <div class="accordion-item mb-2 shadow-sm">
+ <h6 class="accordion-header" id="heading-{{ category.id }}">
+ <button class="accordion-button collapsed fw-bold" type="button"
+ data-bs-toggle="collapse"
+ data-bs-target="#collapse-{{ category.id }}"
+ aria-expanded="false"
+ aria-controls="collapse-{{ category.id }}">
+ {{ category.name }}
+ {% if category.min_credits %}
+ <span class="text-muted ms-2">({{ category.min_credits }} credits minimum)</span>
+ {% endif %}
+ </button>
+ </h6>
+ <div id="collapse-{{ category.id }}" class="accordion-collapse collapse"
+ aria-labelledby="heading-{{ category.id }}">
+ <div class="accordion-body">
+ <ul class="list-group">
+ {% for item in category.items.all %}
+ <li class="list-group-item">
+ {% if item.course %}
+ <!-- Course Trigger -->
+ <a href="#" class="text-decoration-none fw-bold text-primary"
+ data-bs-toggle="modal"
+ data-bs-target="#courseModal-{{ item.course.id }}">
+ {{ item.course.subject }} {{ item.course.number }}
+ </a> – {{ item.course.title }}
+ <span class="text-muted">({{ item.course.credits }} cr)</span>
 
-                      <!-- Modal -->
-                      <div class="modal fade" id="courseModal-{{ item.course.id }}" tabindex="-1"
-                           aria-labelledby="courseModalLabel-{{ item.course.id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content bg-light text-dark rounded-3 shadow-lg">
-                            <div class="modal-header bg-primary text-white">
-                              <h5 class="modal-title fw-bold" id="courseModalLabel-{{ item.course.id }}">
-                                {{ item.course.subject }} {{ item.course.number }} – {{ item.course.title }}
-                              </h5>
-                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                      aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <p><strong>Subject:</strong> {{ item.course.subject }}</p>
-                              <p><strong>Course Number:</strong> {{ item.course.number }}</p>
-                              <p><strong>Credits:</strong> {{ item.course.credits }}</p>
-                              <hr>
-                              <p class="text-muted small mb-0">
-                                No description yet — this can be added later when the course catalog sync feature is live.
-                              </p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    {% else %}
-                      {{ item.note }}
-                    {% endif %}
-                  </li>
-                {% empty %}
-                  <li class="list-group-item text-muted">No courses listed yet.</li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p class="text-muted text-center">No degree requirements found for this major.</p>
-  {% endif %}
+ <!-- Modal -->
+ <div class="modal fade" id="courseModal-{{ item.course.id }}" tabindex="-1"
+ aria-labelledby="courseModalLabel-{{ item.course.id }}" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered">
+ <div class="modal-content bg-light text-dark rounded-3 shadow-lg">
+ <div class="modal-header bg-primary text-white">
+ <h5 class="modal-title fw-bold" id="courseModalLabel-{{ item.course.id }}">
+ {{ item.course.subject }} {{ item.course.number }} – {{ item.course.title }}
+ </h5>
+ <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+ aria-label="Close"></button>
+ </div>
+ <div class="modal-body">
+ <p><strong>Subject:</strong> {{ item.course.subject }}</p>
+ <p><strong>Course Number:</strong> {{ item.course.number }}</p>
+ <p><strong>Credits:</strong> {{ item.course.credits }}</p>
+ <hr>
+ <p class="text-muted small mb-0">
+ No description yet — this can be added later when the course catalog sync feature is live.
+ </p>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ {% else %}
+ {{ item.note }}
+ {% endif %}
+ </li>
+ {% empty %}
+ <li class="list-group-item text-muted">No courses listed yet.</li>
+ {% endfor %}
+ </ul>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <p class="text-muted text-center">No degree requirements found for this major.</p>
+ {% endif %}
 
-  <div class="text-center mt-4">
-    <a href="{% url 'colleges:detail' college.id %}" class="btn btn-outline-light">← Back to {{ college.abbreviation }}</a>
-  </div>
+ <div class="text-center mt-4">
+ <a href="{% url 'colleges:detail' college.id %}" class="btn btn-outline-light">← Back to {{ college.abbreviation }}</a>
+ </div>
 
 </div>
 {% endblock %}

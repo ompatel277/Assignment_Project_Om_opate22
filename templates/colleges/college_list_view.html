@@ -4,51 +4,51 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h2 class="fw-bold mb-4 text-primary">🎓 Colleges — Base Class-Based View</h2>
+ <h2 class="fw-bold mb-4 text-primary"><i class="bi bi-mortarboard-fill"></i> Colleges — Base Class-Based View</h2>
 
-  {% if colleges %}
-    <div class="card shadow-sm hover-card">
-      <div class="card-header bg-primary text-white fw-semibold">
-        College Directory
-      </div>
-      <div class="card-body p-0">
-        <table class="table table-hover align-middle mb-0">
-          <thead class="table-light">
-            <tr>
-              <th>Name</th>
-              <th>Abbr</th>
-              <th>Location</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for college in colleges %}
-              <tr>
-                <td class="fw-semibold text-dark">{{ college.college_name }}</td>
-                <td class="text-primary">{{ college.abbreviation }}</td>
-                <td>{{ college.city }}, {{ college.state }}</td>
-                <td class="text-end">
-                  <a href="{% url 'colleges:detail' college.pk %}"
-                     class="btn btn-sm btn-outline-primary">
-                    View
-                  </a>
-                </td>
-              </tr>
-            {% empty %}
-              <tr>
-                <td colspan="4" class="text-center text-muted p-3">
-                  No colleges found.
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  {% else %}
-    <div class="alert alert-info mt-4">
-      No colleges available yet.
-    </div>
-  {% endif %}
+ {% if colleges %}
+ <div class="card shadow-sm hover-card">
+ <div class="card-header bg-primary text-white fw-semibold">
+ College Directory
+ </div>
+ <div class="card-body p-0">
+ <table class="table table-hover align-middle mb-0">
+ <thead class="table-light">
+ <tr>
+ <th>Name</th>
+ <th>Abbr</th>
+ <th>Location</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ {% for college in colleges %}
+ <tr>
+ <td class="fw-semibold text-dark">{{ college.college_name }}</td>
+ <td class="text-primary">{{ college.abbreviation }}</td>
+ <td>{{ college.city }}, {{ college.state }}</td>
+ <td class="text-end">
+ <a href="{% url 'colleges:detail' college.pk %}"
+ class="btn btn-sm btn-outline-primary">
+ View
+ </a>
+ </td>
+ </tr>
+ {% empty %}
+ <tr>
+ <td colspan="4" class="text-center text-muted p-3">
+ No colleges found.
+ </td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+ </div>
+ </div>
+ {% else %}
+ <div class="alert alert-info mt-4">
+ No colleges available yet.
+ </div>
+ {% endif %}
 </div>
 {% endblock %}

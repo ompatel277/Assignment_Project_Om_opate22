@@ -3,24 +3,24 @@
 
 {% block content %}
 <div class="container mt-5" style="max-width: 700px;">
-  <h2 class="fw-bold text-info mb-4">🏗️ Add a Major (CBV Example)</h2>
+ <h2 class="fw-bold text-info mb-4"><i class="bi bi-tools"></i> Add a Major (CBV Example)</h2>
 
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
+ <form method="post" novalidate>
+ {% csrf_token %}
+ {{ form.as_p }}
 
-    <div class="d-grid gap-2 mt-4">
-      <button type="submit" class="btn btn-info text-dark fw-semibold">💾 Submit (CBV)</button>
-      <a href="{% url 'colleges:list' %}" class="btn btn-outline-secondary">Cancel</a>
-    </div>
-  </form>
+ <div class="d-grid gap-2 mt-4">
+ <button type="submit" class="btn btn-info text-dark fw-semibold"><i class="bi bi-save"></i> Submit (CBV)</button>
+ <a href="{% url 'colleges:list' %}" class="btn btn-outline-secondary">Cancel</a>
+ </div>
+ </form>
 
-  {% if messages %}
-    <div class="mt-4">
-      {% for message in messages %}
-        <div class="alert alert-info">{{ message }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
+ {% if messages %}
+ <div class="mt-4">
+ {% for message in messages %}
+ <div class="alert alert-info">{{ message }}</div>
+ {% endfor %}
+ </div>
+ {% endif %}
 </div>
 {% endblock %}

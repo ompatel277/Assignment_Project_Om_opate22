@@ -4,398 +4,398 @@
 
 <html lang="en" data-bs-theme="dark">
 
-  <head>
+ <head>
 
-    <meta charset="UTF-8" />
+ <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Traject | {% block title %}Dashboard{% endblock %}</title>
+ <title>Traject | {% block title %}Dashboard{% endblock %}</title>
 
 
 
-    <!-- Bootstrap CSS -->
+ <!-- Bootstrap CSS -->
 
-    <link
+ <link
 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 
-      rel="stylesheet"
+ rel="stylesheet"
 
-    >
+ >
 
 
 
-    <!-- Bootstrap Icons -->
+ <!-- Bootstrap Icons -->
 
-    <link
+ <link
 
-      rel="stylesheet"
+ rel="stylesheet"
 
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 
-    >
+ >
 
 
 
-    <!-- Traject Theme -->
+ <!-- Traject Theme -->
 
-    <link rel="stylesheet" href="{% static 'css/traject.css' %}">
+ <link rel="stylesheet" href="{% static 'css/traject.css' %}">
 
 
 
-    <!-- Optional Favicon -->
+ <!-- Optional Favicon -->
 
-    <link rel="icon" href="{% static 'images/favicon.png' %}">
+ <link rel="icon" href="{% static 'images/favicon.png' %}">
 
-  </head>
+ </head>
 
 
 
-  <body class="traject-bg d-flex flex-column min-vh-100">
+ <body class="traject-bg d-flex flex-column min-vh-100">
 
-    <!-- Navbar -->
+ <!-- Navbar -->
 
-    <nav class="navbar navbar-expand-lg traject-navbar py-3">
+ <nav class="navbar navbar-expand-lg traject-navbar py-3">
 
-      <div class="container">
+ <div class="container">
 
-        <a class="navbar-brand fw-bold text-accent" href="/">
+ <a class="navbar-brand fw-bold text-accent" href="/">
 
-          <i class="bi bi-rocket-takeoff"></i> Traject
+ <i class="bi bi-rocket-takeoff"></i> Traject
 
-        </a>
+ </a>
 
 
 
-        <button
+ <button
 
-          class="navbar-toggler"
+ class="navbar-toggler"
 
-          type="button"
+ type="button"
 
-          data-bs-toggle="collapse"
+ data-bs-toggle="collapse"
 
-          data-bs-target="#navbarNav"
+ data-bs-target="#navbarNav"
 
-        >
+ >
 
-          <span class="navbar-toggler-icon"></span>
+ <span class="navbar-toggler-icon"></span>
 
-        </button>
+ </button>
 
 
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+ <div class="collapse navbar-collapse" id="navbarNav">
 
-          <ul class="navbar-nav ms-auto align-items-center gap-2">
+ <ul class="navbar-nav ms-auto align-items-center gap-2">
 
-            {% if user.is_authenticated %}
+ {% if user.is_authenticated %}
 
-              <!-- Dashboard -->
+ <!-- Dashboard -->
 
-              <li class="nav-item">
+ <li class="nav-item">
 
-                <a class="nav-link" href="{% url 'accounts:dashboard' %}">
+ <a class="nav-link" href="{% url 'accounts:dashboard' %}">
 
-                  <i class="bi bi-speedometer2"></i> Dashboard
+ <i class="bi bi-speedometer2"></i> Dashboard
 
-                </a>
+ </a>
 
-              </li>
+ </li>
 
 
 
-              <!-- Explore Dropdown -->
+ <!-- Explore Dropdown -->
 
-              <li class="nav-item dropdown">
+ <li class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+ <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
 
-                  <i class="bi bi-compass"></i> Explore
+ <i class="bi bi-compass"></i> Explore
 
-                </a>
+ </a>
 
-                <ul class="dropdown-menu">
+ <ul class="dropdown-menu">
 
-                  <li><a class="dropdown-item" href="{% url 'colleges:list' %}"><i class="bi bi-building"></i> Colleges</a></li>
+ <li><a class="dropdown-item" href="{% url 'colleges:list' %}"><i class="bi bi-building"></i> Colleges</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'careers:list' %}"><i class="bi bi-briefcase"></i> Careers</a></li>
+ <li><a class="dropdown-item" href="{% url 'careers:list' %}"><i class="bi bi-briefcase"></i> Careers</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'catalog:courses' %}"><i class="bi bi-journal-text"></i> Courses</a></li>
+ <li><a class="dropdown-item" href="{% url 'catalog:courses' %}"><i class="bi bi-journal-text"></i> Courses</a></li>
 
-                  {% comment %}
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'clubs:list' %}"><i class="bi bi-people"></i> Clubs</a></li>
-                  {% endcomment %}
-                  <!-- TODO: Add clubs list view and URL pattern -->
+ {% comment %}
+ <li><hr class="dropdown-divider"></li>
+ <li><a class="dropdown-item" href="{% url 'clubs:list' %}"><i class="bi bi-people"></i> Clubs</a></li>
+ {% endcomment %}
+ <!-- TODO: Add clubs list view and URL pattern -->
 
-                </ul>
+ </ul>
 
-              </li>
+ </li>
 
 
 
-              <!-- Recommender Dropdown -->
+ <!-- Recommender Dropdown -->
 
-              <li class="nav-item dropdown">
+ <li class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+ <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
 
-                  <i class="bi bi-stars"></i> AI Recommender
+ <i class="bi bi-stars"></i> AI Recommender
 
-                </a>
+ </a>
 
-                <ul class="dropdown-menu">
+ <ul class="dropdown-menu">
 
-                  <li><a class="dropdown-item" href="{% url 'recommender:dashboard' %}"><i class="bi bi-grid"></i> Overview</a></li>
+ <li><a class="dropdown-item" href="{% url 'recommender:dashboard' %}"><i class="bi bi-grid"></i> Overview</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'recommender:careers' %}"><i class="bi bi-briefcase"></i> Career Matches</a></li>
+ <li><a class="dropdown-item" href="{% url 'recommender:careers' %}"><i class="bi bi-briefcase"></i> Career Matches</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'recommender:portfolio' %}"><i class="bi bi-star"></i> Portfolio Tips</a></li>
+ <li><a class="dropdown-item" href="{% url 'recommender:portfolio' %}"><i class="bi bi-star"></i> Portfolio Tips</a></li>
 
-                  <li><hr class="dropdown-divider"></li>
+ <li><hr class="dropdown-divider"></li>
 
-                  <li><a class="dropdown-item" href="{% url 'recommender:roadmap' %}"><i class="bi bi-map"></i> My Roadmap</a></li>
+ <li><a class="dropdown-item" href="{% url 'recommender:roadmap' %}"><i class="bi bi-map"></i> My Roadmap</a></li>
 
-                </ul>
+ </ul>
 
-              </li>
+ </li>
 
 
 
-              <!-- Profile Dropdown -->
+ <!-- Profile Dropdown -->
 
-              <li class="nav-item dropdown">
+ <li class="nav-item dropdown">
 
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+ <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
 
-                  <i class="bi bi-person-circle"></i> Profile
+ <i class="bi bi-person-circle"></i> Profile
 
-                </a>
+ </a>
 
-                <ul class="dropdown-menu">
+ <ul class="dropdown-menu">
 
-                  <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="bi bi-person"></i> View Profile</a></li>
+ <li><a class="dropdown-item" href="{% url 'accounts:profile' %}"><i class="bi bi-person"></i> View Profile</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' %}"><i class="bi bi-pencil"></i> Edit Profile</a></li>
+ <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' %}"><i class="bi bi-pencil"></i> Edit Profile</a></li>
 
-                  <li><hr class="dropdown-divider"></li>
+ <li><hr class="dropdown-divider"></li>
 
-                  <li><a class="dropdown-item" href="{% url 'accounts:portfolio_checklist' %}"><i class="bi bi-list-check"></i> My Portfolio</a></li>
+ <li><a class="dropdown-item" href="{% url 'accounts:portfolio_checklist' %}"><i class="bi bi-list-check"></i> My Portfolio</a></li>
 
-                  <li><a class="dropdown-item" href="{% url 'accounts:browse_portfolio' %}"><i class="bi bi-collection"></i> Browse Portfolios</a></li>
+ <li><a class="dropdown-item" href="{% url 'accounts:browse_portfolio' %}"><i class="bi bi-collection"></i> Browse Portfolios</a></li>
 
-                </ul>
+ </ul>
 
-              </li>
+ </li>
 
 
 
-              <!-- Reports -->
+ <!-- Reports -->
 
-              <li class="nav-item">
+ <li class="nav-item">
 
-                <a class="nav-link" href="{% url 'accounts:reports' %}">
+ <a class="nav-link" href="{% url 'accounts:reports' %}">
 
-                  <i class="bi bi-file-earmark-bar-graph"></i> Reports
+ <i class="bi bi-file-earmark-bar-graph"></i> Reports
 
-                </a>
+ </a>
 
-              </li>
+ </li>
 
 
 
-              <!-- Logout -->
+ <!-- Logout -->
 
-              <li class="nav-item">
+ <li class="nav-item">
 
-                <a class="nav-link fw-semibold text-accent-dark" href="{% url 'accounts:logout' %}">
+ <a class="nav-link fw-semibold text-accent-dark" href="{% url 'accounts:logout' %}">
 
-                  <i class="bi bi-box-arrow-right"></i> Logout
+ <i class="bi bi-box-arrow-right"></i> Logout
 
-                </a>
+ </a>
 
-              </li>
+ </li>
 
 
 
-              <!-- User Badges -->
+ <!-- User Badges -->
 
-              {% if user.profile.college %}
+ {% if user.profile.college %}
 
-                <li class="nav-item">
+ <li class="nav-item">
 
-                  <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your College">
+ <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your College">
 
-                    {{ user.profile.college.abbreviation }}
+ {{ user.profile.college.abbreviation }}
 
-                  </span>
+ </span>
 
-                </li>
+ </li>
 
-              {% endif %}
+ {% endif %}
 
-              {% if user.profile.major %}
+ {% if user.profile.major %}
 
-                <li class="nav-item">
+ <li class="nav-item">
 
-                  <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your Major">
+ <span class="badge bg-accent text-dark" data-bs-toggle="tooltip" title="Your Major">
 
-                    {{ user.profile.major.name }}
+ {{ user.profile.major.name }}
 
-                  </span>
+ </span>
 
-                </li>
+ </li>
 
-              {% endif %}
+ {% endif %}
 
-            {% else %}
+ {% else %}
 
-              <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
+ <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
 
-              <li class="nav-item">
+ <li class="nav-item">
 
-                <a class="btn btn-accent btn-sm" href="{% url 'accounts:signup' %}">Sign Up</a>
+ <a class="btn btn-accent btn-sm" href="{% url 'accounts:signup' %}">Sign Up</a>
 
-              </li>
+ </li>
 
-            {% endif %}
+ {% endif %}
 
-          </ul>
+ </ul>
 
-        </div>
+ </div>
 
-      </div>
+ </div>
 
-    </nav>
+ </nav>
 
 
 
-    <!-- Main -->
+ <!-- Main -->
 
-    <main class="flex-grow-1 py-5">
+ <main class="flex-grow-1 py-5">
 
-      <div class="container">
+ <div class="container">
 
-        {% if messages %}
+ {% if messages %}
 
-          <div class="mb-3">
+ <div class="mb-3">
 
-            {% for message in messages %}
+ {% for message in messages %}
 
-              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+ <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
 
-                {{ message }}
+ {{ message }}
 
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+ <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
-              </div>
+ </div>
 
-            {% endfor %}
+ {% endfor %}
 
-          </div>
+ </div>
 
-        {% endif %}
+ {% endif %}
 
-        {% block content %}{% endblock %}
+ {% block content %}{% endblock %}
 
-      </div>
+ </div>
 
-    </main>
+ </main>
 
 
 
-    <!-- Footer -->
+ <!-- Footer -->
 
-    <footer class="footer text-center py-4 border-top">
+ <footer class="footer text-center py-4 border-top">
 
-      <div class="container">
+ <div class="container">
 
-        <div class="row mb-3">
+ <div class="row mb-3">
 
-          <div class="col-md-4 mb-3 mb-md-0">
+ <div class="col-md-4 mb-3 mb-md-0">
 
-            <h6 class="text-accent fw-bold">Quick Links</h6>
+ <h6 class="text-accent fw-bold">Quick Links</h6>
 
-            <ul class="list-unstyled small">
+ <ul class="list-unstyled small">
 
-              <li><a href="{% url 'colleges:list' %}" class="text-decoration-none">Colleges</a></li>
+ <li><a href="{% url 'colleges:list' %}" class="text-decoration-none">Colleges</a></li>
 
-              <li><a href="{% url 'careers:list' %}" class="text-decoration-none">Careers</a></li>
+ <li><a href="{% url 'careers:list' %}" class="text-decoration-none">Careers</a></li>
 
-              <li><a href="{% url 'catalog:courses' %}" class="text-decoration-none">Courses</a></li>
+ <li><a href="{% url 'catalog:courses' %}" class="text-decoration-none">Courses</a></li>
 
-            </ul>
+ </ul>
 
-          </div>
+ </div>
 
-          <div class="col-md-4 mb-3 mb-md-0">
+ <div class="col-md-4 mb-3 mb-md-0">
 
-            <h6 class="text-accent fw-bold">Tools</h6>
+ <h6 class="text-accent fw-bold">Tools</h6>
 
-            <ul class="list-unstyled small">
+ <ul class="list-unstyled small">
 
-              {% if user.is_authenticated %}
+ {% if user.is_authenticated %}
 
-                <li><a href="{% url 'recommender:dashboard' %}" class="text-decoration-none">AI Recommender</a></li>
+ <li><a href="{% url 'recommender:dashboard' %}" class="text-decoration-none">AI Recommender</a></li>
 
-                <li><a href="{% url 'accounts:reports' %}" class="text-decoration-none">Reports</a></li>
+ <li><a href="{% url 'accounts:reports' %}" class="text-decoration-none">Reports</a></li>
 
-              {% else %}
+ {% else %}
 
-                <li><a href="{% url 'accounts:login' %}" class="text-decoration-none">Login</a></li>
+ <li><a href="{% url 'accounts:login' %}" class="text-decoration-none">Login</a></li>
 
-                <li><a href="{% url 'accounts:signup' %}" class="text-decoration-none">Sign Up</a></li>
+ <li><a href="{% url 'accounts:signup' %}" class="text-decoration-none">Sign Up</a></li>
 
-              {% endif %}
+ {% endif %}
 
-            </ul>
+ </ul>
 
-          </div>
+ </div>
 
-          <div class="col-md-4">
+ <div class="col-md-4">
 
-            <h6 class="text-accent fw-bold">About</h6>
+ <h6 class="text-accent fw-bold">About</h6>
 
-            <p class="small mb-0">Empowering Students to Navigate Their Future</p>
+ <p class="small mb-0">Empowering Students to Navigate Their Future</p>
 
-          </div>
+ </div>
 
-        </div>
+ </div>
 
-        <p class="mb-0 small">&copy; {% now "Y" %} Traject <i class="bi bi-rocket-takeoff"></i></p>
+ <p class="mb-0 small">&copy; {% now "Y" %} Traject <i class="bi bi-rocket-takeoff"></i></p>
 
-      </div>
+ </div>
 
-    </footer>
+ </footer>
 
 
 
-    <!-- Bootstrap Bundle -->
+ <!-- Bootstrap Bundle -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
-    <!-- Initialize Tooltips -->
+ <!-- Initialize Tooltips -->
 
-    <script>
+ <script>
 
-      document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
 
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+ const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 
-        tooltipTriggerList.map(function (tooltipTriggerEl) {
+ tooltipTriggerList.map(function (tooltipTriggerEl) {
 
-          return new bootstrap.Tooltip(tooltipTriggerEl);
+ return new bootstrap.Tooltip(tooltipTriggerEl);
 
-        });
+ });
 
-      });
+ });
 
-    </script>
+ </script>
 
-  </body>
+ </body>
 
 </html>

@@ -4,131 +4,131 @@
 
 {% block content %}
 <style>
-  /* ===== Hero Section Styling ===== */
-  .tj-hero {
-    min-height: 85vh;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    color: #c5c6c7;
-    background: radial-gradient(
-      circle at 80% 20%,
-      rgba(102, 252, 241, 0.1),
-      rgba(31, 40, 51, 0.95)
-    );
-  }
+ /* ===== Hero Section Styling ===== */
+ .tj-hero {
+ min-height: 85vh;
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: center;
+ padding: 2rem 1rem;
+ color: #c5c6c7;
+ background: radial-gradient(
+ circle at 80% 20%,
+ rgba(102, 252, 241, 0.1),
+ rgba(31, 40, 51, 0.95)
+ );
+ }
 
-  .tj-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: #66fcf1;
-    text-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
-    line-height: 1.2;
-  }
+ .tj-title {
+ font-size: 3.5rem;
+ font-weight: 800;
+ color: #66fcf1;
+ text-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+ line-height: 1.2;
+ }
 
-  .tj-subtitle {
-    font-size: 1.25rem;
-    color: #c5c6c7;
-    margin-top: 1.2rem;
-    max-width: 600px;
-    line-height: 1.6;
-  }
+ .tj-subtitle {
+ font-size: 1.25rem;
+ color: #c5c6c7;
+ margin-top: 1.2rem;
+ max-width: 600px;
+ line-height: 1.6;
+ }
 
-  .tj-cta,
-  .tj-ghost {
-    display: inline-block;
-    padding: 0.9rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
+ .tj-cta,
+ .tj-ghost {
+ display: inline-block;
+ padding: 0.9rem 2rem;
+ border-radius: 50px;
+ font-weight: 600;
+ text-decoration: none;
+ transition: all 0.3s ease;
+ }
 
-  .tj-cta {
-    background: #66fcf1;
-    color: #0b0c10;
-    border: none;
-    box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
-  }
+ .tj-cta {
+ background: #66fcf1;
+ color: #0b0c10;
+ border: none;
+ box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+ }
 
-  .tj-cta:hover {
-    background: #45a29e;
-    color: #0b0c10;
-    transform: scale(1.05);
-    box-shadow: 0 0 35px rgba(102, 252, 241, 0.6);
-  }
+ .tj-cta:hover {
+ background: #45a29e;
+ color: #0b0c10;
+ transform: scale(1.05);
+ box-shadow: 0 0 35px rgba(102, 252, 241, 0.6);
+ }
 
-  .tj-ghost {
-    border: 2px solid #66fcf1;
-    color: #66fcf1;
-    background: transparent;
-  }
+ .tj-ghost {
+ border: 2px solid #66fcf1;
+ color: #66fcf1;
+ background: transparent;
+ }
 
-  .tj-ghost:hover {
-    background: #66fcf1;
-    color: #0b0c10;
-    box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
-  }
+ .tj-ghost:hover {
+ background: #66fcf1;
+ color: #0b0c10;
+ box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+ }
 
-  @media (max-width: 768px) {
-    .tj-title {
-      font-size: 2.6rem;
-      text-align: center;
-    }
-    .tj-subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-    }
-    .tj-hero {
-      text-align: center;
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
+ @media (max-width: 768px) {
+ .tj-title {
+ font-size: 2.6rem;
+ text-align: center;
+ }
+ .tj-subtitle {
+ text-align: center;
+ font-size: 1.1rem;
+ }
+ .tj-hero {
+ text-align: center;
+ flex-direction: column;
+ justify-content: center;
+ }
+ }
 </style>
 
 <main class="tj-hero container-xxl">
-  <div class="text-center">
-    <h1 class="tj-title">Chart Your<br>Path to Success</h1>
-    <p class="tj-subtitle mx-auto">
-      Navigate your college and career journey with personalized insights,
-      interactive tools, and step-by-step guidance — designed to help you
-      visualize your future, one milestone at a time.
-    </p>
-    <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
-      <a class="tj-cta" href="{% url 'accounts:signup' %}">Get Started</a>
-      <a class="tj-ghost" href="{% url 'colleges:list' %}">Explore Colleges</a>
-    </div>
-    <div class="mt-4">
-      <p class="text-muted small">
-        Already have an account?
-        <a href="{% url 'accounts:login' %}" class="text-accent text-decoration-none fw-semibold">
-          Log in here
-        </a>.
-      </p>
-    </div>
-  </div>
+ <div class="text-center">
+ <h1 class="tj-title">Chart Your<br>Path to Success</h1>
+ <p class="tj-subtitle mx-auto">
+ Navigate your college and career journey with personalized insights,
+ interactive tools, and step-by-step guidance — designed to help you
+ visualize your future, one milestone at a time.
+ </p>
+ <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
+ <a class="tj-cta" href="{% url 'accounts:signup' %}">Get Started</a>
+ <a class="tj-ghost" href="{% url 'colleges:list' %}">Explore Colleges</a>
+ </div>
+ <div class="mt-4">
+ <p class="text-muted small">
+ Already have an account?
+ <a href="{% url 'accounts:login' %}" class="text-accent text-decoration-none fw-semibold">
+ Log in here
+ </a>.
+ </p>
+ </div>
+ </div>
 </main>
-    <div class="container mt-5 pb-5">
-  <div class="row g-4">
-    <div class="col-md-4 text-center">
-      <div class="fs-1 mb-3">🎯</div>
-      <h4 class="text-accent">Career Matching</h4>
-      <p class="text-light">AI-powered recommendations based on your skills and interests</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <div class="fs-1 mb-3">📋</div>
-      <h4 class="text-accent">Portfolio Tracking</h4>
-      <p class="text-light">Track projects, certifications, and milestones</p>
-    </div>
-    <div class="col-md-4 text-center">
-      <div class="fs-1 mb-3">🗺️</div>
-      <h4 class="text-accent">Semester Planning</h4>
-      <p class="text-light">Personalized roadmap from freshman to graduation</p>
-    </div>
-  </div>
+ <div class="container mt-5 pb-5">
+ <div class="row g-4">
+ <div class="col-md-4 text-center">
+ <div class="fs-1 mb-3"><i class="bi bi-target"></i></div>
+ <h4 class="text-accent">Career Matching</h4>
+ <p class="text-light">AI-powered recommendations based on your skills and interests</p>
+ </div>
+ <div class="col-md-4 text-center">
+ <div class="fs-1 mb-3"><i class="bi bi-list-check"></i></div>
+ <h4 class="text-accent">Portfolio Tracking</h4>
+ <p class="text-light">Track projects, certifications, and milestones</p>
+ </div>
+ <div class="col-md-4 text-center">
+ <div class="fs-1 mb-3"><i class="bi bi-map"></i></div>
+ <h4 class="text-accent">Semester Planning</h4>
+ <p class="text-light">Personalized roadmap from freshman to graduation</p>
+ </div>
+ </div>
 </div>
 
 {% endblock %}

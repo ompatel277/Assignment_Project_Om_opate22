@@ -5,94 +5,94 @@
 
 {% block content %}
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h1 class="display-5">📋 Recommended Portfolio Items</h1>
-            <p class="lead text-muted">Build your portfolio with these curated activities and achievements</p>
-        </div>
-    </div>
+ <div class="row mb-4">
+ <div class="col-12">
+ <h1 class="display-5"><i class="bi bi-list-check"></i> Recommended Portfolio Items</h1>
+ <p class="lead text-muted">Build your portfolio with these curated activities and achievements</p>
+ </div>
+ </div>
 
-    <!-- Filter by Category -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="btn-group" role="group">
-                <a href="?category=all" class="btn btn-outline-primary {% if not request.GET.category or request.GET.category == 'all' %}active{% endif %}">All</a>
-                <a href="?category=PROJECT" class="btn btn-outline-primary {% if request.GET.category == 'PROJECT' %}active{% endif %}">Projects</a>
-                <a href="?category=COURSE" class="btn btn-outline-primary {% if request.GET.category == 'COURSE' %}active{% endif %}">Courses</a>
-                <a href="?category=CERTIFICATION" class="btn btn-outline-primary {% if request.GET.category == 'CERTIFICATION' %}active{% endif %}">Certifications</a>
-                <a href="?category=EXPERIENCE" class="btn btn-outline-primary {% if request.GET.category == 'EXPERIENCE' %}active{% endif %}">Experience</a>
-                <a href="?category=ACHIEVEMENT" class="btn btn-outline-primary {% if request.GET.category == 'ACHIEVEMENT' %}active{% endif %}">Achievements</a>
-            </div>
-        </div>
-    </div>
+ <!-- Filter by Category -->
+ <div class="row mb-4">
+ <div class="col-12">
+ <div class="btn-group" role="group">
+ <a href="?category=all" class="btn btn-outline-primary {% if not request.GET.category or request.GET.category == 'all' %}active{% endif %}">All</a>
+ <a href="?category=PROJECT" class="btn btn-outline-primary {% if request.GET.category == 'PROJECT' %}active{% endif %}">Projects</a>
+ <a href="?category=COURSE" class="btn btn-outline-primary {% if request.GET.category == 'COURSE' %}active{% endif %}">Courses</a>
+ <a href="?category=CERTIFICATION" class="btn btn-outline-primary {% if request.GET.category == 'CERTIFICATION' %}active{% endif %}">Certifications</a>
+ <a href="?category=EXPERIENCE" class="btn btn-outline-primary {% if request.GET.category == 'EXPERIENCE' %}active{% endif %}">Experience</a>
+ <a href="?category=ACHIEVEMENT" class="btn btn-outline-primary {% if request.GET.category == 'ACHIEVEMENT' %}active{% endif %}">Achievements</a>
+ </div>
+ </div>
+ </div>
 
-    {% if portfolio_items %}
-        <div class="row">
-            {% for item in portfolio_items %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm border-{{ item.category|lower }}">
-                    <div class="card-header bg-{{ item.category|lower }} text-white">
-                        <span class="badge bg-light text-dark">{{ item.category }}</span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <p class="card-text">{{ item.description|truncatewords:20 }}</p>
-                        
-                        {% if item.estimated_time %}
-                        <small class="text-muted d-block mb-2">
-                            ⏱️ Est. Time: {{ item.estimated_time }}
-                        </small>
-                        {% endif %}
+ {% if portfolio_items %}
+ <div class="row">
+ {% for item in portfolio_items %}
+ <div class="col-md-6 col-lg-4 mb-4">
+ <div class="card h-100 shadow-sm border-{{ item.category|lower }}">
+ <div class="card-header bg-{{ item.category|lower }} text-white">
+ <span class="badge bg-light text-dark">{{ item.category }}</span>
+ </div>
+ <div class="card-body">
+ <h5 class="card-title">{{ item.title }}</h5>
+ <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+ 
+ {% if item.estimated_time %}
+ <small class="text-muted d-block mb-2">
+ ⏱ Est. Time: {{ item.estimated_time }}
+ </small>
+ {% endif %}
 
-                        {% if item.difficulty %}
-                        <small class="text-muted d-block mb-3">
-                            📊 Difficulty: {{ item.get_difficulty_display }}
-                        </small>
-                        {% endif %}
+ {% if item.difficulty %}
+ <small class="text-muted d-block mb-3">
+ <i class="bi bi-graph-up"></i> Difficulty: {{ item.get_difficulty_display }}
+ </small>
+ {% endif %}
 
-                        {% if item.related_careers.all %}
-                        <div class="mb-3">
-                            <small class="text-muted d-block mb-1">Relevant for:</small>
-                            {% for career in item.related_careers.all|slice:":3" %}
-                                <span class="badge bg-secondary me-1">{{ career.title }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
+ {% if item.related_careers.all %}
+ <div class="mb-3">
+ <small class="text-muted d-block mb-1">Relevant for:</small>
+ {% for career in item.related_careers.all|slice:":3" %}
+ <span class="badge bg-secondary me-1">{{ career.title }}</span>
+ {% endfor %}
+ </div>
+ {% endif %}
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{% url 'accounts:portfolio_item_detail' item.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
-                            <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-primary">Add to List</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-info text-center">
-            <h4>No portfolio items found</h4>
-            <p>Complete your profile to get personalized portfolio recommendations.</p>
-            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Update Profile</a>
-        </div>
-    {% endif %}
+ <div class="d-flex justify-content-between align-items-center">
+ <a href="{% url 'accounts:portfolio_item_detail' item.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+ <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-primary">Add to List</a>
+ </div>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ {% else %}
+ <div class="alert alert-info text-center">
+ <h4>No portfolio items found</h4>
+ <p>Complete your profile to get personalized portfolio recommendations.</p>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Update Profile</a>
+ </div>
+ {% endif %}
 
-    <!-- Pagination if needed -->
-    {% if is_paginated %}
-    <nav>
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-            {% endif %}
+ <!-- Pagination if needed -->
+ {% if is_paginated %}
+ <nav>
+ <ul class="pagination justify-content-center">
+ {% if page_obj.has_previous %}
+ <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+ <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+ {% endif %}
 
-            <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+ <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
 
-            {% if page_obj.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+ {% if page_obj.has_next %}
+ <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+ <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+ {% endif %}
+ </ul>
+ </nav>
+ {% endif %}
 </div>
 {% endblock %}

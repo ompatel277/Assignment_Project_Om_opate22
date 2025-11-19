@@ -3,70 +3,70 @@
 
 {% block content %}
 <div class="container my-5">
-  <div class="card shadow-lg p-4 rounded-4">
-    <h2 class="fw-bold mb-4 text-center text-primary">Edit Your Profile</h2>
-    <form method="POST" class="needs-validation" novalidate>
-      {% csrf_token %}
+ <div class="card shadow-lg p-4 rounded-4">
+ <h2 class="fw-bold mb-4 text-center text-primary">Edit Your Profile</h2>
+ <form method="POST" class="needs-validation" novalidate>
+ {% csrf_token %}
 
-      <!-- 🎓 EDUCATION SECTION -->
-      <h4 class="text-secondary border-bottom pb-2 mb-3">🎓 Education</h4>
-      <div class="row mb-3">
-        <div class="col-md-6">{{ form.college.label_tag }} {{ form.college }}</div>
-        <div class="col-md-3">{{ form.academic_year.label_tag }} {{ form.academic_year }}</div>
-        <div class="col-md-3">{{ form.gpa.label_tag }} {{ form.gpa }}</div>
-      </div>
+ <!-- <i class="bi bi-mortarboard-fill"></i> EDUCATION SECTION -->
+ <h4 class="text-secondary border-bottom pb-2 mb-3"><i class="bi bi-mortarboard-fill"></i> Education</h4>
+ <div class="row mb-3">
+ <div class="col-md-6">{{ form.college.label_tag }} {{ form.college }}</div>
+ <div class="col-md-3">{{ form.academic_year.label_tag }} {{ form.academic_year }}</div>
+ <div class="col-md-3">{{ form.gpa.label_tag }} {{ form.gpa }}</div>
+ </div>
 
-      <div class="row mb-3">
-        <div class="col-md-6">
-          {{ form.major.label_tag }} {{ form.major }}
-        </div>
-        <div class="col-md-6">
-          {{ form.minors.label_tag }} {{ form.minors }}
-        </div>
-      </div>
+ <div class="row mb-3">
+ <div class="col-md-6">
+ {{ form.major.label_tag }} {{ form.major }}
+ </div>
+ <div class="col-md-6">
+ {{ form.minors.label_tag }} {{ form.minors }}
+ </div>
+ </div>
 
-      <!-- 💡 INTERESTS & GOALS -->
-      <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4">💡 Interests & Goals</h4>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          {{ form.personal_interests.label_tag }} {{ form.personal_interests }}
-        </div>
-        <div class="col-md-6">
-          {{ form.career_goals.label_tag }} {{ form.career_goals }}
-        </div>
-      </div>
+ <!-- <i class="bi bi-lightbulb-fill"></i> INTERESTS & GOALS -->
+ <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4"><i class="bi bi-lightbulb-fill"></i> Interests & Goals</h4>
+ <div class="row mb-3">
+ <div class="col-md-6">
+ {{ form.personal_interests.label_tag }} {{ form.personal_interests }}
+ </div>
+ <div class="col-md-6">
+ {{ form.career_goals.label_tag }} {{ form.career_goals }}
+ </div>
+ </div>
 
-      <div class="row mb-3">
-        <div class="col-md-6">
-          {{ form.clubs_interest.label_tag }} {{ form.clubs_interest }}
-        </div>
-        <div class="col-md-6">
-          {{ form.clubs_user_is_a_part_of.label_tag }} {{ form.clubs_user_is_a_part_of }}
-        </div>
-      </div>
+ <div class="row mb-3">
+ <div class="col-md-6">
+ {{ form.clubs_interest.label_tag }} {{ form.clubs_interest }}
+ </div>
+ <div class="col-md-6">
+ {{ form.clubs_user_is_a_part_of.label_tag }} {{ form.clubs_user_is_a_part_of }}
+ </div>
+ </div>
 
-      <!-- ⚙️ EXPERIENCE & SKILLS -->
-      <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4">⚙️ Experience & Skills</h4>
-      <div class="mb-3">{{ form.skills.label_tag }} {{ form.skills }}</div>
-      <div class="mb-3">{{ form.work_experience.label_tag }} {{ form.work_experience }}</div>
+ <!-- EXPERIENCE & SKILLS -->
+ <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4"> Experience & Skills</h4>
+ <div class="mb-3">{{ form.skills.label_tag }} {{ form.skills }}</div>
+ <div class="mb-3">{{ form.work_experience.label_tag }} {{ form.work_experience }}</div>
 
-      <!-- 🌍 PREFERENCES -->
-      <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4">🌍 Preferences</h4>
-      <div class="row">
-        <div class="col-md-6">{{ form.preferred_industries.label_tag }} {{ form.preferred_industries }}</div>
-        <div class="col-md-6">{{ form.preferred_positions.label_tag }} {{ form.preferred_positions }}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">{{ form.preferred_locations.label_tag }} {{ form.preferred_locations }}</div>
-        <div class="col-md-6">{{ form.preferred_company.label_tag }} {{ form.preferred_company }}</div>
-      </div>
+ <!-- <i class="bi bi-globe"></i> PREFERENCES -->
+ <h4 class="text-secondary border-bottom pb-2 mb-3 mt-4"><i class="bi bi-globe"></i> Preferences</h4>
+ <div class="row">
+ <div class="col-md-6">{{ form.preferred_industries.label_tag }} {{ form.preferred_industries }}</div>
+ <div class="col-md-6">{{ form.preferred_positions.label_tag }} {{ form.preferred_positions }}</div>
+ </div>
+ <div class="row">
+ <div class="col-md-6">{{ form.preferred_locations.label_tag }} {{ form.preferred_locations }}</div>
+ <div class="col-md-6">{{ form.preferred_company.label_tag }} {{ form.preferred_company }}</div>
+ </div>
 
-      <!-- SAVE / CANCEL BUTTONS -->
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary px-5 py-2 fw-semibold">💾 Save Changes</button>
-        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-secondary px-4 ms-2">Cancel</a>
-      </div>
-    </form>
-  </div>
+ <!-- SAVE / CANCEL BUTTONS -->
+ <div class="text-center mt-4">
+ <button type="submit" class="btn btn-primary px-5 py-2 fw-semibold"><i class="bi bi-save"></i> Save Changes</button>
+ <a href="{% url 'accounts:profile' %}" class="btn btn-outline-secondary px-4 ms-2">Cancel</a>
+ </div>
+ </form>
+ </div>
 </div>
 {% endblock %}

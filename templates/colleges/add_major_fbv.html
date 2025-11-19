@@ -3,24 +3,24 @@
 
 {% block content %}
 <div class="container mt-5" style="max-width: 700px;">
-  <h2 class="fw-bold text-success mb-4">📘 Add a Major (FBV Example)</h2>
+ <h2 class="fw-bold text-success mb-4"><i class="bi bi-book"></i> Add a Major (FBV Example)</h2>
 
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
+ <form method="post" novalidate>
+ {% csrf_token %}
+ {{ form.as_p }}
 
-    <div class="d-grid gap-2 mt-4">
-      <button type="submit" class="btn btn-success">💾 Save Major</button>
-      <a href="{% url 'colleges:list' %}" class="btn btn-outline-secondary">Cancel</a>
-    </div>
-  </form>
+ <div class="d-grid gap-2 mt-4">
+ <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Save Major</button>
+ <a href="{% url 'colleges:list' %}" class="btn btn-outline-secondary">Cancel</a>
+ </div>
+ </form>
 
-  {% if messages %}
-    <div class="mt-4">
-      {% for message in messages %}
-        <div class="alert alert-success">{{ message }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
+ {% if messages %}
+ <div class="mt-4">
+ {% for message in messages %}
+ <div class="alert alert-success">{{ message }}</div>
+ {% endfor %}
+ </div>
+ {% endif %}
 </div>
 {% endblock %}
