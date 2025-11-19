@@ -136,6 +136,20 @@
 
 
 
+ <!-- Career Plans -->
+
+ <li class="nav-item">
+
+ <a class="nav-link" href="{% url 'accounts:career_plans_list' %}">
+
+ <i class="bi bi-diagram-3"></i> Career Plans
+
+ </a>
+
+ </li>
+
+
+
  <!-- Recommender Dropdown -->
 
  <li class="nav-item dropdown">
@@ -338,7 +352,11 @@
 
  {% if user.is_authenticated %}
 
+ <li><a href="{% url 'accounts:career_plans_list' %}" class="text-decoration-none">Career Plans</a></li>
+
  <li><a href="{% url 'recommender:dashboard' %}" class="text-decoration-none">AI Recommender</a></li>
+
+ <li><a href="{% url 'accounts:portfolio_checklist' %}" class="text-decoration-none">My Portfolio</a></li>
 
  <li><a href="{% url 'accounts:reports' %}" class="text-decoration-none">Reports</a></li>
 

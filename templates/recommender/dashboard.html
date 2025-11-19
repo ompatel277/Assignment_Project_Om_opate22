@@ -5,10 +5,19 @@
 
 {% block content %}
 <div class="container-fluid">
+ <!-- Header -->
  <div class="row mb-4">
  <div class="col-12">
- <h1 class="display-5">🤖 Your Personalized Recommendations</h1>
- <p class="lead text-muted">AI-powered insights based on your profile, interests, and career goals</p>
+ <div class="card bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+ <div class="card-body p-4">
+ <h1 class="display-5 fw-bold mb-2">
+ <i class="bi bi-stars"></i> Your Personalized Recommendations
+ </h1>
+ <p class="lead mb-0">
+ AI-powered insights based on your profile, interests, and career goals
+ </p>
+ </div>
+ </div>
  </div>
  </div>
 
@@ -17,7 +26,12 @@
  <div class="col-12">
  <div class="card shadow-sm">
  <div class="card-header bg-primary text-white">
+ <div class="d-flex justify-content-between align-items-center">
  <h4 class="mb-0"><i class="bi bi-briefcase-fill"></i> Recommended Careers</h4>
+ {% if career_recommendations %}
+ <span class="badge bg-light text-dark">{{ career_recommendations|length }} matches</span>
+ {% endif %}
+ </div>
  </div>
  <div class="card-body">
  {% if career_recommendations %}
@@ -39,9 +53,15 @@
  {% endfor %}
  </div>
  {% else %}
- <div class="text-center text-muted py-4">
- <p>No career recommendations yet. Complete your profile to get personalized suggestions!</p>
- <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Update Profile</a>
+ <div class="text-center py-5">
+ <i class="bi bi-briefcase fs-1 text-muted mb-3 d-block"></i>
+ <h5 class="mb-2">No Career Recommendations Yet</h5>
+ <p class="text-muted mb-3">
+ Add your skills, interests, and career goals to get personalized career matches!
+ </p>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">
+ <i class="bi bi-pencil"></i> Complete Your Profile
+ </a>
  </div>
  {% endif %}
  </div>
@@ -54,7 +74,12 @@
  <div class="col-12">
  <div class="card shadow-sm">
  <div class="card-header bg-info text-white">
+ <div class="d-flex justify-content-between align-items-center">
  <h4 class="mb-0"><i class="bi bi-list-check"></i> Recommended Portfolio Items</h4>
+ {% if portfolio_recommendations %}
+ <span class="badge bg-light text-dark">{{ portfolio_recommendations|length }} items</span>
+ {% endif %}
+ </div>
  </div>
  <div class="card-body">
  {% if portfolio_recommendations %}
@@ -77,7 +102,13 @@
  {% endfor %}
  </div>
  {% else %}
- <p class="text-muted text-center py-3">No portfolio recommendations available.</p>
+ <div class="text-center py-4">
+ <i class="bi bi-list-check fs-1 text-muted mb-3 d-block"></i>
+ <h6 class="mb-2">No Portfolio Recommendations Yet</h6>
+ <p class="text-muted small mb-0">
+ We'll suggest projects, certifications, and skills once you complete your profile.
+ </p>
+ </div>
  {% endif %}
  </div>
  </div>
@@ -87,25 +118,36 @@
  <!-- Course Recommendations -->
  <div class="row mb-4">
  <div class="col-md-6">
- <div class="card shadow-sm">
+ <div class="card shadow-sm h-100">
  <div class="card-header bg-success text-white">
+ <div class="d-flex justify-content-between align-items-center">
  <h4 class="mb-0"><i class="bi bi-book-fill"></i> Recommended Courses</h4>
+ {% if course_recommendations %}
+ <span class="badge bg-light text-dark">{{ course_recommendations|length }}</span>
+ {% endif %}
+ </div>
  </div>
  <div class="card-body">
  {% if course_recommendations %}
  <ul class="list-group list-group-flush">
  {% for rec in course_recommendations %}
- <li class="list-group-item d-flex justify-content-between align-items-center">
+ <li class="list-group-item">
  <div>
  <strong>{{ rec.course.subject }} {{ rec.course.number }}</strong> - {{ rec.course.title }}
- <br><small class="text-muted">{{ rec.course.credits }} credits</small>
- <br><small class="text-info">{{ rec.reasoning }}</small>
+ <br><small class="text-muted"><i class="bi bi-clock"></i> {{ rec.course.credits }} credits</small>
+ <br><small class="text-success">{{ rec.reasoning }}</small>
  </div>
  </li>
  {% endfor %}
  </ul>
  {% else %}
- <p class="text-muted text-center">Complete your profile to see course recommendations.</p>
+ <div class="text-center py-4">
+ <i class="bi bi-book fs-1 text-muted mb-2 d-block"></i>
+ <h6 class="mb-2">No Course Recommendations</h6>
+ <p class="text-muted small mb-0">
+ Select a major in your profile to see relevant courses.
+ </p>
+ </div>
  {% endif %}
  </div>
  </div>
@@ -113,9 +155,14 @@
 
  <!-- Club Recommendations -->
  <div class="col-md-6">
- <div class="card shadow-sm">
+ <div class="card shadow-sm h-100">
  <div class="card-header bg-warning text-dark">
- <h4 class="mb-0"><i class="bi bi-bullseye"></i> Recommended Clubs</h4>
+ <div class="d-flex justify-content-between align-items-center">
+ <h4 class="mb-0"><i class="bi bi-people-fill"></i> Recommended Clubs</h4>
+ {% if club_recommendations %}
+ <span class="badge bg-dark">{{ club_recommendations|length }}</span>
+ {% endif %}
+ </div>
  </div>
  <div class="card-body">
  {% if club_recommendations %}
@@ -124,12 +171,18 @@
  <li class="list-group-item">
  <strong>{{ rec.club.name }}</strong>
  <br><small class="text-muted">{{ rec.club.description|truncatewords:10 }}</small>
- <br><small class="text-warning">Relevance: {{ rec.relevance_score }} - {{ rec.reasoning }}</small>
+ <br><small class="text-warning"><i class="bi bi-star-fill"></i> Relevance: {{ rec.relevance_score }}</small>
  </li>
  {% endfor %}
  </ul>
  {% else %}
- <p class="text-muted text-center">No club recommendations available.</p>
+ <div class="text-center py-4">
+ <i class="bi bi-people fs-1 text-muted mb-2 d-block"></i>
+ <h6 class="mb-2">No Club Recommendations</h6>
+ <p class="text-muted small mb-0">
+ Select a college and add interests to see relevant clubs.
+ </p>
+ </div>
  {% endif %}
  </div>
  </div>
@@ -137,12 +190,32 @@
  </div>
 
  <!-- Quick Actions -->
- <div class="row">
- <div class="col-12 text-center">
- <a href="{% url 'recommender:roadmap' %}" class="btn btn-lg btn-primary me-2">View Full Roadmap</a>
- <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-lg btn-outline-primary me-2">My Portfolio</a>
- <a href="{% url 'accounts:edit_profile' %}" class="btn btn-lg btn-outline-secondary">Update Preferences</a>
+ <div class="row mt-4">
+ <div class="col-12">
+ <div class="card shadow-sm bg-light">
+ <div class="card-body text-center py-4">
+ <h5 class="mb-3"><i class="bi bi-lightning-fill"></i> Quick Actions</h5>
+ <div class="d-flex flex-wrap gap-2 justify-content-center">
+ <a href="{% url 'recommender:roadmap' %}" class="btn btn-primary">
+ <i class="bi bi-map"></i> View Full Roadmap
+ </a>
+ <a href="{% url 'accounts:career_plans_list' %}" class="btn btn-outline-primary">
+ <i class="bi bi-diagram-3"></i> My Career Plans
+ </a>
+ <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-outline-primary">
+ <i class="bi bi-list-check"></i> My Portfolio
+ </a>
+ <a href="{% url 'accounts:edit_profile' %}" class="btn btn-outline-secondary">
+ <i class="bi bi-pencil"></i> Update Profile
+ </a>
+ </div>
+ </div>
+ </div>
  </div>
  </div>
 </div>
+
+<!-- Add spacing at bottom -->
+<div class="mb-5"></div>
+
 {% endblock %}
