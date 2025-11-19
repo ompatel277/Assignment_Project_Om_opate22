@@ -6,12 +6,12 @@
 <style>
  /* ===== Hero Section Styling ===== */
  .tj-hero {
- min-height: 85vh;
+ min-height: 75vh;
  display: flex;
  flex-wrap: wrap;
  align-items: center;
  justify-content: center;
- padding: 2rem 1rem;
+ padding: 3rem 1rem;
  color: #c5c6c7;
  background: radial-gradient(
  circle at 80% 20%,
@@ -29,21 +29,22 @@
  }
 
  .tj-subtitle {
- font-size: 1.25rem;
+ font-size: 1.3rem;
  color: #c5c6c7;
  margin-top: 1.2rem;
- max-width: 600px;
- line-height: 1.6;
+ max-width: 650px;
+ line-height: 1.7;
  }
 
  .tj-cta,
  .tj-ghost {
  display: inline-block;
- padding: 0.9rem 2rem;
+ padding: 1rem 2.5rem;
  border-radius: 50px;
  font-weight: 600;
  text-decoration: none;
  transition: all 0.3s ease;
+ font-size: 1.1rem;
  }
 
  .tj-cta {
@@ -56,8 +57,8 @@
  .tj-cta:hover {
  background: #45a29e;
  color: #0b0c10;
- transform: scale(1.05);
- box-shadow: 0 0 35px rgba(102, 252, 241, 0.6);
+ transform: translateY(-2px);
+ box-shadow: 0 5px 35px rgba(102, 252, 241, 0.6);
  }
 
  .tj-ghost {
@@ -69,12 +70,31 @@
  .tj-ghost:hover {
  background: #66fcf1;
  color: #0b0c10;
- box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+ transform: translateY(-2px);
+ box-shadow: 0 5px 25px rgba(102, 252, 241, 0.4);
+ }
+
+ .feature-card {
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ border: 1px solid rgba(102, 252, 241, 0.2);
+ background: rgba(31, 40, 51, 0.5);
+ }
+
+ .feature-card:hover {
+ transform: translateY(-8px);
+ box-shadow: 0 8px 30px rgba(102, 252, 241, 0.3);
+ border-color: rgba(102, 252, 241, 0.5);
+ }
+
+ .feature-icon {
+ font-size: 3rem;
+ color: #66fcf1;
+ margin-bottom: 1rem;
  }
 
  @media (max-width: 768px) {
  .tj-title {
- font-size: 2.6rem;
+ font-size: 2.5rem;
  text-align: center;
  }
  .tj-subtitle {
@@ -82,55 +102,137 @@
  font-size: 1.1rem;
  }
  .tj-hero {
+ min-height: 70vh;
  text-align: center;
  flex-direction: column;
  justify-content: center;
+ padding: 2rem 1rem;
+ }
+ .tj-cta,
+ .tj-ghost {
+ font-size: 1rem;
+ padding: 0.9rem 2rem;
  }
  }
 </style>
 
-<main class="tj-hero container-xxl">
+<!-- Hero Section -->
+<section class="tj-hero">
  <div class="text-center">
  <h1 class="tj-title">Chart Your<br>Path to Success</h1>
  <p class="tj-subtitle mx-auto">
- Navigate your college and career journey with personalized insights,
+ Navigate your college and career journey with personalized AI insights,
  interactive tools, and step-by-step guidance — designed to help you
  visualize your future, one milestone at a time.
  </p>
- <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center">
- <a class="tj-cta" href="{% url 'accounts:signup' %}">Get Started</a>
- <a class="tj-ghost" href="{% url 'colleges:list' %}">Explore Colleges</a>
+ <div class="d-flex flex-wrap gap-3 mt-5 justify-content-center">
+ <a class="tj-cta" href="{% url 'accounts:signup' %}">
+ <i class="bi bi-rocket-takeoff"></i> Get Started Free
+ </a>
+ <a class="tj-ghost" href="{% url 'colleges:list' %}">
+ <i class="bi bi-building"></i> Explore Colleges
+ </a>
  </div>
  <div class="mt-4">
- <p class="text-muted small">
+ <p class="text-muted">
  Already have an account?
  <a href="{% url 'accounts:login' %}" class="text-accent text-decoration-none fw-semibold">
- Log in here
- </a>.
+ Log in here <i class="bi bi-arrow-right"></i>
+ </a>
  </p>
  </div>
  </div>
-</main>
- <div class="container mt-5 pb-5">
+</section>
+
+<!-- Features Section -->
+<section class="container my-5 py-5">
+ <div class="text-center mb-5">
+ <h2 class="display-6 fw-bold text-accent mb-3">
+ <i class="bi bi-stars"></i> Powerful Features to Guide Your Journey
+ </h2>
+ <p class="lead text-muted">Everything you need to plan your academic and career success</p>
+ </div>
+
  <div class="row g-4">
- <div class="col-md-4 text-center">
- <div class="fs-1 mb-3"><i class="bi bi-target"></i></div>
- <h4 class="text-accent">Career Matching</h4>
- <p class="text-light">AI-powered recommendations based on your skills and interests</p>
+ <!-- Feature 1: AI Career Matching -->
+ <div class="col-lg-3 col-md-6">
+ <div class="card feature-card h-100 text-center p-4">
+ <div class="feature-icon">
+ <i class="bi bi-cpu"></i>
  </div>
- <div class="col-md-4 text-center">
- <div class="fs-1 mb-3"><i class="bi bi-list-check"></i></div>
- <h4 class="text-accent">Portfolio Tracking</h4>
- <p class="text-light">Track projects, certifications, and milestones</p>
- </div>
- <div class="col-md-4 text-center">
- <div class="fs-1 mb-3"><i class="bi bi-map"></i></div>
- <h4 class="text-accent">Semester Planning</h4>
- <p class="text-light">Personalized roadmap from freshman to graduation</p>
+ <h4 class="text-accent fw-bold mb-3">AI Career Matching</h4>
+ <p class="text-light mb-0">
+ Get personalized career recommendations based on your unique skills, interests, and goals
+ </p>
  </div>
  </div>
-</div>
+
+ <!-- Feature 2: Portfolio Tracking -->
+ <div class="col-lg-3 col-md-6">
+ <div class="card feature-card h-100 text-center p-4">
+ <div class="feature-icon">
+ <i class="bi bi-journal-check"></i>
+ </div>
+ <h4 class="text-accent fw-bold mb-3">Portfolio Tracking</h4>
+ <p class="text-light mb-0">
+ Track projects, certifications, and achievements with our comprehensive checklist system
+ </p>
+ </div>
+ </div>
+
+ <!-- Feature 3: Career Planning -->
+ <div class="col-lg-3 col-md-6">
+ <div class="card feature-card h-100 text-center p-4">
+ <div class="feature-icon">
+ <i class="bi bi-diagram-3"></i>
+ </div>
+ <h4 class="text-accent fw-bold mb-3">Career Planning</h4>
+ <p class="text-light mb-0">
+ Create multiple career plans, compare paths, and build roadmaps to your dream job
+ </p>
+ </div>
+ </div>
+
+ <!-- Feature 4: Semester Roadmap -->
+ <div class="col-lg-3 col-md-6">
+ <div class="card feature-card h-100 text-center p-4">
+ <div class="feature-icon">
+ <i class="bi bi-map"></i>
+ </div>
+ <h4 class="text-accent fw-bold mb-3">Semester Roadmap</h4>
+ <p class="text-light mb-0">
+ Plan your entire academic journey with personalized course recommendations and timelines
+ </p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="container my-5 py-5">
+ <div class="row">
+ <div class="col-lg-8 mx-auto">
+ <div class="card border-primary shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+ <div class="card-body text-center p-5 text-white">
+ <h2 class="display-6 fw-bold mb-3">Ready to Start Your Journey?</h2>
+ <p class="lead mb-4">
+ Join thousands of students already using Traject to navigate their path to success
+ </p>
+ <div class="d-flex gap-3 justify-content-center flex-wrap">
+ <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-lg px-5">
+ <i class="bi bi-person-plus"></i> Sign Up Now
+ </a>
+ <a href="{% url 'careers:list' %}" class="btn btn-outline-light btn-lg px-5">
+ <i class="bi bi-briefcase"></i> Explore Careers
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- Bottom spacing -->
+<div class="mb-5"></div>
 
 {% endblock %}
-
-
