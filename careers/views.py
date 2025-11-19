@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Career
 
 # ============================
-# 1️⃣  Career List View
+# Career List View
 # ============================
 @login_required
 def career_list_view(request):
@@ -17,7 +17,7 @@ def career_list_view(request):
 
 
 # ============================
-# 2️⃣  Career Detail View
+# Career Detail View
 # ============================
 @login_required
 def career_detail_view(request, pk):
@@ -29,7 +29,7 @@ def career_detail_view(request, pk):
 
 
 # ============================
-# 3️⃣  (Optional) Recommended Careers
+# Recommended Careers (Optional)
 # ============================
 @login_required
 def recommended_careers_view(request):
@@ -39,10 +39,18 @@ def recommended_careers_view(request):
     user_profile = getattr(request.user, "profile", None)
     recommended = Career.objects.none()
 
-    if user_profile and (user_profile.skills or user_profile.personal_interests):
-        keywords = set(user_profile.skills or []) | set(user_profile.personal_interests or [])
-        recommended = Career.objects.filter(
-            description__icontains=list(keywords)[0]
-        )[:10] if keywords else Career.objects.none()
+    if user_profile:
+        # Use the model's helper methods to get lists of skills and interests
+        skills_list = user_profile.get_skills_list()
+        interests_list = user_profile.get_interests_list()
+        keywords = set(skills_list) | set(interests_list)
+
+        if keywords:
+            # Filter careers that match any of the keywords
+            from django.db.models import Q
+            query = Q()
+            for keyword in keywords:
+                query |= Q(description__icontains=keyword) | Q(title__icontains=keyword)
+            recommended = Career.objects.filter(query).distinct()[:10]
 
     return render(request, "careers/recommended_careers.html", {"recommended": recommended})
