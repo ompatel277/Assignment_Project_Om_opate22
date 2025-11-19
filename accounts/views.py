@@ -120,8 +120,11 @@ def dashboard_view(request):
         from recommender.roadmap import get_roadmap_summary
         recommendations = get_all_recommendations(profile)
         roadmap_summary = get_roadmap_summary(profile)
-    except ImportError:
-        # Fallback if recommender not available
+    except Exception as e:
+        # Fallback if recommender fails for any reason
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error generating recommendations: {e}")
         recommendations = {
             'careers': [],
             'portfolio_items': [],
