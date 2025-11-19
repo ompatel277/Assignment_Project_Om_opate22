@@ -30,40 +30,48 @@
  <!-- Quick Stats -->
  <div class="row g-3 mb-4">
  <div class="col-md-3">
- <div class="card bg-primary text-white h-100">
+ <a href="{% url 'accounts:portfolio_checklist' %}" class="text-decoration-none">
+ <div class="card bg-primary text-white h-100 hover-lift" style="cursor: pointer; transition: transform 0.2s;">
  <div class="card-body text-center">
  <i class="bi bi-trophy-fill fs-1 mb-2"></i>
  <h3 class="fw-bold mb-1">{{ checklist_stats.completion_rate }}%</h3>
  <p class="small mb-0">Portfolio Complete</p>
  </div>
  </div>
+ </a>
  </div>
  <div class="col-md-3">
- <div class="card bg-success text-white h-100">
+ <a href="{% url 'accounts:portfolio_checklist' %}" class="text-decoration-none">
+ <div class="card bg-success text-white h-100 hover-lift" style="cursor: pointer; transition: transform 0.2s;">
  <div class="card-body text-center">
  <i class="bi bi-list-check fs-1 mb-2"></i>
  <h3 class="fw-bold mb-1">{{ checklist_stats.completed }}/{{ checklist_stats.total }}</h3>
  <p class="small mb-0">Tasks Completed</p>
  </div>
  </div>
+ </a>
  </div>
  <div class="col-md-3">
- <div class="card bg-warning text-dark h-100">
+ <a href="{% url 'recommender:careers' %}" class="text-decoration-none">
+ <div class="card bg-warning text-dark h-100 hover-lift" style="cursor: pointer; transition: transform 0.2s;">
  <div class="card-body text-center">
  <i class="bi bi-briefcase-fill fs-1 mb-2"></i>
  <h3 class="fw-bold mb-1">{{ recommendations.careers|length }}</h3>
  <p class="small mb-0">Career Matches</p>
  </div>
  </div>
+ </a>
  </div>
  <div class="col-md-3">
- <div class="card bg-info text-white h-100">
+ <a href="{% url 'recommender:portfolio' %}" class="text-decoration-none">
+ <div class="card bg-info text-white h-100 hover-lift" style="cursor: pointer; transition: transform 0.2s;">
  <div class="card-body text-center">
  <i class="bi bi-star-fill fs-1 mb-2"></i>
  <h3 class="fw-bold mb-1">{{ recommendations.portfolio_items|length }}</h3>
  <p class="small mb-0">Suggested Items</p>
  </div>
  </div>
+ </a>
  </div>
  </div>
 
@@ -319,5 +327,12 @@
 
 <!-- Add some spacing at bottom -->
 <div class="mb-5"></div>
+
+<style>
+.hover-lift:hover {
+ transform: translateY(-5px) !important;
+ box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+}
+</style>
 
 {% endblock %}
