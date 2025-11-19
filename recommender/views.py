@@ -50,7 +50,7 @@ def career_recommendations_view(request):
         'profile': profile,
     }
 
-    return render(request, 'recommender/career_recommendations.html', context)
+    return render(request, 'recommender/careers.html', context)
 
 
 @login_required
@@ -68,7 +68,7 @@ def portfolio_recommendations_view(request):
         'profile': profile,
     }
 
-    return render(request, 'recommender/portfolio_recommendations.html', context)
+    return render(request, 'recommender/portfolio.html', context)
 
 
 # =====================================================

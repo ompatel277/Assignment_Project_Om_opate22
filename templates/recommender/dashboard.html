@@ -1,0 +1,143 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}AI Recommendations - Traject{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5">🤖 Your Personalized Recommendations</h1>
+            <p class="lead text-muted">AI-powered insights based on your profile, interests, and career goals</p>
+        </div>
+    </div>
+
+    <!-- Career Recommendations -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">💼 Recommended Careers</h4>
+                </div>
+                <div class="card-body">
+                    {% if recommended_careers %}
+                        <div class="row">
+                            {% for career in recommended_careers %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100 border-primary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ career.title }}</h5>
+                                        <p class="card-text text-muted small">{{ career.description|truncatewords:20 }}</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-success">Match: {{ career.match_score }}%</span>
+                                        </div>
+                                        <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted py-4">
+                            <p>No career recommendations yet. Complete your profile to get personalized suggestions!</p>
+                            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">Update Profile</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Item Recommendations -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">📋 Recommended Portfolio Items</h4>
+                </div>
+                <div class="card-body">
+                    {% if recommended_portfolio %}
+                        <div class="row">
+                            {% for item in recommended_portfolio %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ item.title }}</h6>
+                                        <p class="card-text small">{{ item.description|truncatewords:15 }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-{{ item.category|lower }}">{{ item.category }}</span>
+                                            <a href="{% url 'accounts:add_to_checklist' item.id %}" class="btn btn-sm btn-info">Add to Checklist</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center py-3">No portfolio recommendations available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Recommendations -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">📚 Recommended Courses</h4>
+                </div>
+                <div class="card-body">
+                    {% if recommended_courses %}
+                        <ul class="list-group list-group-flush">
+                            {% for course in recommended_courses %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ course.subject }} {{ course.number }}</strong> - {{ course.title }}
+                                    <br><small class="text-muted">{{ course.credits }} credits</small>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center">Complete your profile to see course recommendations.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Club Recommendations -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">🎯 Recommended Clubs</h4>
+                </div>
+                <div class="card-body">
+                    {% if recommended_clubs %}
+                        <ul class="list-group list-group-flush">
+                            {% for club in recommended_clubs %}
+                            <li class="list-group-item">
+                                <strong>{{ club.name }}</strong>
+                                <br><small class="text-muted">{{ club.description|truncatewords:10 }}</small>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center">No club recommendations available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'recommender:roadmap' %}" class="btn btn-lg btn-primary me-2">View Full Roadmap</a>
+            <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-lg btn-outline-primary me-2">My Portfolio</a>
+            <a href="{% url 'accounts:edit_profile' %}" class="btn btn-lg btn-outline-secondary">Update Preferences</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

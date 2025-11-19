@@ -1,132 +1,220 @@
-/* ==========================================
-   TRAJECT — BERT Dark Aqua Theme
-   ========================================== */
+/* Traject Custom Styles */
 
-/* === COLOR VARIABLES === */
 :root {
-  --tj-bg-dark: #0b0c10;
-  --tj-bg-light: #1f2833;
-  --tj-text: #c5c6c7;
-  --tj-accent: #66fcf1;
-  --tj-accent-dark: #45a29e;
-  --tj-white: #ffffff;
+  --traject-primary: #667eea;
+  --traject-secondary: #764ba2;
+  --traject-accent: #FF6B35;
+  --traject-dark: #1a1a2e;
+  --traject-light: #f8f9fa;
 }
 
-/* === GLOBAL BASE === */
-body {
-  background-color: var(--tj-bg-dark);
-  color: var(--tj-text);
-  font-family: 'Inter', 'Poppins', sans-serif;
-  transition: background 0.6s ease, color 0.6s ease;
-  overflow-x: hidden;
-  min-height: 100vh;
+/* Dark theme overrides */
+[data-bs-theme="dark"] {
+  --bs-body-bg: #1a1a2e;
+  --bs-body-color: #e0e0e0;
 }
 
-/* === NAVBAR === */
-.navbar {
-  background-color: var(--tj-bg-light);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+.traject-bg {
+  background-color: var(--traject-dark);
 }
 
-.navbar-brand {
-  color: var(--tj-accent);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.traject-navbar {
+  background: linear-gradient(135deg, var(--traject-primary) 0%, var(--traject-secondary) 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
 
-.navbar-nav .nav-link {
-  color: var(--tj-text);
-  transition: color 0.3s ease;
+.text-accent {
+  color: var(--traject-accent) !important;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: var(--tj-accent);
+.text-accent-dark {
+  color: #ff8c61 !important;
 }
 
-/* === BUTTONS === */
-.btn-outline-light,
-.btn {
-  border: 2px solid var(--tj-accent);
-  color: var(--tj-accent);
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.bg-accent {
+  background-color: var(--traject-accent) !important;
 }
 
-.btn-outline-light:hover,
-.btn:hover {
-  background: var(--tj-accent);
-  color: var(--tj-bg-dark);
-  box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+.btn-accent {
+  background-color: var(--traject-accent);
+  border-color: var(--traject-accent);
+  color: white;
 }
 
-/* === HEADINGS === */
-h1, h2, h3, h4, h5 {
-  color: var(--tj-accent);
-  font-weight: 700;
+.btn-accent:hover {
+  background-color: #ff8c61;
+  border-color: #ff8c61;
+  color: white;
 }
 
-/* === LINKS === */
-a {
-  color: var(--tj-accent);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--tj-accent-dark);
-}
-
-/* === CARDS === */
+/* Card hover effects */
 .card {
-  background-color: var(--tj-bg-light);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* === ACCORDION === */
-.accordion-button {
-  background-color: var(--tj-bg-light);
-  color: var(--tj-text);
+/* Badge styles */
+.badge {
+  padding: 0.5em 0.75em;
   font-weight: 500;
 }
 
-.accordion-button:not(.collapsed) {
-  background-color: var(--tj-accent-dark);
-  color: var(--tj-bg-dark);
-  box-shadow: 0 0 12px rgba(102, 252, 241, 0.4);
+/* Category-specific colors for portfolio items */
+.border-project, .bg-project {
+  border-color: #667eea !important;
+  background-color: #667eea !important;
 }
 
-.accordion-body {
-  background-color: var(--tj-bg-dark);
-  color: var(--tj-text);
+.border-course, .bg-course {
+  border-color: #28a745 !important;
+  background-color: #28a745 !important;
 }
 
-/* === FOOTER === */
+.border-certification, .bg-certification {
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+}
+
+.border-experience, .bg-experience {
+  border-color: #17a2b8 !important;
+  background-color: #17a2b8 !important;
+}
+
+.border-achievement, .bg-achievement {
+  border-color: #fd7e14 !important;
+  background-color: #fd7e14 !important;
+}
+
+/* Footer styles */
 .footer {
-  background-color: var(--tj-bg-light);
-  color: var(--tj-text);
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  margin-top: 4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-top: 2px solid var(--traject-primary);
 }
 
-/* === DARK MODE TOGGLE === */
-.dark-toggle {
-  background: none;
-  border: none;
-  color: var(--tj-accent);
-  font-size: 1.4rem;
-  transition: transform 0.2s ease;
+/* Loading animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
 }
-.dark-toggle:hover {
-  transform: rotate(20deg);
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--traject-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--traject-secondary);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: width 0.6s ease;
+}
+
+/* Alert improvements */
+.alert {
+  border-left: 4px solid;
+  border-radius: 0.25rem;
+}
+
+.alert-success {
+  border-left-color: #28a745;
+}
+
+.alert-danger {
+  border-left-color: #dc3545;
+}
+
+.alert-warning {
+  border-left-color: #ffc107;
+}
+
+.alert-info {
+  border-left-color: #17a2b8;
+}
+
+/* Form improvements */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--traject-primary);
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+}
+
+/* Button improvements */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Dropdown menu animation */
+.dropdown-menu {
+  animation: slideDown 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .display-3 {
+    font-size: 2.5rem;
+  }
+
+  .display-5 {
+    font-size: 2rem;
+  }
+
+  .hero-section {
+    padding: 60px 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .navbar,
+  .footer,
+  .btn {
+    display: none;
+  }
 }

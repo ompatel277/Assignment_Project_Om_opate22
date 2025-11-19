@@ -1,4 +1,3 @@
-# recommender/urls.py
 from django.urls import path
 from . import views
 
@@ -12,7 +11,7 @@ urlpatterns = [
     path('careers/', views.career_recommendations_view, name='careers'),
     path('portfolio/', views.portfolio_recommendations_view, name='portfolio'),
 
-    # 🆕 Roadmap views (NEW)
+    # Roadmap views
     path('roadmap/', views.roadmap_view, name='roadmap'),
     path('roadmap/summary/', views.roadmap_summary_view, name='roadmap_summary'),
 ]

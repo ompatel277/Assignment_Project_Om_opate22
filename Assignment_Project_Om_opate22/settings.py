@@ -112,3 +112,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # --- DEFAULT PRIMARY KEY ---
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'accounts:dashboard'
+LOGOUT_REDIRECT_URL = 'accounts:login'
+ITEMS_PER_PAGE = 20
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,0 +1,164 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Roadmap Summary - Traject{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5">🗺️ Your Academic Roadmap Summary</h1>
+            <p class="lead text-muted">Quick overview of your degree progress and planning</p>
+        </div>
+    </div>
+
+    <!-- Progress Overview -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm border-primary">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Credits Required</h6>
+                    <h2 class="text-primary">{{ summary.total_credits_required|default:"120" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm border-success">
+                <div class="card-body">
+                    <h6 class="text-muted">Credits Completed</h6>
+                    <h2 class="text-success">{{ summary.credits_completed|default:"0" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm border-warning">
+                <div class="card-body">
+                    <h6 class="text-muted">Credits Remaining</h6>
+                    <h2 class="text-warning">{{ summary.credits_remaining|default:"120" }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm border-info">
+                <div class="card-body">
+                    <h6 class="text-muted">Semesters Left</h6>
+                    <h2 class="text-info">{{ summary.semesters_remaining|default:"8" }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5>Degree Progress</h5>
+                    <div class="progress" style="height: 30px;">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                             style="width: {{ summary.progress_percentage|default:"0" }}%">
+                            {{ summary.progress_percentage|default:"0" }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Milestones -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">🎯 Upcoming Milestones</h5>
+                </div>
+                <div class="card-body">
+                    {% if summary.milestones %}
+                        <ul class="list-group list-group-flush">
+                            {% for milestone in summary.milestones %}
+                            <li class="list-group-item">
+                                <strong>{{ milestone.title }}</strong>
+                                <br><small class="text-muted">{{ milestone.semester }} - {{ milestone.year }}</small>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No upcoming milestones. Check back later!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Semester Snapshot -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">📅 Current Semester</h5>
+                </div>
+                <div class="card-body">
+                    {% if summary.current_courses %}
+                        <ul class="list-group list-group-flush">
+                            {% for course in summary.current_courses %}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>{{ course.code }} - {{ course.title }}</span>
+                                <span class="badge bg-info">{{ course.credits }} cr</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No courses planned for this semester.</p>
+                        <a href="{% url 'recommender:roadmap' %}" class="btn btn-sm btn-primary">Build Your Roadmap</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Degree Requirements Breakdown -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">📚 Degree Requirements Breakdown</h5>
+                </div>
+                <div class="card-body">
+                    {% if summary.requirements %}
+                        <div class="row">
+                            {% for req in summary.requirements %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card border-{{ req.status }}">
+                                    <div class="card-body">
+                                        <h6>{{ req.category }}</h6>
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar" style="width: {{ req.completion }}%">
+                                                {{ req.completion }}%
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">
+                                            {{ req.completed }}/{{ req.required }} credits
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center">
+                            Degree requirements will appear here once you select a major.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'recommender:roadmap' %}" class="btn btn-lg btn-primary me-2">View Full Roadmap</a>
+            <a href="{% url 'recommender:dashboard' %}" class="btn btn-lg btn-outline-primary me-2">AI Recommendations</a>
+            <a href="{% url 'accounts:portfolio_checklist' %}" class="btn btn-lg btn-outline-secondary">My Portfolio</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
