@@ -50,7 +50,8 @@ class RecommendationEngine:
 
     def _calculate_career_match(self, career: Career) -> Dict:
         """
-        Calculate how well a career matches the user's profile.
+        IMPROVED: Calculate how well a career matches the user's profile using
+        multi-factor scoring: skills, interests, industries, career goals.
         Returns match score (0-100), matched skills, gaps, and reasoning.
         """
         # Get career's required skills
@@ -60,22 +61,70 @@ class RecommendationEngine:
         elif isinstance(career.skills, str):
             career_skills = set([s.lower().strip() for s in career.skills.split(',') if s.strip()])
 
-        # Normalize user skills for comparison
-        user_skills_normalized = set([s.lower().strip() for s in self.user_skills])
+        # Get career's industries
+        career_industries = set()
+        if isinstance(career.industries, list):
+            career_industries = set([i.lower().strip() for i in career.industries])
 
-        # Calculate skill overlap
+        # Normalize user data
+        user_skills_normalized = set([s.lower().strip() for s in self.user_skills])
+        user_interests_normalized = set([i.lower().strip() for i in self.user_interests])
+
+        # Get user's preferred industries
+        user_industries = set()
+        if self.profile.preferred_industries:
+            user_industries = set([i.lower().strip() for i in self.profile.preferred_industries.split(',')])
+
+        # Calculate skill overlap (50% weight)
         matched_skills = user_skills_normalized & career_skills
         missing_skills = career_skills - user_skills_normalized
 
-        # Calculate match score
-        if len(career_skills) == 0:
-            match_score = 0
-        else:
-            match_score = int((len(matched_skills) / len(career_skills)) * 100)
+        skill_score = 0
+        if len(career_skills) > 0:
+            skill_score = (len(matched_skills) / len(career_skills)) * 50
+
+        # Calculate interest alignment (30% weight)
+        # Check if user's interests overlap with career title, description, or skills
+        interest_score = 0
+        career_text = f"{career.title} {career.description}".lower()
+        interest_matches = []
+        for interest in user_interests_normalized:
+            if interest in career_text or interest in career_skills:
+                interest_matches.append(interest)
+                interest_score += 10
+        interest_score = min(interest_score, 30)  # Cap at 30
+
+        # Calculate industry alignment (20% weight)
+        industry_score = 0
+        if user_industries and career_industries:
+            industry_overlap = user_industries & career_industries
+            if industry_overlap:
+                industry_score = min((len(industry_overlap) / len(career_industries)) * 20, 20)
+
+        # Calculate career goals alignment (bonus, up to 15 points)
+        goals_score = 0
+        if self.profile.career_goals:
+            goals_text = self.profile.career_goals.lower()
+            if career.title.lower() in goals_text:
+                goals_score = 15  # Direct title match
+            elif any(skill in goals_text for skill in career_skills):
+                goals_score = 8  # Skills match goals
+            elif any(industry in goals_text for industry in career_industries):
+                goals_score = 5  # Industry match goals
+
+        # Calculate total match score (capped at 100)
+        match_score = int(min(skill_score + interest_score + industry_score + goals_score, 100))
+
+        # Boost score if user has work experience related to this career
+        if self.profile.work_experience:
+            exp_text = self.profile.work_experience.lower()
+            if career.title.lower() in exp_text:
+                match_score = min(match_score + 10, 100)  # Boost for relevant experience
 
         # Generate reasoning
         reasoning = self._generate_career_reasoning(
-            career, matched_skills, missing_skills, match_score
+            career, matched_skills, missing_skills, match_score,
+            interest_matches, industry_overlap if user_industries and career_industries else []
         )
 
         return {
@@ -86,30 +135,84 @@ class RecommendationEngine:
         }
 
     def _generate_career_reasoning(
-            self, career: Career, matched: set, missing: set, score: int
+            self, career: Career, matched: set, missing: set, score: int,
+            interest_matches: list = None, industry_overlap: set = None
     ) -> str:
-        """Generate human-readable explanation for why a career matches."""
+        """IMPROVED: Generate comprehensive explanation for why a career matches."""
 
-        if score >= 70:
-            reason = f"**Strong Match** ({score}%): You already have {len(matched)} out of {len(matched) + len(missing)} key skills for {career.title}. "
+        interest_matches = interest_matches or []
+        industry_overlap = industry_overlap or set()
+
+        if score >= 80:
+            reason = f"**Excellent Match** ({score}%): "
+
+            # Highlight work experience if relevant
+            if self.profile.work_experience and career.title.lower() in self.profile.work_experience.lower():
+                reason += f"Your work experience directly relates to {career.title}! "
+
             if matched:
-                reason += f"Your skills in {', '.join(list(matched)[:3])} align well with this role. "
+                reason += f"You have strong skills in {', '.join(list(matched)[:3])}. "
+
+            if interest_matches:
+                reason += f"Your interests in {', '.join(interest_matches[:2])} align perfectly. "
+
+            if industry_overlap:
+                reason += f"You're targeting the right industry. "
+
+            if missing and len(missing) <= 2:
+                reason += f"Just polish up on: {', '.join(list(missing))}."
+            elif missing:
+                reason += f"Consider adding: {', '.join(list(missing)[:2])}."
+
+        elif score >= 60:
+            reason = f"**Strong Match** ({score}%): "
+
+            if len(matched) > 0:
+                reason += f"You have {len(matched)} out of {len(matched) + len(missing)} key skills. "
+                reason += f"Your expertise in {', '.join(list(matched)[:3])} is valuable. "
+
+            if interest_matches:
+                reason += f"Your passion for {', '.join(interest_matches[:2])} makes this a great fit. "
+
             if missing:
-                reason += f"Consider developing: {', '.join(list(missing)[:3])}."
+                reason += f"Focus on developing: {', '.join(list(missing)[:3])}."
+
         elif score >= 40:
-            reason = f"**Good Match** ({score}%): You have {len(matched)} relevant skills for {career.title}. "
+            reason = f"**Good Match** ({score}%): "
+
             if matched:
-                reason += f"Your experience in {', '.join(list(matched)[:2])} is valuable. "
+                reason += f"You have relevant experience with {', '.join(list(matched)[:2])}. "
+
+            if interest_matches:
+                reason += f"Your interest in {', '.join(interest_matches[:2])} shows strong alignment. "
+            elif industry_overlap:
+                reason += f"This role fits your target industries. "
+
             if missing:
-                reason += f"To strengthen your fit, focus on: {', '.join(list(missing)[:3])}."
-        elif score > 0:
-            reason = f"**Growing Opportunity** ({score}%): {career.title} could be a future path. "
+                reason += f"Build up skills in: {', '.join(list(missing)[:3])}."
+
+        elif score >= 20:
+            reason = f"**Growing Opportunity** ({score}%): "
+
             if matched:
-                reason += f"You have some foundation with {', '.join(list(matched)[:2])}. "
-            if missing:
-                reason += f"Key areas to develop: {', '.join(list(missing)[:3])}."
+                reason += f"You have a foundation with {', '.join(list(matched)[:2])}. "
+
+            if interest_matches:
+                reason += f"Your interest in {', '.join(interest_matches[:1])} could drive your learning. "
+
+            reason += f"{career.title} requires developing: {', '.join(list(missing)[:3])}. "
+
+            # Suggest pathway
+            if self.profile.academic_year in ['FR', 'SO']:
+                reason += "You have time to build these skills through coursework and projects."
+
         else:
-            reason = f"**Exploratory Path**: {career.title} requires different skills. Consider if this aligns with your long-term interests."
+            reason = f"**Exploratory Path** ({score}%): {career.title} requires different skills. "
+
+            if interest_matches:
+                reason += f"However, your interest in {', '.join(interest_matches[:1])} shows curiosity. "
+
+            reason += "Consider if this aligns with your long-term goals before investing time."
 
         return reason
 
