@@ -992,22 +992,24 @@ def career_plan_detail(request, plan_id):
 def career_plan_add_item(request, plan_id):
     """Add an item to a career plan."""
     from accounts.models import CareerPlan, PlanItem, PortfolioItem
-    
+
     plan = get_object_or_404(CareerPlan, id=plan_id, user_profile=request.user.profile)
-    
+
     if request.method == 'POST':
         item_type = request.POST.get('item_type')  # 'portfolio' or 'course' or 'custom'
         priority = int(request.POST.get('priority', 5))
         target_semester = request.POST.get('target_semester', '')
         notes = request.POST.get('notes', '')
-        
+        status = request.POST.get('status', 'PLANNED')
+
         plan_item = PlanItem(
             career_plan=plan,
             priority=priority,
             target_semester=target_semester,
-            notes=notes
+            notes=notes,
+            status=status
         )
-        
+
         if item_type == 'portfolio':
             portfolio_item_id = request.POST.get('portfolio_item_id')
             portfolio_item = PortfolioItem.objects.get(id=portfolio_item_id)
@@ -1019,11 +1021,11 @@ def career_plan_add_item(request, plan_id):
         elif item_type == 'custom':
             plan_item.custom_title = request.POST.get('custom_title')
             plan_item.custom_description = request.POST.get('custom_description', '')
-        
+
         plan_item.save()
         messages.success(request, "Item added to your career plan!")
         return redirect('accounts:career_plan_detail', plan_id=plan.id)
-    
+
     return redirect('accounts:career_plan_detail', plan_id=plan.id)
 
 

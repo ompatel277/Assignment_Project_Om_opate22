@@ -96,9 +96,76 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="bi bi-list-check"></i> Action Items</h5>
+                    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#addCustomItem" aria-expanded="false">
+                        <i class="bi bi-plus-circle"></i> Add Custom Item
+                    </button>
                 </div>
+
+                <!-- Add Custom Item Form (Collapsible) -->
+                <div class="collapse" id="addCustomItem">
+                    <div class="card-body bg-light border-bottom">
+                        <h6 class="mb-3"><i class="bi bi-plus"></i> Create Custom Action Item</h6>
+                        <form method="post" action="{% url 'accounts:career_plan_add_item' plan.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_type" value="custom">
+
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <label for="custom_title" class="form-label fw-bold">Title *</label>
+                                    <input type="text" class="form-control" id="custom_title" name="custom_title"
+                                           placeholder="e.g., Complete System Design Course" required>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="priority" class="form-label fw-bold">Priority (1-10)</label>
+                                    <input type="number" class="form-control" id="priority" name="priority"
+                                           min="1" max="10" value="5">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="target_semester" class="form-label fw-bold">Target Semester</label>
+                                    <input type="text" class="form-control" id="target_semester" name="target_semester"
+                                           placeholder="e.g., Fall 2025">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="status" class="form-label fw-bold">Initial Status</label>
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="PLANNED" selected>Planned</option>
+                                        <option value="IN_PROGRESS">In Progress</option>
+                                        <option value="COMPLETED">Completed</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="custom_description" class="form-label fw-bold">Description</label>
+                                    <textarea class="form-control" id="custom_description" name="custom_description"
+                                              rows="2" placeholder="Details about this action item..."></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="notes" class="form-label fw-bold">Notes</label>
+                                    <textarea class="form-control" id="notes" name="notes" rows="2"
+                                              placeholder="Additional notes or reminders..."></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle"></i> Add Item
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="collapse"
+                                            data-bs-target="#addCustomItem">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="card-body">
                     {% if plan_items %}
                         <div class="list-group list-group-flush">
