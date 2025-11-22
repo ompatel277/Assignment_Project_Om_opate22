@@ -176,6 +176,26 @@ h1, h2, h3, h4, h5, h6,
   background-color: #fd7e14 !important;
 }
 
+.border-cert, .bg-cert {
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+}
+
+.border-milestone, .bg-milestone {
+  border-color: #9b59b6 !important;
+  background-color: #9b59b6 !important;
+}
+
+.border-internship, .bg-internship {
+  border-color: #17a2b8 !important;
+  background-color: #17a2b8 !important;
+}
+
+.border-competition, .bg-competition {
+  border-color: #e74c3c !important;
+  background-color: #e74c3c !important;
+}
+
 /* Footer styles */
 .footer {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);

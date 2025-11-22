@@ -16,12 +16,12 @@
  <div class="row mb-4">
  <div class="col-12">
  <div class="btn-group" role="group">
- <a href="?category=all" class="btn btn-outline-primary {% if not request.GET.category or request.GET.category == 'all' %}active{% endif %}">All</a>
- <a href="?category=PROJECT" class="btn btn-outline-primary {% if request.GET.category == 'PROJECT' %}active{% endif %}">Projects</a>
- <a href="?category=COURSE" class="btn btn-outline-primary {% if request.GET.category == 'COURSE' %}active{% endif %}">Courses</a>
- <a href="?category=CERTIFICATION" class="btn btn-outline-primary {% if request.GET.category == 'CERTIFICATION' %}active{% endif %}">Certifications</a>
- <a href="?category=EXPERIENCE" class="btn btn-outline-primary {% if request.GET.category == 'EXPERIENCE' %}active{% endif %}">Experience</a>
- <a href="?category=ACHIEVEMENT" class="btn btn-outline-primary {% if request.GET.category == 'ACHIEVEMENT' %}active{% endif %}">Achievements</a>
+ <a href="?category=all" class="btn btn-outline-primary {% if not selected_category or selected_category == 'all' %}active{% endif %}">All</a>
+ <a href="?category=PROJECT" class="btn btn-outline-primary {% if selected_category == 'PROJECT' %}active{% endif %}">Projects</a>
+ <a href="?category=CERT" class="btn btn-outline-primary {% if selected_category == 'CERT' %}active{% endif %}">Certifications</a>
+ <a href="?category=MILESTONE" class="btn btn-outline-primary {% if selected_category == 'MILESTONE' %}active{% endif %}">Milestones</a>
+ <a href="?category=INTERNSHIP" class="btn btn-outline-primary {% if selected_category == 'INTERNSHIP' %}active{% endif %}">Internships</a>
+ <a href="?category=COMPETITION" class="btn btn-outline-primary {% if selected_category == 'COMPETITION' %}active{% endif %}">Competitions</a>
  </div>
  </div>
  </div>

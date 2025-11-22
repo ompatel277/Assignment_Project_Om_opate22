@@ -56,16 +56,23 @@ def career_recommendations_view(request):
 @login_required
 def portfolio_recommendations_view(request):
     """
-    Detailed view of portfolio item recommendations.
+    Detailed view of portfolio item recommendations with filtering.
     """
     profile = request.user.profile
     engine = RecommendationEngine(profile)
 
-    portfolio_recs = engine.get_portfolio_recommendations(limit=12)
+    # Get all portfolio recommendations
+    portfolio_recs = engine.get_portfolio_recommendations(limit=50)
+
+    # Filter by category if specified
+    category = request.GET.get('category', 'all')
+    if category and category != 'all':
+        portfolio_recs = [rec for rec in portfolio_recs if rec['item'].item_type == category]
 
     context = {
         'recommendations': portfolio_recs,
         'profile': profile,
+        'selected_category': category,
     }
 
     return render(request, 'recommender/portfolio.html', context)
