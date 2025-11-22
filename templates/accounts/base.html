@@ -138,13 +138,21 @@
 
  <!-- Career Plans -->
 
- <li class="nav-item">
+ <li class="nav-item dropdown">
 
- <a class="nav-link" href="{% url 'accounts:career_plans_list' %}">
+ <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
 
  <i class="bi bi-diagram-3"></i> Career Plans
 
  </a>
+
+ <ul class="dropdown-menu">
+
+ <li><a class="dropdown-item" href="{% url 'accounts:career_plans_list' %}"><i class="bi bi-list-ul"></i> My Plans</a></li>
+
+ <li><a class="dropdown-item" href="{% url 'recommender:roadmap' %}"><i class="bi bi-map"></i> My Roadmap</a></li>
+
+ </ul>
 
  </li>
 

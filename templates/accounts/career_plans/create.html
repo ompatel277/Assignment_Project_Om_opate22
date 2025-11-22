@@ -45,7 +45,7 @@
                                                 <div class="form-check card">
                                                     <div class="card-body py-2">
                                                         <input class="form-check-input career-radio" type="radio"
-                                                               name="career" id="career_{{ rec.career.id }}"
+                                                               name="career_radio" id="career_{{ rec.career.id }}"
                                                                value="{{ rec.career.id }}">
                                                         <label class="form-check-label" for="career_{{ rec.career.id }}">
                                                             <strong>{{ rec.career.title }}</strong>
@@ -126,7 +126,7 @@
 <script>
 // Sync radio buttons and select dropdown
 document.addEventListener('DOMContentLoaded', function() {
-    const radioButtons = document.querySelectorAll('.career-radio');
+    const radioButtons = document.querySelectorAll('input[name="career_radio"]');
     const selectDropdown = document.getElementById('career_all');
     const hiddenInput = document.getElementById('career_hidden');
     const form = document.getElementById('careerPlanForm');
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form submission validation
     form.addEventListener('submit', function(e) {
-        const selectedRadio = document.querySelector('.career-radio:checked');
+        const selectedRadio = document.querySelector('input[name="career_radio"]:checked');
         const selectedDropdown = selectDropdown.value;
 
         if (!selectedRadio && !selectedDropdown) {
@@ -170,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (selectedDropdown) {
             hiddenInput.value = selectedDropdown;
         }
+
+        return true;
     });
 });
 </script>
