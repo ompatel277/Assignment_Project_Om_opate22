@@ -32,7 +32,7 @@ class RoadmapGenerator:
         self.profile = user_profile
         self.rec_engine = RecommendationEngine(user_profile)
 
-        # Semester settings
+        # Semester Settings
         self.target_credits_per_semester = 15  # Typical full-time load
         self.max_semesters = 8  # 4 years = 8 semesters
 
