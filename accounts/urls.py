@@ -135,6 +135,10 @@ urlpatterns = [
     # =====================================================
     #  CAREER PLANNING
     # =====================================================
+    # Career Planning (Unified View)
+    path("career-planning/", views.career_planning_view, name="career_planning"),
+
+    # Career Plans (Legacy)
     path("career-plans/", views.career_plans_list, name="career_plans_list"),
     path("career-plans/create/", views.career_plan_create, name="career_plan_create"),
     path("career-plans/<int:plan_id>/", views.career_plan_detail, name="career_plan_detail"),

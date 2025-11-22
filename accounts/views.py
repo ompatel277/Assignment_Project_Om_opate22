@@ -884,16 +884,35 @@ function greet() { return 'Hello World!'; }"""
 # =====================================================
 
 @login_required
+def career_planning_view(request):
+    """Unified career planning page with tabs for My Plans and AI Roadmap."""
+    profile = request.user.profile
+    plans = CareerPlan.objects.filter(user_profile=profile)
+
+    # Get roadmap summary
+    from recommender.roadmap import get_roadmap_summary
+    summary = get_roadmap_summary(profile)
+
+    context = {
+        'plans': plans,
+        'profile': profile,
+        'summary': summary,
+    }
+
+    return render(request, 'accounts/career_planning.html', context)
+
+
+@login_required
 def career_plans_list(request):
     """List all career plans for the current user."""
     profile = request.user.profile
     plans = CareerPlan.objects.filter(user_profile=profile)
-    
+
     context = {
         'plans': plans,
         'profile': profile,
     }
-    
+
     return render(request, 'accounts/career_plans/list.html', context)
 
 

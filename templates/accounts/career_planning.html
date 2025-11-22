@@ -1,0 +1,195 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Career Planning - Traject{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-5"><i class="bi bi-diagram-3"></i> Career Planning</h1>
+            <p class="lead text-muted">Plan your path to success with personalized career roadmaps</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'accounts:career_plan_create' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Create New Plan
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-4" id="careerPlanningTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="my-plans-tab" data-bs-toggle="tab"
+                    data-bs-target="#my-plans" type="button" role="tab">
+                <i class="bi bi-list-ul"></i> My Plans
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ai-roadmap-tab" data-bs-toggle="tab"
+                    data-bs-target="#ai-roadmap" type="button" role="tab">
+                <i class="bi bi-map"></i> AI Roadmap
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tabs Content -->
+    <div class="tab-content" id="careerPlanningTabsContent">
+        <!-- Tab 1: My Plans -->
+        <div class="tab-pane fade show active" id="my-plans" role="tabpanel">
+            {% if plans %}
+                <div class="row g-4">
+                    {% for plan in plans %}
+                        <div class="col-md-6">
+                            <div class="card h-100 {% if plan.is_primary %}border-primary{% endif %} shadow-sm">
+                                <div class="card-header {% if plan.is_primary %}bg-primary text-white{% else %}bg-secondary text-white{% endif %}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            {{ plan.name }}
+                                            {% if plan.is_primary %}
+                                                <span class="badge bg-success ms-2">Primary</span>
+                                            {% endif %}
+                                        </h5>
+                                        {% if not plan.is_active %}
+                                            <span class="badge bg-dark">Inactive</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-muted mb-2">
+                                        <i class="bi bi-briefcase"></i> Target Career
+                                    </h6>
+                                    <p class="fw-bold mb-3">{{ plan.target_career.title }}</p>
+
+                                    {% if plan.description %}
+                                        <p class="small text-muted">{{ plan.description|truncatewords:20 }}</p>
+                                    {% endif %}
+
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <small class="text-muted">Progress</small>
+                                            <small class="fw-bold">{{ plan.get_progress_percentage }}%</small>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: {{ plan.get_progress_percentage }}%"
+                                                 aria-valuenow="{{ plan.get_progress_percentage }}"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="bi bi-list-check"></i> {{ plan.plan_items.count }} items in plan
+                                        </small>
+                                    </div>
+
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar"></i> Created {{ plan.created_at|date:"M d, Y" }}
+                                    </small>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'accounts:career_plan_detail' plan.id %}"
+                                           class="btn btn-sm btn-primary flex-grow-1">
+                                            <i class="bi bi-eye"></i> View Plan
+                                        </a>
+                                        <form method="post" action="{% url 'accounts:career_plan_delete' plan.id %}"
+                                              onsubmit="return confirm('Delete this plan?')" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card shadow-sm">
+                    <div class="card-body text-center py-5">
+                        <i class="bi bi-diagram-3 fs-1 text-muted mb-3 d-block"></i>
+                        <h4 class="mb-3">No Career Plans Yet</h4>
+                        <p class="text-muted mb-4">
+                            Create a career plan to map out your path to your dream job.<br>
+                            Compare multiple career options and track your progress!
+                        </p>
+                        <a href="{% url 'accounts:career_plan_create' %}" class="btn btn-primary btn-lg">
+                            <i class="bi bi-plus-circle"></i> Create Your First Plan
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Tab 2: AI Roadmap -->
+        <div class="tab-pane fade" id="ai-roadmap" role="tabpanel">
+            <!-- Progress Overview -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center shadow-sm border-primary">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Credits Required</h6>
+                            <h2 class="text-primary">{{ summary.total_credits_required|default:"120" }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow-sm border-success">
+                        <div class="card-body">
+                            <h6 class="text-muted">Credits Completed</h6>
+                            <h2 class="text-success">{{ summary.credits_completed|default:"0" }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow-sm border-warning">
+                        <div class="card-body">
+                            <h6 class="text-muted">Credits Remaining</h6>
+                            <h2 class="text-warning">{{ summary.credits_remaining|default:"120" }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center shadow-sm border-info">
+                        <div class="card-body">
+                            <h6 class="text-muted">Semesters Left</h6>
+                            <h2 class="text-info">{{ summary.semesters_remaining|default:"8" }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5>Degree Progress</h5>
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: {{ summary.progress_percentage|default:"0" }}%">
+                                    {{ summary.progress_percentage|default:"0" }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Full Roadmap Button -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a href="{% url 'recommender:roadmap' %}" class="btn btn-lg btn-primary">
+                        <i class="bi bi-map"></i> View Full Semester-by-Semester Roadmap
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
