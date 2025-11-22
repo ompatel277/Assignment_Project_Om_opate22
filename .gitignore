@@ -59,3 +59,11 @@ htmlcov/
 # Migrations (optional - uncomment if you want to ignore)
 # */migrations/*.py
 # !*/migrations/__init__.py
+
+# Database files
+db.sqlite3
+data/
+
+# Environment-specific
+*.pyc
+__pycache__/

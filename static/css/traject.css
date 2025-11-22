@@ -325,6 +325,20 @@ html {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+
+/* Dropdown items */
+.dropdown-item {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #000000 !important;
+  background-color: #ffffff;
+}
+
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -358,4 +372,14 @@ html {
   .btn {
     display: none;
   }
+}
+
+/* Focus outline - white instead of blue */
+.nav-link:focus,
+.dropdown-toggle:focus,
+.btn:focus,
+a:focus {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25) !important;
 }
