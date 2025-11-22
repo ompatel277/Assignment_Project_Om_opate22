@@ -12,33 +12,44 @@
  </div>
  </div>
 
- {% if careers %}
+ {% if recommendations %}
  <div class="row">
- {% for career in careers %}
+ {% for rec in recommendations %}
  <div class="col-md-6 col-lg-4 mb-4">
  <div class="card h-100 shadow-sm">
  <div class="card-body">
  <div class="d-flex justify-content-between align-items-start mb-3">
- <h5 class="card-title">{{ career.title }}</h5>
- <span class="badge bg-success">{{ career.match_score }}%</span>
+ <h5 class="card-title">{{ rec.career.title }}</h5>
+ <span class="badge bg-success">{{ rec.match_score }}%</span>
  </div>
- 
- <p class="card-text text-muted">{{ career.description|truncatewords:25 }}</p>
- 
- {% if career.required_skills %}
+
+ <p class="card-text text-muted mb-3">{{ rec.reasoning|truncatewords:20 }}</p>
+
+ {% if rec.matched_skills %}
  <div class="mb-3">
- <small class="text-muted d-block mb-1">Required Skills:</small>
+ <small class="text-success d-block mb-1"><i class="bi bi-check-circle"></i> Your Matching Skills:</small>
  <div class="d-flex flex-wrap gap-1">
- {% for skill in career.required_skills|slice:":5" %}
- <span class="badge bg-secondary">{{ skill }}</span>
+ {% for skill in rec.matched_skills|slice:":5" %}
+ <span class="badge bg-success">{{ skill }}</span>
+ {% endfor %}
+ </div>
+ </div>
+ {% endif %}
+
+ {% if rec.missing_skills %}
+ <div class="mb-3">
+ <small class="text-warning d-block mb-1"><i class="bi bi-star"></i> Skills to Develop:</small>
+ <div class="d-flex flex-wrap gap-1">
+ {% for skill in rec.missing_skills|slice:":5" %}
+ <span class="badge bg-warning text-dark">{{ skill }}</span>
  {% endfor %}
  </div>
  </div>
  {% endif %}
 
  <div class="d-flex justify-content-between align-items-center mt-3">
- <small class="text-muted">Avg Salary: ${{ career.average_salary|default:"N/A" }}</small>
- <a href="{% url 'careers:detail' career.id %}" class="btn btn-sm btn-primary">Learn More</a>
+ <small class="text-muted"><i class="bi bi-building"></i> {{ rec.career.company }}</small>
+ <a href="{% url 'careers:detail' rec.career.id %}" class="btn btn-sm btn-primary">Learn More</a>
  </div>
  </div>
  </div>

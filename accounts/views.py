@@ -902,45 +902,53 @@ def career_plan_create(request):
     """Create a new career plan."""
     from careers.models import Career
     from accounts.models import CareerPlan
-    
+
     if request.method == 'POST':
         career_id = request.POST.get('career')
-        name = request.POST.get('name')
-        description = request.POST.get('description', '')
+        name = request.POST.get('name', '').strip()
+        description = request.POST.get('description', '').strip()
         is_primary = request.POST.get('is_primary') == 'on'
-        
-        try:
-            career = Career.objects.get(id=career_id)
-            plan = CareerPlan.objects.create(
-                user_profile=request.user.profile,
-                target_career=career,
-                name=name,
-                description=description,
-                is_primary=is_primary
-            )
-            
-            if is_primary:
-                plan.set_as_primary()
-            
-            messages.success(request, f"Career plan '{name}' created successfully!")
-            return redirect('accounts:career_plan_detail', plan_id=plan.id)
-        except Career.DoesNotExist:
-            messages.error(request, "Selected career not found.")
-    
+
+        # Validation
+        if not name:
+            messages.error(request, "Please provide a plan name.")
+        elif not career_id:
+            messages.error(request, "Please select a target career.")
+        else:
+            try:
+                career = Career.objects.get(id=career_id)
+                plan = CareerPlan.objects.create(
+                    user_profile=request.user.profile,
+                    target_career=career,
+                    name=name,
+                    description=description,
+                    is_primary=is_primary
+                )
+
+                if is_primary:
+                    plan.set_as_primary()
+
+                messages.success(request, f"Career plan '{name}' created successfully!")
+                return redirect('accounts:career_plan_detail', plan_id=plan.id)
+            except Career.DoesNotExist:
+                messages.error(request, "Selected career not found.")
+            except Exception as e:
+                messages.error(request, f"Error creating plan: {str(e)}")
+
     # Get top career recommendations for quick selection
     from recommender.engine import RecommendationEngine
     engine = RecommendationEngine(request.user.profile)
     recommended_careers = engine.get_career_recommendations(limit=10)
-    
+
     # Get all careers
     from careers.models import Career
-    all_careers = Career.objects.all()
-    
+    all_careers = Career.objects.all().order_by('title')
+
     context = {
         'recommended_careers': recommended_careers,
         'all_careers': all_careers,
     }
-    
+
     return render(request, 'accounts/career_plans/create.html', context)
 
 
