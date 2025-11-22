@@ -20,6 +20,118 @@
  </div>
  </div>
 
+ <!-- Plan Selection and Comparison Controls -->
+ {% if career_plans %}
+ <div class="row mb-4">
+ <div class="col-md-8">
+ <div class="card shadow-sm">
+ <div class="card-body">
+ <div class="row align-items-center">
+ <div class="col-md-8">
+ <label class="form-label fw-bold mb-2"><i class="bi bi-diagram-3"></i> Select Career Plan:</label>
+ <select class="form-select" id="planSelector" onchange="window.location.href='?plan=' + this.value">
+ <option value="">-- Select a Plan --</option>
+ {% for plan in career_plans %}
+ <option value="{{ plan.id }}" {% if selected_plan and selected_plan.id == plan.id %}selected{% endif %}>
+ {{ plan.name }} ({{ plan.target_career.title }})
+ {% if plan.is_primary %}★ Primary{% endif %}
+ </option>
+ {% endfor %}
+ </select>
+ </div>
+ <div class="col-md-4 text-end">
+ {% if not compare_mode %}
+ <a href="?compare=true" class="btn btn-primary">
+ <i class="bi bi-layout-split"></i> Compare Plans
+ </a>
+ {% else %}
+ <a href="{% url 'recommender:roadmap' %}" class="btn btn-outline-primary">
+ <i class="bi bi-eye"></i> Single View
+ </a>
+ {% endif %}
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-4">
+ {% if selected_plan and not compare_mode %}
+ <div class="card border-primary shadow-sm h-100">
+ <div class="card-body">
+ <h6 class="text-primary mb-2"><i class="bi bi-briefcase"></i> Current Plan</h6>
+ <p class="fw-bold mb-1">{{ selected_plan.name }}</p>
+ <small class="text-muted">{{ selected_plan.target_career.title }}</small>
+ </div>
+ </div>
+ {% endif %}
+ </div>
+ </div>
+ {% endif %}
+
+ {% if compare_mode %}
+ <!-- COMPARISON MODE: Show multiple roadmaps side by side -->
+ <div class="row">
+ {% for data in roadmaps_data %}
+ <div class="col-md-6 mb-4">
+ <div class="card h-100 border-primary shadow">
+ <div class="card-header bg-primary text-white">
+ <h4 class="mb-0">
+ <i class="bi bi-diagram-3"></i> {{ data.plan.name }}
+ {% if data.plan.is_primary %}
+ <span class="badge bg-success ms-2">Primary</span>
+ {% endif %}
+ </h4>
+ <small>Target: {{ data.plan.target_career.title }}</small>
+ </div>
+ <div class="card-body">
+ <!-- Summary Stats for this plan -->
+ <div class="row g-2 mb-3">
+ <div class="col-6">
+ <div class="card text-center border-primary">
+ <div class="card-body p-2">
+ <h6 class="text-accent mb-0">{{ data.summary.total_semesters }}</h6>
+ <small class="text-muted">Semesters</small>
+ </div>
+ </div>
+ </div>
+ <div class="col-6">
+ <div class="card text-center border-success">
+ <div class="card-body p-2">
+ <h6 class="text-success mb-0">{{ data.summary.total_courses }}</h6>
+ <small class="text-muted">Courses</small>
+ </div>
+ </div>
+ </div>
+ <div class="col-6">
+ <div class="card text-center border-info">
+ <div class="card-body p-2">
+ <h6 class="text-info mb-0">{{ data.summary.total_credits|floatformat:0 }}</h6>
+ <small class="text-muted">Credits</small>
+ </div>
+ </div>
+ </div>
+ <div class="col-6">
+ <div class="card text-center border-warning">
+ <div class="card-body p-2">
+ <h6 class="text-warning mb-0">{{ data.summary.graduation_season|slice:":3" }} '{{ data.summary.graduation_year|slice:"-2:" }}</h6>
+ <small class="text-muted">Graduation</small>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <a href="?plan={{ data.plan.id }}" class="btn btn-sm btn-primary w-100">
+ <i class="bi bi-eye"></i> View Full Roadmap
+ </a>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+
+ {% else %}
+ <!-- SINGLE MODE: Show detailed roadmap -->
+
  <!-- Summary Stats -->
  <div class="row g-3 mb-5">
  <div class="col-md-3">
@@ -159,6 +271,9 @@
  </div>
  </div>
  {% endfor %}
+
+ {% endif %}
+ <!-- End of compare_mode conditional -->
 
 </div>
 {% endblock %}

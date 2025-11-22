@@ -85,23 +85,59 @@ def portfolio_recommendations_view(request):
 @login_required
 def roadmap_view(request):
     """
-    Display the complete semester-by-semester roadmap for the user.
-    Shows courses, portfolio items, clubs, and milestones for each semester.
+    Display roadmaps based on user's career plans.
+    Allows selecting specific plan or comparing multiple plans.
     """
+    from accounts.models import CareerPlan
+
     profile = request.user.profile
-    generator = RoadmapGenerator(profile)
 
-    # Generate the full roadmap
-    roadmap = generator.generate_roadmap()
+    # Get all user's career plans
+    career_plans = CareerPlan.objects.filter(user_profile=profile)
 
-    # Get summary stats
-    summary = generator.generate_summary()
+    # Get selected plan (or primary plan by default)
+    selected_plan_id = request.GET.get('plan')
+    compare_mode = request.GET.get('compare') == 'true'
 
-    context = {
-        'roadmap': roadmap,
-        'summary': summary,
-        'profile': profile,
-    }
+    if compare_mode and career_plans.count() > 0:
+        # Compare mode: show multiple roadmaps
+        roadmaps_data = []
+        for plan in career_plans:
+            generator = RoadmapGenerator(profile)
+            roadmaps_data.append({
+                'plan': plan,
+                'roadmap': generator.generate_roadmap(),
+                'summary': generator.generate_summary()
+            })
+
+        context = {
+            'compare_mode': True,
+            'roadmaps_data': roadmaps_data,
+            'career_plans': career_plans,
+            'profile': profile,
+        }
+    else:
+        # Single plan mode
+        selected_plan = None
+
+        if selected_plan_id:
+            selected_plan = career_plans.filter(id=selected_plan_id).first()
+        else:
+            # Default to primary plan or first plan
+            selected_plan = career_plans.filter(is_primary=True).first() or career_plans.first()
+
+        generator = RoadmapGenerator(profile)
+        roadmap = generator.generate_roadmap()
+        summary = generator.generate_summary()
+
+        context = {
+            'compare_mode': False,
+            'roadmap': roadmap,
+            'summary': summary,
+            'profile': profile,
+            'career_plans': career_plans,
+            'selected_plan': selected_plan,
+        }
 
     return render(request, 'recommender/roadmap.html', context)
 
