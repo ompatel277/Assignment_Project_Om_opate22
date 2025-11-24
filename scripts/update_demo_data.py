@@ -10,7 +10,7 @@ sys.path.insert(0, '/home/user/Assignment_Project_Om_opate22')
 os.environ.setdefault('DJANGO_SECRET_KEY', 'demo-key-for-testing')
 os.environ.setdefault('DJANGO_DEBUG', 'True')
 os.environ.setdefault('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Assignment_Project_Om_opate22.Settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Assignment_Project_Om_opate22.settings')
 django.setup()
 
 from django.contrib.auth.models import User

@@ -8,7 +8,7 @@ import django
 
 # Setup Django
 sys.path.append('/home/user/Assignment_Project_Om_opate22')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Assignment_Project_Om_opate22.Settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Assignment_Project_Om_opate22.settings')
 django.setup()
 
 from django.contrib.auth.models import User
