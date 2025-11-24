@@ -30,7 +30,7 @@ db.sqlite3-journal
 /media
 /staticfiles
 /static_root
-# Note: db.sqlite3 is committed for demo purposes
+data/db.sqlite3
 
 # Environment variables
 .env
