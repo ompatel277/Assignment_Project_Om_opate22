@@ -78,3 +78,6 @@ Django’s form process:
   - `add_major_fbv` and `AddMajorCBV` → POST examples.
 
 Assignment 11 enhances Traject with comprehensive data export capabilities and secure authentication controls. We implemented CSV/JSON export endpoints for Courses and Colleges with timestamped filenames, created a protected Reports page displaying aggregated summaries, and built a public signup form that enforces non-staff user creation with auto-login functionality. All sensitive routes are protected with @login_required decorators and LoginRequiredMixin, ensuring only authenticated users can access data exports while maintaining proper separation between staff and regular users.
+
+A13
+Deploying the webapp. Used Ai to make final touches to webapp
