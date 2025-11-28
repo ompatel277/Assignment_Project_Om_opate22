@@ -113,7 +113,8 @@ class RecommendationEngine:
                 goals_score = 5  # Industry match goals
 
         # Calculate total match score (capped at 100)
-        match_score = int(min(skill_score + interest_score + industry_score + goals_score, 100))
+        raw_score = skill_score + interest_score + industry_score + goals_score
+        match_score = min(int(raw_score),100) # hard Cap match to at max at 100% career match
 
         # Boost score if user has work experience related to this career
         if self.profile.work_experience:
@@ -128,7 +129,7 @@ class RecommendationEngine:
         )
 
         return {
-            'match_score': match_score,
+            'match_score': min(match_score, 100),
             'matched_skills': list(matched_skills),
             'missing_skills': list(missing_skills),
             'reasoning': reasoning,
@@ -244,6 +245,7 @@ class RecommendationEngine:
             difficulty_match = self._assess_difficulty_match(item.difficulty_level)
 
             relevance_score = (skill_overlap * 20) + (difficulty_match * 10)
+            relevance_score = min(relevance_score, 100)
 
             if relevance_score > 0:
                 reasoning = self._generate_portfolio_reasoning(item, item_skills, target_skills)
