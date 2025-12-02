@@ -8,7 +8,7 @@ class College(models.Model):
     college_name = models.CharField(max_length=300)  # Full college name
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    abbreviation = models.CharField(max_length=50, unique=True)  # e.g. UIUC
+    abbreviation = models.CharField(max_length=50)  # e.g. UIUC
     logo_url = models.URLField(blank=True, null=True)
 
     class Meta:
