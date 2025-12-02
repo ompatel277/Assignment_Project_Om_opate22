@@ -12,8 +12,5 @@ DATABASES = {
         'PASSWORD': 'Crispyunicorn6248$',
         'HOST': 'opate22.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
     }
 }
