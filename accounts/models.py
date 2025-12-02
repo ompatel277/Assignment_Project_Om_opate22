@@ -50,7 +50,7 @@ class UserProfile(models.Model):
     )
 
     academic_year = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=ACADEMIC_YEARS,
         default='FR'
     )
