@@ -1,0 +1,3615 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-10-02T17:45:21.053Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "UIUC - University of Illinois Urbana-Champaign",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-10-02T17:45:52.117Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Information Science Plus Data Science (UIUC)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-10-02T17:46:05.812Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "opate22 (Junior)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-10-14T20:39:06.555Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "user0 (Freshman)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Minors\", \"Personal interests\", \"Career goals\", \"Clubs interest\", \"Clubs user is a part of\", \"Skills\", \"Work experience\", \"Preferred industries\", \"Preferred locations\", \"Preferred positions\", \"Preferred company\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-10-14T20:39:58.720Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "INFO 490 (Information Science Plus Data Science)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-10-14T20:50:44.761Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "UIUC Web Development Club",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-11-06T16:18:15.544Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "13",
+    "object_repr": "alice_cs",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$5Pf26t4ufjfWsgOQnlyYQK$eDhkGJQ68Z96La5Kz0c2522KZF3BB7+g3y1jr+3+61k=",
+    "last_login": "2025-11-24T23:15:15.986Z",
+    "is_superuser": true,
+    "username": "opate22",
+    "first_name": "",
+    "last_name": "",
+    "email": "opate22@illinois.edu",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-10-02T17:44:03.810Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6Xyly8Hpy06FDSftjGLVKL$wsuYMGoUOPk5eAHCoNCzZ6119GePWW56RWZavkd+seM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "bob_data",
+    "first_name": "Bob",
+    "last_name": "Smith",
+    "email": "bob@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-30T16:20:01.087Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$rwj0MIk6CEQKMZVmOlbC5H$rrLmSPVGId6nhTrEdaSJJ9rj5Q+/FWiwe0gyfPNVWyg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "charlie_ml",
+    "first_name": "Charlie",
+    "last_name": "Brown",
+    "email": "charlie@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-30T16:20:01.228Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$3uLvhkJviPWXrekC0JAQ1E$t9Q9TStfn/8zVwajvd8sC+e0CtyOJ9d/gx1aX5CQxw0=",
+    "last_login": "2025-11-13T03:32:54.865Z",
+    "is_superuser": false,
+    "username": "mohitg2",
+    "first_name": "",
+    "last_name": "",
+    "email": "mohitg2@illinois.edu",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-13T03:29:22.054Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$rggVQxGBjM1WTuNVT8in7T$lUkQ00CAoe9T9cpXEfk9qStQGvX2IIroPjhT8L9MXCw=",
+    "last_login": "2025-11-19T08:20:41.274Z",
+    "is_superuser": false,
+    "username": "demo_student",
+    "first_name": "Demo",
+    "last_name": "Student",
+    "email": "demo@traject.edu",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T05:41:00.793Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$lgEJvfCWmwcqnkmz0hVjtA$Z8iPfxlrpg2n/r6ZzIK0nOXVEasMb3MBufKgzqILjBI=",
+    "last_login": "2025-11-19T06:01:09.944Z",
+    "is_superuser": false,
+    "username": "alice_cs",
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "email": "alice@traject.edu",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T05:41:00.947Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 19,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$oO9naoomdjElkJT1pdAU67$ptDgrtmgfkp1BvCwvduqRRMByyQzFMQA5UuSxowPBkk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "testuser",
+    "first_name": "",
+    "last_name": "",
+    "email": "test@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T06:29:06.745Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$krAz20l4N810G0FbPhynhc$YyL9zG10UK5sF0CvDKyAmf1eInDQREVkz8jfiJpJ2sU=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@traject.edu",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-19T06:39:31.677Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QomlvpcFRJ3lvyVyDpRhE2$IHfPs3bV7FJH85qPaSEzcwPOJ5mw0bjltjZ7spQFD88=",
+    "last_login": "2025-11-28T17:59:03.353Z",
+    "is_superuser": false,
+    "username": "alice_chen",
+    "first_name": "Alice",
+    "last_name": "Chen",
+    "email": "alice@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:19:46.367Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 22,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$04arlyjh6kTGR3RSatmKHn$seS9qeWvnI817TIjmr/hOnZSrOsl7T1PLhb7oUobLAM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "bob_martinez",
+    "first_name": "Bob",
+    "last_name": "Martinez",
+    "email": "bob@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:20:15.223Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Prx5FpigTpyvekIZ1ZPKt0$OYwy0OIJoiJwYYmTuJqKiTHt9pwBZ1hYatahpmemQow=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "carol_johnson",
+    "first_name": "Carol",
+    "last_name": "Johnson",
+    "email": "carol@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:20:15.599Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$thPUOPHm5OxjwOdcEYfYAm$68XRrD2FFcAkDicpo9u43XGBuQiIoOnQyGf9ZdCAyCE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "david_kim",
+    "first_name": "David",
+    "last_name": "Kim",
+    "email": "david@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:20:15.961Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 25,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$0dczxacGK7UCrmWb2JG4zB$SlRa+uex0ftVb3iXrbM+NBcM/OavYZD8TolqBphVank=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "emma_wilson",
+    "first_name": "Emma",
+    "last_name": "Wilson",
+    "email": "emma@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:20:16.358Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 26,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$NDXTcAGTNLHjHffIn4iJlT$IJ1MfQtPpXPGJK/smwOs1ColdRd6t9WRPX6AmqusoL0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "frank_zhang",
+    "first_name": "Frank",
+    "last_name": "Zhang",
+    "email": "frank@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:28:20.254Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 27,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$BYAlvSudpE6xZrDwAKLIXj$DB0bULXkwIIkhFT+Tm8a0rIM++OZa3uObXV9mdAFGAA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "grace_park",
+    "first_name": "Grace",
+    "last_name": "Park",
+    "email": "grace@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:28:20.737Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 28,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$NPxV8xmHgGB3EA5JZkhANK$0i+SE1RniiZMaZ2H9bEcNp1Sg9aSYW9FggxGU6DUNl0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "henry_brown",
+    "first_name": "Henry",
+    "last_name": "Brown",
+    "email": "henry@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:28:21.099Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 29,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$d5ct5iIwi9oCsOKrnsyqiK$DnbyAGYFlG+gdnWAIuvWAupSsBIWk2IYjkcVx0c7boA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "isabel_garcia",
+    "first_name": "Isabel",
+    "last_name": "Garcia",
+    "email": "isabel@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:28:21.530Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 30,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$RdqkjoS3IB7j5vvIkQggfT$vBCHfF+RdHncxhElUK/wJVqGHVAMZHdyaUQR1Q5F8pE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "jason_lee",
+    "first_name": "Jason",
+    "last_name": "Lee",
+    "email": "jason@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-19T07:28:21.893Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0bmtyoc8u4ddwfipbvdbb17mb9zdo7xe",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLd7M:VYBKOUvjfXKfOqkid8gaGNV7eL5vEx3VGjALz9A9tJg",
+    "expire_date": "2025-12-03T08:00:44.833Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "568n9fk6wsk48mk0tusze2vuintt5vzz",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLcxr:rsXynRiinUi6Gm-xGSaERrsEsp5j0aQSUDiFQX8i1bA",
+    "expire_date": "2025-12-03T07:50:55.256Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "814l7kpjfipfas7oq8lt9xh635oxmyxg",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLd7o:IszKP5UFF46lcqeSbPvcKvecm_iAAMn7_C-maRVjuOc",
+    "expire_date": "2025-12-03T08:01:12.608Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dk229aa1k9vcafvy8qam9r49zahremnr",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSE8BVy67zeQGQakaiAp7cr479qkC93ec859sQjbWuM28hJnYhcm2el3Q0iP3HZAd2i3zlNv6zIj3xV-0MGnTvl5Pdy_gwqjfuusiwqQsrEkSgbtAmkDHpUsznknzFkkSkiGQAaDBUTAJL12VhlldWHvD_6YOC0:1vLbiv:mYhYkj9rQKIy_hcQRhDqJe2_wpeVm5qQZQwJ-3A6-CA",
+    "expire_date": "2025-12-03T06:31:25.176Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ej142twxx3048ueh15prbnbh04ykl74l",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLc8B:iQy1qdCvLKJhKV-UT7hWEs9REpK17B6ROady5YkSyYc",
+    "expire_date": "2025-12-03T06:57:31.162Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "h84p907xj7xs6n6bt14q3jrcxr1bks5s",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlmxvQ5rSvqcwdqPgwMokfKpEHeHSCmgfTPzXibTtta8LWXOg5qL8c6cfkcmeZRxJ3qn8TZZmcZ1Htjuij3oYrtJy_N6uH8HlZb6rRunogkleiaI2DqBKIWwaRsXEzCiTxQC-ISlBxY4cwzqfCgILWtv3h_1Xjeo:1vP2kJ:tQQZ22TsYvHbeiE7zYDWoIvj8hBC-f6K5EJJ0LwNozg",
+    "expire_date": "2025-12-12T17:59:03.353Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nrm7knjw8cdwwpxtgnl539zdj1gpfo3c",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLcyG:RgmKKirKAWt53mSNKv4EL4kpvFX8WghWMvKWFj8Odao",
+    "expire_date": "2025-12-03T07:51:20.190Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "sy0wzh1dyq1fdatfnlcaxl5ozkrddm6v",
+  "fields": {
+    "session_data": ".eJxVjEEOgjAQRe_StWloKZ2pS_eegUxnBkFNSSisjHdXEha6_e-9_zI9bevYb1WXfhJzNq41p98xEz-07ETuVG6z5bmsy5TtrtiDVnudRZ-Xw_07GKmO3zoiAThIgp1rOq_BY0KW4DQqNw485iYgxDbnQSOTDAEZQ_IROBJ05v0B4XE3Zg:1vJOBb:sKhoNmDJffqw3xfuXyIbcubJpq9oM97fPy1L8ca0nG8",
+    "expire_date": "2025-11-27T03:39:51.511Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "y33oyw4ryght2x12yv2heap77atv3liq",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAYKh1cuu8ZCAyDVA0kpV0Z765NutDtf-_9l_BhW4vfOi9-TuIiNIrT7xgDPbjuJN1DvTVJra7LHOWuyIN2ObXEz-vh_h2U0Mu3NjDkiBCN1tmRyjBqSgQaEChrNohsSVkzGIthTOpMnBkd5WjSAOTE-wMCQDg5:1vLbFd:YDZ3Vo0f1e4eTp7MfKj7n5_zG8ZUVm44ZOOfyAkbX44",
+    "expire_date": "2025-12-03T06:01:09.945Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ybm76qocoo2x177bw0fq265l0of44b9w",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hDotMC4dO8ZyAwMUjVtUtqV8e7apAvd_vfef6lI21rj1mSJY1ZnBer0uzGlh0w7yHeabrNO87QuI-td0Qdt-jpneV4O9--gUqvfmoGH7HvnXAfipDBJDtgHYPaesTgUGiggQTKZLZbeBHDGJosBCnbq_QH2hTfu:1v98a9:jtz9aTOwkio8fIM4qx0d1GAdrls0dUCAW_pep2Z9ARQ",
+    "expire_date": "2025-10-29T20:58:49.014Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yhl5vdumzbeaqgyyioy9gsxmixefoe1d",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSEMDCAu3fcbyPCSqoGktCvjv2uTLnR7zzn3xTxta_XbyIufE7swsOz0OwaKj9x2ku7Ubp3H3tZlDnxX-EEHn3rKz-vh_h1UGvVbo3IZZdIgkAqQTqhNkUWCkhgVWBmM00JZMFGb6M6INktrkDJoVUCw9wfYDDZ-:1vLd6H:W13Wo39lgd3rS7C0tniSiP1PHrngwK3tUeDGEDFP_cg",
+    "expire_date": "2025-12-03T07:59:37.961Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yjfqbq2bfnzxmdd4rws6gxbihyla8usw",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLd9j:f8Nrj5UPGRW2N6jgAOlisPaPBJ6pWHJEqTMoCXqPLOM",
+    "expire_date": "2025-12-03T08:03:11.671Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "z5rrhoh1q3smw75bfgke8uxnp59qzuz0",
+  "fields": {
+    "session_data": ".eJxVjEsOwjAMBe-SNYrc2E4MS_Y9Q-V8SgsolfpZIe4OlbqA7ZuZ9zKdbuvQbUuZuzGbi2nQnH7HqOlR6k7yXettsmmq6zxGuyv2oIttp1ye18P9Oxh0Gb61V5KMyABFgiPiFMAH53vfJCE4c2DfZ_Ug0QkoIQD3pIxRIiKxeX8Axv02UA:1vEYBf:JBugU0ZGzBg4OTtVOiWXCN2Y7lBCG7QU78YO-v9bhrc",
+    "expire_date": "2025-11-13T19:19:55.193Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zw9sy9k0dwcpvvzr9zaf7t0ppzgtjjed",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllrx-sPJX3OYK0_wQFkS3FSIe5OIqWAdmbeezNP21r81vPi58SuTBh2-YWB4jPXw6QH1XvjsdV1mQM_En7azseW8ut2tn8HhXrZ14gCVXRRJEskiXCQelI2EykNGWxQU0Qn4wABjAMYINmEFo0TeueBfb784Tc_:1vLd4t:lRj6OHcheKpUwDGpnKuopa2HVPwzaU6YuPDh6oKXkIM",
+    "expire_date": "2025-12-03T07:58:11.627Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "college": null,
+    "major": null,
+    "gpa": "3.90",
+    "academic_year": "FR",
+    "personal_interests": "Web Development, AI",
+    "career_goals": "",
+    "clubs_interest": "[]",
+    "clubs_user_is_a_part_of": "[]",
+    "skills": "Python, JavaScript, React",
+    "work_experience": "",
+    "preferred_industries": "[]",
+    "preferred_locations": "[]",
+    "preferred_positions": "[]",
+    "preferred_company": "[]",
+    "created_at": "2025-10-02T17:46:05.810Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 14,
+  "fields": {
+    "user": 14,
+    "college": null,
+    "major": null,
+    "gpa": "3.50",
+    "academic_year": "SO",
+    "personal_interests": "Data Analysis, Statistics, Visualization",
+    "career_goals": "Data Scientist in healthcare or finance",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, R, SQL, Pandas, Matplotlib",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-10-30T16:20:01.227Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 15,
+  "fields": {
+    "user": 15,
+    "college": null,
+    "major": null,
+    "gpa": "3.90",
+    "academic_year": "SR",
+    "personal_interests": "Machine Learning, Computer Vision, Research",
+    "career_goals": "Machine Learning Researcher or ML Engineer",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, TensorFlow, PyTorch, C++, CUDA",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-10-30T16:20:01.368Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 16,
+  "fields": {
+    "user": 16,
+    "college": null,
+    "major": null,
+    "gpa": null,
+    "academic_year": "FR",
+    "personal_interests": "",
+    "career_goals": "",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-13T03:29:22.238Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 17,
+  "fields": {
+    "user": 17,
+    "college": 17,
+    "major": 97,
+    "gpa": "3.75",
+    "academic_year": "JR",
+    "personal_interests": "Web Development, AI, Software Engineering, Data Science",
+    "career_goals": "Full-stack developer or software engineer at innovative tech company",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, JavaScript, React, Django, Machine Learning, Data Analysis",
+    "work_experience": "Software Engineering Intern at local startup",
+    "preferred_industries": "Technology, Startups, SaaS",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T05:41:00.947Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 18,
+  "fields": {
+    "user": 18,
+    "college": 13,
+    "major": 74,
+    "gpa": null,
+    "academic_year": "Junior",
+    "personal_interests": "",
+    "career_goals": "",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T05:41:01.095Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 19,
+  "fields": {
+    "user": 19,
+    "college": null,
+    "major": null,
+    "gpa": null,
+    "academic_year": "FR",
+    "personal_interests": "",
+    "career_goals": "",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T06:29:07.153Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 20,
+  "fields": {
+    "user": 20,
+    "college": null,
+    "major": null,
+    "gpa": null,
+    "academic_year": "FR",
+    "personal_interests": "",
+    "career_goals": "",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "",
+    "work_experience": "",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T06:43:15.007Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 21,
+  "fields": {
+    "user": 21,
+    "college": 13,
+    "major": 113,
+    "gpa": "3.90",
+    "academic_year": "SR",
+    "personal_interests": "Artificial Intelligence, Software Engineering, Research",
+    "career_goals": "AI Research Scientist or ML Engineer at top AI lab",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, Java, React, Machine Learning, Data Structures, Algorithms",
+    "work_experience": "Research Assistant at MIT CSAIL, ML Intern at Google Brain",
+    "preferred_industries": "AI/ML, Research, Technology",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "Google, OpenAI, DeepMind, Meta AI",
+    "created_at": "2025-11-19T07:20:15.211Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 22,
+  "fields": {
+    "user": 22,
+    "college": 14,
+    "major": 115,
+    "gpa": "3.70",
+    "academic_year": "JR",
+    "personal_interests": "Robotics, Hardware Design, IoT",
+    "career_goals": "Become a robotics engineer working on autonomous systems and hardware integration",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Circuit Design, MATLAB, C++, Embedded Systems, Signal Processing",
+    "work_experience": "Summer intern at Tesla - Autopilot hardware team",
+    "preferred_industries": "Automotive, Robotics, IoT, Hardware",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:20:15.590Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 23,
+  "fields": {
+    "user": 23,
+    "college": null,
+    "major": 117,
+    "gpa": "3.80",
+    "academic_year": "SO",
+    "personal_interests": "Entrepreneurship, Consulting, Product Management",
+    "career_goals": "Launch my own startup or become a product manager at a tech company",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Marketing, Finance, Excel, Public Speaking, Project Management",
+    "work_experience": "Marketing Intern at McKinsey & Company",
+    "preferred_industries": "Technology, E-commerce, Fintech, Consulting",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:20:15.953Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 24,
+  "fields": {
+    "user": 24,
+    "college": null,
+    "major": 114,
+    "gpa": "3.85",
+    "academic_year": "JR",
+    "personal_interests": "Data Analytics, Machine Learning, Business Intelligence",
+    "career_goals": "Become a senior data scientist or ML engineer at a top tech company",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, R, SQL, Tableau, Statistics, Pandas, NumPy",
+    "work_experience": "Data Analyst Intern at Airbnb (Summer 2024)",
+    "preferred_industries": "Technology, Finance, E-commerce",
+    "preferred_locations": "",
+    "preferred_positions": "Data Scientist, ML Engineer, Data Engineer",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:20:16.349Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 25,
+  "fields": {
+    "user": 25,
+    "college": 13,
+    "major": 116,
+    "gpa": "3.60",
+    "academic_year": "FR",
+    "personal_interests": "Aerospace, Sustainable Energy, Manufacturing",
+    "career_goals": "Design sustainable aircraft or work in renewable energy systems",
+    "clubs_interest": "Engineering clubs, sustainability groups, women in STEM",
+    "clubs_user_is_a_part_of": "",
+    "skills": "CAD, SolidWorks, Physics, Calculus, Python",
+    "work_experience": "",
+    "preferred_industries": "Aerospace, Sustainable Energy, Manufacturing",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:20:16.702Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 26,
+  "fields": {
+    "user": 26,
+    "college": 13,
+    "major": 113,
+    "gpa": "3.45",
+    "academic_year": "SO",
+    "personal_interests": "Open Source, Systems Programming, Cybersecurity",
+    "career_goals": "Work on open source projects and contribute to Linux kernel",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, C, Linux, Git, Algorithms",
+    "work_experience": "Teaching Assistant for Introduction to Programming",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:28:20.690Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 27,
+  "fields": {
+    "user": 27,
+    "college": 14,
+    "major": 113,
+    "gpa": "3.95",
+    "academic_year": "JR",
+    "personal_interests": "Artificial Intelligence, Research, Healthcare AI",
+    "career_goals": "PhD in AI/ML, research scientist at top tech company or academia",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Python, TensorFlow, PyTorch, Computer Vision, NLP",
+    "work_experience": "Research Assistant - Stanford AI Lab, AI Research Intern at DeepMind",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:28:21.090Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 28,
+  "fields": {
+    "user": 28,
+    "college": null,
+    "major": 113,
+    "gpa": "3.55",
+    "academic_year": "SR",
+    "personal_interests": "Web Development, UI/UX, Developer Tools",
+    "career_goals": "Senior Frontend Engineer or Engineering Manager",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "JavaScript, TypeScript, React, Vue, Node.js, GraphQL",
+    "work_experience": "Frontend Engineer Intern at Stripe, Full-stack Intern at Notion",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:28:21.521Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 29,
+  "fields": {
+    "user": 29,
+    "college": null,
+    "major": 113,
+    "gpa": "3.70",
+    "academic_year": "JR",
+    "personal_interests": "Product Design, Accessibility, Human-Computer Interaction",
+    "career_goals": "Lead product designer at a mission-driven tech company",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "Figma, Adobe XD, User Research, Prototyping, HTML/CSS",
+    "work_experience": "UX Design Intern at Microsoft, Design Intern at Duolingo",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:28:21.884Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 30,
+  "fields": {
+    "user": 30,
+    "college": 14,
+    "major": 115,
+    "gpa": "3.80",
+    "academic_year": "SR",
+    "personal_interests": "Hardware Engineering, Chip Design, IoT",
+    "career_goals": "Hardware Engineer at Apple or semiconductor company",
+    "clubs_interest": "",
+    "clubs_user_is_a_part_of": "",
+    "skills": "FPGA, Verilog, ARM, Embedded C, PCB Design",
+    "work_experience": "Hardware Engineering Intern at Apple, Research at Stanford Hardware Lab",
+    "preferred_industries": "",
+    "preferred_locations": "",
+    "preferred_positions": "",
+    "preferred_company": "",
+    "created_at": "2025-11-19T07:28:22.253Z",
+    "minors": []
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 16,
+  "fields": {
+    "subject": "CS",
+    "number": "101",
+    "title": "Introduction to Computer Science",
+    "credits": "3.0",
+    "major": 113,
+    "description": "Fundamental programming concepts"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 17,
+  "fields": {
+    "subject": "CS",
+    "number": "225",
+    "title": "Data Structures",
+    "credits": "4.0",
+    "major": 113,
+    "description": "Arrays, lists, trees, graphs"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 18,
+  "fields": {
+    "subject": "CS",
+    "number": "233",
+    "title": "Computer Architecture",
+    "credits": "4.0",
+    "major": 113,
+    "description": "Digital logic, processors, memory"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 19,
+  "fields": {
+    "subject": "CS",
+    "number": "374",
+    "title": "Algorithms",
+    "credits": "4.0",
+    "major": 113,
+    "description": "Design and analysis of algorithms"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 20,
+  "fields": {
+    "subject": "MATH",
+    "number": "221",
+    "title": "Calculus I",
+    "credits": "4.0",
+    "major": 118,
+    "description": "Limits, derivatives, integration"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 21,
+  "fields": {
+    "subject": "MATH",
+    "number": "231",
+    "title": "Calculus II",
+    "credits": "3.0",
+    "major": 118,
+    "description": "Advanced integration techniques"
+  }
+},
+{
+  "model": "accounts.course",
+  "pk": 22,
+  "fields": {
+    "subject": "EE",
+    "number": "120",
+    "title": "Signals and Systems",
+    "credits": "4.0",
+    "major": 115,
+    "description": "Signal processing fundamentals"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 16,
+  "fields": {
+    "name": "CMU ACM Student Chapter",
+    "category": "Academic",
+    "college": 16,
+    "description": "ACM Student Chapter at Carnegie Mellon University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 17,
+  "fields": {
+    "name": "CMU Data Science Club",
+    "category": "Academic",
+    "college": 16,
+    "description": "Data Science Club at Carnegie Mellon University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 18,
+  "fields": {
+    "name": "CMU Robotics Team",
+    "category": "Tech",
+    "college": 16,
+    "description": "Robotics Team at Carnegie Mellon University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 19,
+  "fields": {
+    "name": "CMU International Students Association",
+    "category": "Cultural",
+    "college": 16,
+    "description": "International Students Association at Carnegie Mellon University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 20,
+  "fields": {
+    "name": "CMU Intramural Sports",
+    "category": "Sports",
+    "college": 16,
+    "description": "Intramural Sports at Carnegie Mellon University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 21,
+  "fields": {
+    "name": "MIT ACM Student Chapter",
+    "category": "Academic",
+    "college": 13,
+    "description": "ACM Student Chapter at Massachusetts Institute of Technology"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 22,
+  "fields": {
+    "name": "MIT Data Science Club",
+    "category": "Academic",
+    "college": 13,
+    "description": "Data Science Club at Massachusetts Institute of Technology"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 23,
+  "fields": {
+    "name": "MIT Robotics Team",
+    "category": "Tech",
+    "college": 13,
+    "description": "Robotics Team at Massachusetts Institute of Technology"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 24,
+  "fields": {
+    "name": "MIT International Students Association",
+    "category": "Cultural",
+    "college": 13,
+    "description": "International Students Association at Massachusetts Institute of Technology"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 25,
+  "fields": {
+    "name": "MIT Intramural Sports",
+    "category": "Sports",
+    "college": 13,
+    "description": "Intramural Sports at Massachusetts Institute of Technology"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 26,
+  "fields": {
+    "name": "Stanford ACM Student Chapter",
+    "category": "Academic",
+    "college": 14,
+    "description": "ACM Student Chapter at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 27,
+  "fields": {
+    "name": "Stanford Data Science Club",
+    "category": "Academic",
+    "college": 14,
+    "description": "Data Science Club at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 28,
+  "fields": {
+    "name": "Stanford Robotics Team",
+    "category": "Tech",
+    "college": 14,
+    "description": "Robotics Team at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 29,
+  "fields": {
+    "name": "Stanford International Students Association",
+    "category": "Cultural",
+    "college": 14,
+    "description": "International Students Association at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 30,
+  "fields": {
+    "name": "Stanford Intramural Sports",
+    "category": "Sports",
+    "college": 14,
+    "description": "Intramural Sports at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 31,
+  "fields": {
+    "name": "STANFORD ACM Student Chapter",
+    "category": "Academic",
+    "college": 18,
+    "description": "ACM Student Chapter at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 32,
+  "fields": {
+    "name": "STANFORD Data Science Club",
+    "category": "Academic",
+    "college": 18,
+    "description": "Data Science Club at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 33,
+  "fields": {
+    "name": "STANFORD Robotics Team",
+    "category": "Tech",
+    "college": 18,
+    "description": "Robotics Team at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 34,
+  "fields": {
+    "name": "STANFORD International Students Association",
+    "category": "Cultural",
+    "college": 18,
+    "description": "International Students Association at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 35,
+  "fields": {
+    "name": "STANFORD Intramural Sports",
+    "category": "Sports",
+    "college": 18,
+    "description": "Intramural Sports at Stanford University"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 36,
+  "fields": {
+    "name": "Berkeley ACM Student Chapter",
+    "category": "Academic",
+    "college": 15,
+    "description": "ACM Student Chapter at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 37,
+  "fields": {
+    "name": "Berkeley Data Science Club",
+    "category": "Academic",
+    "college": 15,
+    "description": "Data Science Club at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 38,
+  "fields": {
+    "name": "Berkeley Robotics Team",
+    "category": "Tech",
+    "college": 15,
+    "description": "Robotics Team at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 39,
+  "fields": {
+    "name": "Berkeley International Students Association",
+    "category": "Cultural",
+    "college": 15,
+    "description": "International Students Association at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 40,
+  "fields": {
+    "name": "Berkeley Intramural Sports",
+    "category": "Sports",
+    "college": 15,
+    "description": "Intramural Sports at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 41,
+  "fields": {
+    "name": "BERKELEY ACM Student Chapter",
+    "category": "Academic",
+    "college": 19,
+    "description": "ACM Student Chapter at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 42,
+  "fields": {
+    "name": "BERKELEY Data Science Club",
+    "category": "Academic",
+    "college": 19,
+    "description": "Data Science Club at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 43,
+  "fields": {
+    "name": "BERKELEY Robotics Team",
+    "category": "Tech",
+    "college": 19,
+    "description": "Robotics Team at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 44,
+  "fields": {
+    "name": "BERKELEY International Students Association",
+    "category": "Cultural",
+    "college": 19,
+    "description": "International Students Association at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 45,
+  "fields": {
+    "name": "BERKELEY Intramural Sports",
+    "category": "Sports",
+    "college": 19,
+    "description": "Intramural Sports at University of California, Berkeley"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 46,
+  "fields": {
+    "name": "UIUC ACM Student Chapter",
+    "category": "Academic",
+    "college": 17,
+    "description": "ACM Student Chapter at University of Illinois Urbana-Champaign"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 47,
+  "fields": {
+    "name": "UIUC Data Science Club",
+    "category": "Academic",
+    "college": 17,
+    "description": "Data Science Club at University of Illinois Urbana-Champaign"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 48,
+  "fields": {
+    "name": "UIUC Robotics Team",
+    "category": "Tech",
+    "college": 17,
+    "description": "Robotics Team at University of Illinois Urbana-Champaign"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 49,
+  "fields": {
+    "name": "UIUC International Students Association",
+    "category": "Cultural",
+    "college": 17,
+    "description": "International Students Association at University of Illinois Urbana-Champaign"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 50,
+  "fields": {
+    "name": "UIUC Intramural Sports",
+    "category": "Sports",
+    "college": 17,
+    "description": "Intramural Sports at University of Illinois Urbana-Champaign"
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 51,
+  "fields": {
+    "name": "Computer Science Society",
+    "category": "Academic",
+    "college": 13,
+    "description": "Student organization for CS majors. Weekly coding challenges, tech talks, and networking events."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 52,
+  "fields": {
+    "name": "Robotics Club",
+    "category": "Academic",
+    "college": 13,
+    "description": "Design and build robots for competitions. Participate in FIRST Robotics and other challenges."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 53,
+  "fields": {
+    "name": "Entrepreneurship Association",
+    "category": "Professional",
+    "college": 14,
+    "description": "Support student startups with mentorship, funding opportunities, and pitch competitions."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 54,
+  "fields": {
+    "name": "Women in Technology",
+    "category": "Professional",
+    "college": 14,
+    "description": "Empowering women in tech through workshops, mentorship, and industry connections."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 55,
+  "fields": {
+    "name": "Data Science Club",
+    "category": "Academic",
+    "college": null,
+    "description": "Explore data analytics, machine learning, and AI through projects and competitions."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 56,
+  "fields": {
+    "name": "Investment Banking Club",
+    "category": "Professional",
+    "college": null,
+    "description": "Prepare for finance careers with case studies, networking, and industry insights."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 57,
+  "fields": {
+    "name": "Debate Team",
+    "category": "Social",
+    "college": null,
+    "description": "Competitive debate team participating in national tournaments and public speaking events."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 58,
+  "fields": {
+    "name": "Hackathon Organizers",
+    "category": "Academic",
+    "college": 13,
+    "description": "Organize and run hackathons, bringing together students to build innovative projects."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 59,
+  "fields": {
+    "name": "AI Research Group",
+    "category": "Academic",
+    "college": 14,
+    "description": "Undergraduate research group focusing on artificial intelligence and deep learning."
+  }
+},
+{
+  "model": "accounts.club",
+  "pk": 60,
+  "fields": {
+    "name": "Product Management Club",
+    "category": "Professional",
+    "college": null,
+    "description": "Learn product management skills through case studies, speakers, and PM simulations."
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 9,
+  "fields": {
+    "title": "Build a Full-Stack Web App",
+    "item_type": "PROJECT",
+    "description": "Create a complete web application with frontend and backend",
+    "skills_gained": "React, Node.js, MongoDB, REST APIs",
+    "estimated_hours": 40,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": "https://www.freecodecamp.org",
+    "created_at": "2025-11-19T05:41:00.787Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 10,
+  "fields": {
+    "title": "AWS Certified Solutions Architect",
+    "item_type": "CERT",
+    "description": "Industry-recognized cloud computing certification",
+    "skills_gained": "AWS, Cloud Architecture, DevOps",
+    "estimated_hours": 80,
+    "difficulty_level": "ADVANCED",
+    "resource_url": "https://aws.amazon.com/certification/",
+    "created_at": "2025-11-19T05:41:00.789Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 11,
+  "fields": {
+    "title": "Contribute to Open Source",
+    "item_type": "MILESTONE",
+    "description": "Make your first open source contribution",
+    "skills_gained": "Git, GitHub, Collaboration",
+    "estimated_hours": 10,
+    "difficulty_level": "BEGINNER",
+    "resource_url": "https://github.com",
+    "created_at": "2025-11-19T05:41:00.790Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 12,
+  "fields": {
+    "title": "Data Science Internship",
+    "item_type": "INTERNSHIP",
+    "description": "Summer internship at a tech company",
+    "skills_gained": "Python, Data Analysis, Machine Learning",
+    "estimated_hours": 480,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": "",
+    "created_at": "2025-11-19T05:41:00.790Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 13,
+  "fields": {
+    "title": "Hackathon Participation",
+    "item_type": "COMPETITION",
+    "description": "Compete in a 24-hour hackathon",
+    "skills_gained": "Rapid Prototyping, Teamwork, Presentation",
+    "estimated_hours": 24,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": "https://mlh.io",
+    "created_at": "2025-11-19T05:41:00.791Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 14,
+  "fields": {
+    "title": "Machine Learning Portfolio Project",
+    "item_type": "PROJECT",
+    "description": "Build and deploy an ML model",
+    "skills_gained": "Python, TensorFlow, Model Deployment",
+    "estimated_hours": 60,
+    "difficulty_level": "ADVANCED",
+    "resource_url": "",
+    "created_at": "2025-11-19T05:41:00.792Z",
+    "related_careers": [
+      9,
+      12
+    ]
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 15,
+  "fields": {
+    "title": "E-commerce Web Application",
+    "item_type": "PROJECT",
+    "description": "Full-stack e-commerce platform with payment integration, user authentication, and admin dashboard",
+    "skills_gained": "React, Node.js, MongoDB, Stripe API, Authentication",
+    "estimated_hours": 120,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.532Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 16,
+  "fields": {
+    "title": "Mobile Fitness Tracking App",
+    "item_type": "PROJECT",
+    "description": "React Native app with activity tracking, calorie counter, and social features",
+    "skills_gained": "React Native, Mobile Development, API Integration",
+    "estimated_hours": 100,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.540Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 17,
+  "fields": {
+    "title": "Machine Learning Internship at Google",
+    "item_type": "INTERNSHIP",
+    "description": "Summer internship working on recommendation systems and neural networks",
+    "skills_gained": "Python, TensorFlow, Neural Networks, Recommendation Systems",
+    "estimated_hours": 480,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.548Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 18,
+  "fields": {
+    "title": "Open Source Contribution to React",
+    "item_type": "PROJECT",
+    "description": "Bug fixes and feature additions to the React JavaScript library",
+    "skills_gained": "JavaScript, React Internals, Open Source, Git",
+    "estimated_hours": 60,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.556Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 19,
+  "fields": {
+    "title": "Hackathon Winner - FinTech App",
+    "item_type": "COMPETITION",
+    "description": "Won 1st place at MIT Hackathon for personal finance management app",
+    "skills_gained": "Rapid Prototyping, Teamwork, Finance APIs, Presentation",
+    "estimated_hours": 48,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.563Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 20,
+  "fields": {
+    "title": "Build a Blockchain from Scratch",
+    "item_type": "PROJECT",
+    "description": "Educational project implementing a basic blockchain and cryptocurrency",
+    "skills_gained": "Cryptography, Blockchain, Python, Distributed Systems",
+    "estimated_hours": 80,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.572Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 21,
+  "fields": {
+    "title": "UI/UX Design Portfolio",
+    "item_type": "PROJECT",
+    "description": "Collection of 10+ web and mobile app designs with user research documentation",
+    "skills_gained": "Figma, User Research, Wireframing, Prototyping",
+    "estimated_hours": 90,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.579Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 22,
+  "fields": {
+    "title": "Complete React Developer Course",
+    "item_type": "CERT",
+    "description": "Comprehensive online course covering React, Redux, and modern web development",
+    "skills_gained": "React, Redux, JavaScript, Web Development",
+    "estimated_hours": 40,
+    "difficulty_level": "BEGINNER",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:20:58.587Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 23,
+  "fields": {
+    "title": "iOS Mobile App Development",
+    "item_type": "PROJECT",
+    "description": "Build native iOS applications using Swift and SwiftUI with App Store deployment",
+    "skills_gained": "Swift, SwiftUI, iOS Development, Xcode, App Store",
+    "estimated_hours": 100,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.263Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 24,
+  "fields": {
+    "title": "Google Cloud Professional Certificate",
+    "item_type": "CERT",
+    "description": "Professional certification for Google Cloud Platform architecture and engineering",
+    "skills_gained": "GCP, Cloud Architecture, Kubernetes, BigQuery",
+    "estimated_hours": 60,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.273Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 25,
+  "fields": {
+    "title": "Research Publication in AI Conference",
+    "item_type": "MILESTONE",
+    "description": "Publish original research at top-tier AI/ML conference (NeurIPS, ICML, CVPR)",
+    "skills_gained": "Research, Academic Writing, Machine Learning, Peer Review",
+    "estimated_hours": 400,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.282Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 26,
+  "fields": {
+    "title": "Contribute to Open Source (10+ PRs)",
+    "item_type": "PROJECT",
+    "description": "Make meaningful contributions to popular open source projects on GitHub",
+    "skills_gained": "Git, Open Source, Code Review, Community Collaboration",
+    "estimated_hours": 80,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.294Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 27,
+  "fields": {
+    "title": "Software Engineering Internship at FAANG",
+    "item_type": "INTERNSHIP",
+    "description": "Summer internship at Facebook, Amazon, Apple, Netflix, or Google",
+    "skills_gained": "Large-scale Systems, Professional Development, Agile, Mentorship",
+    "estimated_hours": 480,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.304Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 28,
+  "fields": {
+    "title": "Kaggle Competition - Top 10%",
+    "item_type": "COMPETITION",
+    "description": "Place in top 10% of a Kaggle machine learning competition",
+    "skills_gained": "ML Competition, Feature Engineering, Model Tuning, Data Science",
+    "estimated_hours": 120,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.315Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 29,
+  "fields": {
+    "title": "Technical Blog with 1000+ Readers",
+    "item_type": "MILESTONE",
+    "description": "Start a technical blog and grow audience to 1000+ monthly readers",
+    "skills_gained": "Technical Writing, Content Creation, SEO, Community Building",
+    "estimated_hours": 60,
+    "difficulty_level": "BEGINNER",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.325Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 30,
+  "fields": {
+    "title": "System Design Course",
+    "item_type": "CERT",
+    "description": "Complete comprehensive system design course covering scalability and architecture",
+    "skills_gained": "System Design, Scalability, Databases, Caching, Load Balancing",
+    "estimated_hours": 50,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.334Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 31,
+  "fields": {
+    "title": "LeetCode - 300+ Problems Solved",
+    "item_type": "MILESTONE",
+    "description": "Solve 300+ LeetCode problems across easy, medium, and hard difficulties",
+    "skills_gained": "Algorithms, Data Structures, Problem Solving, Interview Prep",
+    "estimated_hours": 150,
+    "difficulty_level": "INTERMEDIATE",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.343Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.portfolioitem",
+  "pk": 32,
+  "fields": {
+    "title": "Startup Founder - Launch MVP",
+    "item_type": "PROJECT",
+    "description": "Found a startup and launch minimum viable product with real users",
+    "skills_gained": "Entrepreneurship, Product Development, Marketing, Fundraising",
+    "estimated_hours": 500,
+    "difficulty_level": "ADVANCED",
+    "resource_url": null,
+    "created_at": "2025-11-19T07:28:22.352Z",
+    "related_careers": []
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 11,
+  "fields": {
+    "user_profile": 21,
+    "portfolio_item": 17,
+    "status": "COMPLETED",
+    "notes": "Completed Summer 2024. Worked on recommendation systems.",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.594Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 12,
+  "fields": {
+    "user_profile": 21,
+    "portfolio_item": 18,
+    "status": "COMPLETED",
+    "notes": "Merged 3 PRs with performance improvements",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.608Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 13,
+  "fields": {
+    "user_profile": 21,
+    "portfolio_item": 25,
+    "status": "IN_PROGRESS",
+    "notes": "Paper under review for NeurIPS 2025",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.618Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 14,
+  "fields": {
+    "user_profile": 21,
+    "portfolio_item": 31,
+    "status": "COMPLETED",
+    "notes": "350+ problems solved across all difficulty levels",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.629Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 15,
+  "fields": {
+    "user_profile": 21,
+    "portfolio_item": 10,
+    "status": "PLANNED",
+    "notes": "Planning to get certified before graduation",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.639Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 16,
+  "fields": {
+    "user_profile": 22,
+    "portfolio_item": 27,
+    "status": "COMPLETED",
+    "notes": "Hardware Engineering Intern at Tesla, Summer 2024",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.651Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 17,
+  "fields": {
+    "user_profile": 22,
+    "portfolio_item": 19,
+    "status": "COMPLETED",
+    "notes": "Won 2nd place at Stanford Hardware Hackathon",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.662Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 18,
+  "fields": {
+    "user_profile": 22,
+    "portfolio_item": 29,
+    "status": "IN_PROGRESS",
+    "notes": "Writing about embedded systems and IoT. 500+ readers.",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.672Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 19,
+  "fields": {
+    "user_profile": 22,
+    "portfolio_item": 30,
+    "status": "PLANNED",
+    "notes": "Need to learn system design for interviews",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.683Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 20,
+  "fields": {
+    "user_profile": 23,
+    "portfolio_item": 19,
+    "status": "COMPLETED",
+    "notes": "Won 1st place at Harvard Business + Tech Hackathon",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.694Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 21,
+  "fields": {
+    "user_profile": 23,
+    "portfolio_item": 32,
+    "status": "IN_PROGRESS",
+    "notes": "Building SaaS product for student organizations",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.706Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 22,
+  "fields": {
+    "user_profile": 23,
+    "portfolio_item": 21,
+    "status": "IN_PROGRESS",
+    "notes": "5 case studies completed, working on 3 more",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.717Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 23,
+  "fields": {
+    "user_profile": 23,
+    "portfolio_item": 22,
+    "status": "COMPLETED",
+    "notes": "Completed to build my startup MVP",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.727Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 24,
+  "fields": {
+    "user_profile": 23,
+    "portfolio_item": 29,
+    "status": "PLANNED",
+    "notes": "Want to blog about PM and startups",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.737Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 25,
+  "fields": {
+    "user_profile": 24,
+    "portfolio_item": 12,
+    "status": "COMPLETED",
+    "notes": "Data Analyst Intern at Airbnb, Summer 2024",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.749Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 26,
+  "fields": {
+    "user_profile": 24,
+    "portfolio_item": 28,
+    "status": "COMPLETED",
+    "notes": "Placed 8th/1000+ in Titanic competition",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.759Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 27,
+  "fields": {
+    "user_profile": 24,
+    "portfolio_item": 10,
+    "status": "IN_PROGRESS",
+    "notes": "Studying for certification, exam scheduled",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.769Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 28,
+  "fields": {
+    "user_profile": 24,
+    "portfolio_item": 31,
+    "status": "IN_PROGRESS",
+    "notes": "200 problems solved so far",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.779Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 29,
+  "fields": {
+    "user_profile": 24,
+    "portfolio_item": 29,
+    "status": "COMPLETED",
+    "notes": "Data science blog with 1200+ monthly readers",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.790Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 30,
+  "fields": {
+    "user_profile": 25,
+    "portfolio_item": 22,
+    "status": "IN_PROGRESS",
+    "notes": "Learning web dev for personal projects",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.802Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 31,
+  "fields": {
+    "user_profile": 25,
+    "portfolio_item": 29,
+    "status": "PLANNED",
+    "notes": "Want to document my engineering journey",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.813Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 32,
+  "fields": {
+    "user_profile": 25,
+    "portfolio_item": 31,
+    "status": "PLANNED",
+    "notes": "Starting with easy problems",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.826Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 33,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 15,
+    "status": "COMPLETED",
+    "notes": "Built full-stack app with React and Node.js",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.838Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 34,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 16,
+    "status": "IN_PROGRESS",
+    "notes": "Working on React Native version",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.850Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 35,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 22,
+    "status": "COMPLETED",
+    "notes": "Completed with certificate",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.861Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 36,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 31,
+    "status": "COMPLETED",
+    "notes": "150 problems solved, targeting 300",
+    "progress_percentage": 100,
+    "added_at": "2025-11-19T07:38:17.872Z",
+    "started_at": null,
+    "completed_at": "2025-11-19T08:26:48.403Z",
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 37,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 10,
+    "status": "PLANNED",
+    "notes": "Planning to get certified this year",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.883Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 38,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 18,
+    "status": "PLANNED",
+    "notes": "Looking for good first issues",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.893Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 39,
+  "fields": {
+    "user_profile": 27,
+    "portfolio_item": 17,
+    "status": "COMPLETED",
+    "notes": "DeepMind Research Intern 2024",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.905Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 40,
+  "fields": {
+    "user_profile": 27,
+    "portfolio_item": 25,
+    "status": "COMPLETED",
+    "notes": "Published at ICML 2024",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.916Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 41,
+  "fields": {
+    "user_profile": 27,
+    "portfolio_item": 28,
+    "status": "COMPLETED",
+    "notes": "Top 5% in multiple ML competitions",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.926Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 42,
+  "fields": {
+    "user_profile": 27,
+    "portfolio_item": 31,
+    "status": "COMPLETED",
+    "notes": "400+ problems for interview prep",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.937Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 43,
+  "fields": {
+    "user_profile": 28,
+    "portfolio_item": 27,
+    "status": "COMPLETED",
+    "notes": "Frontend Intern at Stripe",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.949Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 44,
+  "fields": {
+    "user_profile": 28,
+    "portfolio_item": 15,
+    "status": "COMPLETED",
+    "notes": "Built e-commerce platform with Next.js",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.959Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 45,
+  "fields": {
+    "user_profile": 28,
+    "portfolio_item": 18,
+    "status": "COMPLETED",
+    "notes": "15+ PRs to Vue.js and React ecosystem",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.969Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 46,
+  "fields": {
+    "user_profile": 28,
+    "portfolio_item": 29,
+    "status": "COMPLETED",
+    "notes": "Frontend blog with 2000+ monthly readers",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.979Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 47,
+  "fields": {
+    "user_profile": 28,
+    "portfolio_item": 30,
+    "status": "IN_PROGRESS",
+    "notes": "Preparing for senior SWE interviews",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T07:38:17.989Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 48,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 20,
+    "status": "PLANNED",
+    "notes": "",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T08:26:34.199Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.userchecklist",
+  "pk": 49,
+  "fields": {
+    "user_profile": 17,
+    "portfolio_item": 28,
+    "status": "PLANNED",
+    "notes": "",
+    "progress_percentage": 0,
+    "added_at": "2025-11-19T08:26:36.508Z",
+    "started_at": null,
+    "completed_at": null,
+    "priority": "MEDIUM"
+  }
+},
+{
+  "model": "accounts.careerplan",
+  "pk": 1,
+  "fields": {
+    "user_profile": 21,
+    "target_career": 21,
+    "name": "Plan A",
+    "description": "",
+    "target_date": null,
+    "is_active": true,
+    "is_primary": false,
+    "created_at": "2025-11-24T22:29:21.198Z",
+    "updated_at": "2025-11-24T22:29:21.198Z"
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 13,
+  "fields": {
+    "college_name": "Massachusetts Institute of Technology",
+    "city": "Cambridge",
+    "state": "MA",
+    "abbreviation": "MIT",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/MIT_logo.svg"
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 14,
+  "fields": {
+    "college_name": "Stanford University",
+    "city": "Stanford",
+    "state": "CA",
+    "abbreviation": "Stanford",
+    "logo_url": "https://identity.stanford.edu/wp-content/uploads/sites/3/2020/07/block-s-right.png"
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 15,
+  "fields": {
+    "college_name": "University of California, Berkeley",
+    "city": "Berkeley",
+    "state": "CA",
+    "abbreviation": "Berkeley",
+    "logo_url": ""
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 16,
+  "fields": {
+    "college_name": "Carnegie Mellon University",
+    "city": "Pittsburgh",
+    "state": "PA",
+    "abbreviation": "CMU",
+    "logo_url": ""
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 17,
+  "fields": {
+    "college_name": "University of Illinois Urbana-Champaign",
+    "city": "Urbana",
+    "state": "IL",
+    "abbreviation": "UIUC",
+    "logo_url": ""
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 18,
+  "fields": {
+    "college_name": "Stanford University",
+    "city": "Stanford",
+    "state": "California",
+    "abbreviation": "STANFORD",
+    "logo_url": ""
+  }
+},
+{
+  "model": "colleges.college",
+  "pk": 19,
+  "fields": {
+    "college_name": "University of California, Berkeley",
+    "city": "Berkeley",
+    "state": "California",
+    "abbreviation": "BERKELEY",
+    "logo_url": ""
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 65,
+  "fields": {
+    "college": 16,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 66,
+  "fields": {
+    "college": 16,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 67,
+  "fields": {
+    "college": 16,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 68,
+  "fields": {
+    "college": 16,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 69,
+  "fields": {
+    "college": 16,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 70,
+  "fields": {
+    "college": 16,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 71,
+  "fields": {
+    "college": 16,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 72,
+  "fields": {
+    "college": 16,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 73,
+  "fields": {
+    "college": 13,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 74,
+  "fields": {
+    "college": 13,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 75,
+  "fields": {
+    "college": 13,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 76,
+  "fields": {
+    "college": 13,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 77,
+  "fields": {
+    "college": 13,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 78,
+  "fields": {
+    "college": 13,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 79,
+  "fields": {
+    "college": 13,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 80,
+  "fields": {
+    "college": 13,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 81,
+  "fields": {
+    "college": 14,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 82,
+  "fields": {
+    "college": 14,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 83,
+  "fields": {
+    "college": 14,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 84,
+  "fields": {
+    "college": 14,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 85,
+  "fields": {
+    "college": 14,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 86,
+  "fields": {
+    "college": 14,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 87,
+  "fields": {
+    "college": 14,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 88,
+  "fields": {
+    "college": 14,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 89,
+  "fields": {
+    "college": 15,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 90,
+  "fields": {
+    "college": 15,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 91,
+  "fields": {
+    "college": 15,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 92,
+  "fields": {
+    "college": 15,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 93,
+  "fields": {
+    "college": 15,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 94,
+  "fields": {
+    "college": 15,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 95,
+  "fields": {
+    "college": 15,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 96,
+  "fields": {
+    "college": 15,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 97,
+  "fields": {
+    "college": 17,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 98,
+  "fields": {
+    "college": 17,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 99,
+  "fields": {
+    "college": 17,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 100,
+  "fields": {
+    "college": 17,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 101,
+  "fields": {
+    "college": 17,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 102,
+  "fields": {
+    "college": 17,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 103,
+  "fields": {
+    "college": 17,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 104,
+  "fields": {
+    "college": 17,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 105,
+  "fields": {
+    "college": 18,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 106,
+  "fields": {
+    "college": 18,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 107,
+  "fields": {
+    "college": 18,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 108,
+  "fields": {
+    "college": 18,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 109,
+  "fields": {
+    "college": 18,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 110,
+  "fields": {
+    "college": 18,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 111,
+  "fields": {
+    "college": 18,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 112,
+  "fields": {
+    "college": 18,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 113,
+  "fields": {
+    "college": 19,
+    "name": "Computer Science",
+    "code": "CS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 114,
+  "fields": {
+    "college": 19,
+    "name": "Data Science",
+    "code": "DS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 115,
+  "fields": {
+    "college": 19,
+    "name": "Electrical Engineering",
+    "code": "EE"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 116,
+  "fields": {
+    "college": 19,
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 117,
+  "fields": {
+    "college": 19,
+    "name": "Business Administration",
+    "code": "BA"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 118,
+  "fields": {
+    "college": 19,
+    "name": "Mathematics",
+    "code": "MATH"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 119,
+  "fields": {
+    "college": 19,
+    "name": "Physics",
+    "code": "PHYS"
+  }
+},
+{
+  "model": "colleges.major",
+  "pk": 120,
+  "fields": {
+    "college": 19,
+    "name": "Biology",
+    "code": "BIO"
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 1,
+  "fields": {
+    "subject": "CS",
+    "number": "101",
+    "title": "Introduction to Computer Science",
+    "credits": "3.0",
+    "major": 89
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 2,
+  "fields": {
+    "subject": "CS",
+    "number": "225",
+    "title": "Data Structures",
+    "credits": "4.0",
+    "major": 89
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 3,
+  "fields": {
+    "subject": "CS",
+    "number": "233",
+    "title": "Computer Architecture",
+    "credits": "4.0",
+    "major": 89
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 4,
+  "fields": {
+    "subject": "CS",
+    "number": "374",
+    "title": "Algorithms",
+    "credits": "4.0",
+    "major": 89
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 5,
+  "fields": {
+    "subject": "MATH",
+    "number": "221",
+    "title": "Calculus I",
+    "credits": "4.0",
+    "major": 94
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 6,
+  "fields": {
+    "subject": "MATH",
+    "number": "231",
+    "title": "Calculus II",
+    "credits": "3.0",
+    "major": 94
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 7,
+  "fields": {
+    "subject": "PHYS",
+    "number": "211",
+    "title": "Physics: Mechanics",
+    "credits": "4.0",
+    "major": 95
+  }
+},
+{
+  "model": "colleges.course",
+  "pk": 8,
+  "fields": {
+    "subject": "EE",
+    "number": "120",
+    "title": "Introduction to Electrical Engineering",
+    "credits": "3.0",
+    "major": 91
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 8,
+  "fields": {
+    "title": "Software Engineer",
+    "company": "Tech Companies",
+    "industries": [
+      "Technology",
+      "Finance",
+      "Healthcare"
+    ],
+    "skills": [
+      "Python",
+      "Java",
+      "Git",
+      "Algorithms",
+      "Data Structures"
+    ],
+    "description": "Design and develop software applications",
+    "created_at": "2025-11-19T05:41:00.766Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 9,
+  "fields": {
+    "title": "Data Scientist",
+    "company": "Various Industries",
+    "industries": [
+      "Technology",
+      "Finance",
+      "E-commerce"
+    ],
+    "skills": [
+      "Python",
+      "R",
+      "Machine Learning",
+      "Statistics",
+      "SQL"
+    ],
+    "description": "Analyze data and build predictive models",
+    "created_at": "2025-11-19T05:41:00.766Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 10,
+  "fields": {
+    "title": "Product Manager",
+    "company": "Tech Companies",
+    "industries": [
+      "Technology",
+      "Consumer Goods"
+    ],
+    "skills": [
+      "Communication",
+      "Strategy",
+      "Data Analysis",
+      "User Research"
+    ],
+    "description": "Define product strategy and roadmap",
+    "created_at": "2025-11-19T05:41:00.767Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 11,
+  "fields": {
+    "title": "UX Designer",
+    "company": "Design Studios",
+    "industries": [
+      "Technology",
+      "Design",
+      "Advertising"
+    ],
+    "skills": [
+      "Figma",
+      "User Research",
+      "Prototyping",
+      "Visual Design"
+    ],
+    "description": "Create user-centered digital experiences",
+    "created_at": "2025-11-19T05:41:00.767Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 12,
+  "fields": {
+    "title": "Machine Learning Engineer",
+    "company": "AI Companies",
+    "industries": [
+      "Technology",
+      "Research",
+      "Autonomous Vehicles"
+    ],
+    "skills": [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Deep Learning",
+      "MLOps"
+    ],
+    "description": "Build and deploy ML models at scale",
+    "created_at": "2025-11-19T05:41:00.768Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 13,
+  "fields": {
+    "title": "Full Stack Developer",
+    "company": "Tech Companies",
+    "industries": [
+      "Technology",
+      "Software",
+      "Startups"
+    ],
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Databases",
+      "APIs"
+    ],
+    "description": "Build end-to-end web applications using modern frameworks like React, Node.js, and databases. Work on both frontend UI and backend systems. Salary: $85,000 - $150,000. Growth: 22%",
+    "created_at": "2025-11-19T07:21:30.379Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 14,
+  "fields": {
+    "title": "UX/UI Designer",
+    "company": "Design Studios",
+    "industries": [
+      "Design",
+      "Technology",
+      "Consulting"
+    ],
+    "skills": [
+      "Figma",
+      "User Research",
+      "Prototyping",
+      "Visual Design",
+      "Usability Testing"
+    ],
+    "description": "Create intuitive user interfaces and experiences through research, wireframing, prototyping, and user testing. Salary: $70,000 - $130,000. Growth: 15%",
+    "created_at": "2025-11-19T07:21:30.389Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 15,
+  "fields": {
+    "title": "DevOps Engineer",
+    "company": "Cloud Companies",
+    "industries": [
+      "Technology",
+      "Cloud Computing",
+      "Infrastructure"
+    ],
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "CI/CD",
+      "Linux"
+    ],
+    "description": "Automate infrastructure, manage CI/CD pipelines, and ensure reliable system deployment and monitoring. Salary: $95,000 - $160,000. Growth: 25%",
+    "created_at": "2025-11-19T07:21:30.397Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 16,
+  "fields": {
+    "title": "Cybersecurity Analyst",
+    "company": "Security Firms",
+    "industries": [
+      "Cybersecurity",
+      "Finance",
+      "Government"
+    ],
+    "skills": [
+      "Network Security",
+      "Penetration Testing",
+      "Cryptography",
+      "Risk Analysis",
+      "Security Tools"
+    ],
+    "description": "Protect systems from security threats, conduct penetration testing, and implement security best practices. Salary: $85,000 - $145,000. Growth: 31%",
+    "created_at": "2025-11-19T07:21:30.405Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 17,
+  "fields": {
+    "title": "Cloud Architect",
+    "company": "Enterprise Companies",
+    "industries": [
+      "Cloud Computing",
+      "Technology",
+      "Enterprise"
+    ],
+    "skills": [
+      "AWS",
+      "Azure",
+      "Architecture Design",
+      "Scalability",
+      "Cost Optimization"
+    ],
+    "description": "Design scalable cloud infrastructure using AWS, Azure, or GCP. Optimize for performance, cost, and reliability. Salary: $120,000 - $200,000. Growth: 28%",
+    "created_at": "2025-11-19T07:21:30.412Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 18,
+  "fields": {
+    "title": "Backend Engineer",
+    "company": "Tech Companies",
+    "industries": [
+      "Technology",
+      "SaaS",
+      "E-commerce"
+    ],
+    "skills": [
+      "Python",
+      "Java",
+      "Go",
+      "PostgreSQL",
+      "Redis",
+      "Docker"
+    ],
+    "description": "Build scalable server-side applications, APIs, and microservices. Work with databases, caching, and distributed systems. Salary: $90,000 - $160,000. Growth: 20%",
+    "created_at": "2025-11-19T07:28:22.361Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 19,
+  "fields": {
+    "title": "Mobile Developer (iOS/Android)",
+    "company": "Mobile Companies",
+    "industries": [
+      "Mobile",
+      "Technology",
+      "Gaming"
+    ],
+    "skills": [
+      "Swift",
+      "Kotlin",
+      "React Native",
+      "Flutter",
+      "Mobile UI/UX"
+    ],
+    "description": "Create native mobile applications for iOS and Android platforms. Focus on performance, user experience, and platform APIs. Salary: $85,000 - $155,000. Growth: 18%",
+    "created_at": "2025-11-19T07:28:22.370Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 20,
+  "fields": {
+    "title": "Engineering Manager",
+    "company": "Tech Leadership",
+    "industries": [
+      "Technology",
+      "Management",
+      "Leadership"
+    ],
+    "skills": [
+      "Leadership",
+      "Project Management",
+      "Technical Strategy",
+      "Mentoring",
+      "Agile"
+    ],
+    "description": "Lead engineering teams, manage technical roadmaps, and drive project execution. Balance technical and people management. Salary: $130,000 - $220,000. Growth: 12%",
+    "created_at": "2025-11-19T07:28:22.379Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 21,
+  "fields": {
+    "title": "Research Scientist",
+    "company": "Research Labs",
+    "industries": [
+      "Research",
+      "AI/ML",
+      "Academia"
+    ],
+    "skills": [
+      "Research",
+      "Machine Learning",
+      "Mathematics",
+      "Academic Writing",
+      "Python"
+    ],
+    "description": "Conduct cutting-edge research in AI, ML, or computer science. Publish papers and advance the field. Salary: $100,000 - $180,000. Growth: 22%",
+    "created_at": "2025-11-19T07:28:22.388Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 22,
+  "fields": {
+    "title": "Site Reliability Engineer (SRE)",
+    "company": "Cloud Companies",
+    "industries": [
+      "Technology",
+      "Cloud",
+      "Infrastructure"
+    ],
+    "skills": [
+      "Linux",
+      "Kubernetes",
+      "Monitoring",
+      "Automation",
+      "Python",
+      "Terraform"
+    ],
+    "description": "Ensure system reliability, scalability, and performance. Build monitoring, alerting, and automation tools. Salary: $100,000 - $170,000. Growth: 24%",
+    "created_at": "2025-11-19T07:28:22.397Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 23,
+  "fields": {
+    "title": "Quantitative Analyst",
+    "company": "Finance/Trading",
+    "industries": [
+      "Finance",
+      "Trading",
+      "Hedge Funds"
+    ],
+    "skills": [
+      "Mathematics",
+      "Statistics",
+      "Python",
+      "C++",
+      "Financial Modeling"
+    ],
+    "description": "Apply mathematical and statistical methods to financial markets. Build trading algorithms and risk models. Salary: $120,000 - $250,000. Growth: 15%",
+    "created_at": "2025-11-19T07:28:22.405Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 24,
+  "fields": {
+    "title": "Technical Product Manager",
+    "company": "Product Companies",
+    "industries": [
+      "Technology",
+      "Product",
+      "SaaS"
+    ],
+    "skills": [
+      "Product Management",
+      "Technical Knowledge",
+      "APIs",
+      "SQL",
+      "Analytics"
+    ],
+    "description": "Bridge technical and business teams. Define product requirements with deep technical understanding. Salary: $110,000 - $190,000. Growth: 16%",
+    "created_at": "2025-11-19T07:28:22.414Z"
+  }
+},
+{
+  "model": "careers.career",
+  "pk": 25,
+  "fields": {
+    "title": "Security Engineer",
+    "company": "Security Companies",
+    "industries": [
+      "Cybersecurity",
+      "Technology",
+      "Finance"
+    ],
+    "skills": [
+      "Security",
+      "Penetration Testing",
+      "Incident Response",
+      "Cryptography",
+      "Network Security"
+    ],
+    "description": "Build and maintain security systems, conduct audits, and respond to incidents. Protect infrastructure and data. Salary: $95,000 - $165,000. Growth: 28%",
+    "created_at": "2025-11-19T07:28:22.422Z"
+  }
+},
+{
+  "model": "catalog.course",
+  "pk": 1,
+  "fields": {
+    "subject": "CS",
+    "number": "106A",
+    "title": "Programming Methodology",
+    "credits": "5.0",
+    "description": "Introduction to programming using Java, covering problem-solving and software engineering principles.",
+    "college": 14
+  }
+},
+{
+  "model": "catalog.course",
+  "pk": 2,
+  "fields": {
+    "subject": "CS",
+    "number": "6.006",
+    "title": "Introduction to Algorithms",
+    "credits": "4.0",
+    "description": "Design and analysis of algorithms including sorting, graph algorithms, and dynamic programming.",
+    "college": 13
+  }
+},
+{
+  "model": "catalog.course",
+  "pk": 3,
+  "fields": {
+    "subject": "CS",
+    "number": "229",
+    "title": "Machine Learning",
+    "credits": "4.0",
+    "description": "Supervised and unsupervised learning, deep learning, and practical ML applications.",
+    "college": 14
+  }
+},
+{
+  "model": "catalog.course",
+  "pk": 4,
+  "fields": {
+    "subject": "CS",
+    "number": "6.034",
+    "title": "Artificial Intelligence",
+    "credits": "4.0",
+    "description": "Search, knowledge representation, learning, and neural networks.",
+    "college": 13
+  }
+},
+{
+  "model": "catalog.course",
+  "pk": 5,
+  "fields": {
+    "subject": "CS",
+    "number": "161",
+    "title": "Computer Security",
+    "credits": "3.0",
+    "description": "Cryptography, network security, web security, and secure system design.",
+    "college": 14
+  }
+},
+{
+  "model": "catalog.degreecategory",
+  "pk": 1,
+  "fields": {
+    "name": "Core Requirements",
+    "min_credits": "40.0",
+    "major": 73
+  }
+},
+{
+  "model": "catalog.degreecategory",
+  "pk": 2,
+  "fields": {
+    "name": "Major Requirements",
+    "min_credits": "60.0",
+    "major": 73
+  }
+},
+{
+  "model": "catalog.degreecategory",
+  "pk": 3,
+  "fields": {
+    "name": "Electives",
+    "min_credits": "20.0",
+    "major": 73
+  }
+},
+{
+  "model": "catalog.degreecategory",
+  "pk": 4,
+  "fields": {
+    "name": "General Education",
+    "min_credits": "30.0",
+    "major": 73
+  }
+}
+]
